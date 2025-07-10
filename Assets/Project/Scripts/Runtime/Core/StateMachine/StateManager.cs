@@ -24,7 +24,7 @@ namespace Arcade.Project.Core.StateMachine
             if (!IsTransitionState && nextStateKey.Equals(CurrentState.StateKey))
             {
                 CurrentState.UpdateState();
-            } else if (!IsTransitionState)
+            } else if (IsTransitionState)
             {
                 TransitionToState(nextStateKey);
             }

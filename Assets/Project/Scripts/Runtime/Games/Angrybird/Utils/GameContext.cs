@@ -1,57 +1,42 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using Arcade.Project.Runtime.Games.AngryBird;
-using Arcade.Project.Runtime.Games.AngryBird.Utils.PlayerState;
 
 namespace Arcade.Project.Runtime.Games.AngryBird.Utils
 {
   public class GameContext
   {
-    private Spawner _spawner;
-    private Pointer _pointer;
+    private Spawner m_Spawner;
+    private Pointer m_Pointer;
 
-    private Projectile _projectile;
-    private Birds _bird;
+    private Projectile m_Projectile;
+    private Birds m_Bird;
 
-    private Transform _projectileSpawnPosition;
-    private Transform _birdSpawnPosition;
+    private Transform m_ProjectileSpawnPosition;
+    private Transform m_BirdSpawnPosition;
 
-    private List<Env> _environmentList = new List<Env>();
-    private PlayerStateMachine _playerStateMachine;
+    public Spawner Spawner => m_Spawner;
+    public Pointer Pointer => m_Pointer;
+    public Projectile Projectile => m_Projectile;
+    public Birds Bird => m_Bird;
+    public Transform ProjectileSpawnPosition => m_ProjectileSpawnPosition;
+    public Transform BirdSpawnPosition => m_BirdSpawnPosition;
 
     public GameContext
       (
        Spawner spawner,
        Pointer pointer,
        Projectile projectile, Birds bird,
-       Transform projectileSpawnPosition, Transform birdSpawnPosition,
-       List<Env> environmentList,
-       PlayerStateMachine playerStateMachine
+       Transform projectileSpawnPosition, Transform birdSpawnPosition
       )
       {
-       _spawner = spawner;
-       _pointer = pointer;
+       m_Spawner = spawner;
+       m_Pointer = pointer;
 
-       _projectile = projectile;
-       _bird = bird;
+       m_Projectile = projectile;
+       m_Bird = bird;
 
-       _projectileSpawnPosition = projectileSpawnPosition;
-       _birdSpawnPosition = birdSpawnPosition;
-
-       _environmentList = environmentList;
-       _playerStateMachine = playerStateMachine;
+       m_ProjectileSpawnPosition = projectileSpawnPosition;
+       m_BirdSpawnPosition = birdSpawnPosition;
       }
 
-    public Spawner Spawner => _spawner;
-    public Pointer Pointer => _pointer;
-    public Projectile Projectile => _projectile;
-    public Birds Bird => _bird;
-
-    public Transform ProjectileSpawnPosition => _projectileSpawnPosition;
-    public Transform BirdSpawnPosition => _birdSpawnPosition;
-
-    public List<Env> EnvironmentList => _environmentList;
-    public PlayerStateMachine playerStateMachine => _playerStateMachine;
   }
 }

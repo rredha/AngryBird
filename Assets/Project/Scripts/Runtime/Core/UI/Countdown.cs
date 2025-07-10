@@ -4,6 +4,7 @@ namespace Arcade._Project.Core.UI
 {
     public static class Countdown
     {
+        /*
         private static int _countDownInSeconds = 5;
         private static float _inBetweenCountsInSeconds = 5f;
         private static bool _countDownRunning = false;
@@ -34,5 +35,6 @@ namespace Arcade._Project.Core.UI
 
             }
         }
+        */
     }
 }

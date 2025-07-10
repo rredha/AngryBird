@@ -96,5 +96,11 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       return new Vector3(worldPosition.x, worldPosition.y, 5);
     }
 
+    public void Unsubscribe()
+    {
+      _playerInputActions.Player.Move.performed -= Move_performed;
+      _playerInputActions.Player.Select.performed -= Select_performed;
+      
+    }
   }
 }

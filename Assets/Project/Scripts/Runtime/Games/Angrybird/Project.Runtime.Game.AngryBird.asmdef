@@ -3,7 +3,9 @@
     "rootNamespace": "Project.Runtime.Game.AngryBird",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:a0798d30e857591808682743897c8a7d"
+        "GUID:a0798d30e857591808682743897c8a7d",
+        "GUID:55860ef12c6625731948471b7fe8c01a",
+        "GUID:810f54f43f696374fb3b49d45b461274"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

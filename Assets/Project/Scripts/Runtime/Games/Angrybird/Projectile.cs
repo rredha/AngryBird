@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections;
 //using Arcade.Project.Runtime.Games.AngryBird.Cues;
 using Arcade.Project.Runtime.Games.AngryBird.Interfaces;
+using Project.Scripts.Runtime.Games;
 
 namespace Arcade.Project.Runtime.Games.AngryBird
 {
@@ -16,6 +18,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       public bool IsSelected {get; private set;}
       public bool IsMoving {get; private set;}
       public bool IsInContactWithGround {get; private set;}
+      public bool IsFlying { get; set; }
 
       private void Awake()
       {
@@ -27,6 +30,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
         Col = GetComponent<Collider2D>();
 
         IsSelected = false;
+        IsFlying = false;
       }
 
       public void SetStatic()
@@ -61,6 +65,12 @@ namespace Arcade.Project.Runtime.Games.AngryBird
           return true;
           //IsMoving = true;
         }
+      }
+
+      private void Update()
+      {
+        if(GetProjectileInContactWithGround() && GetProjectileIsMoving())
+          Debug.Log("Not Moving anymore and touching ground");
       }
 
       public bool GetProjectileInContactWithGround()

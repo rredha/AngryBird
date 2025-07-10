@@ -1,47 +1,45 @@
+using System;
 using UnityEngine;
-using System.Collections;
-using Arcade.Project.Runtime.Games.AngryBird.Interfaces;
 
 namespace Arcade.Project.Runtime.Games.AngryBird
 {
   public class Birds : MonoBehaviour
   {
-    public Rigidbody2D Rb {get; private set;}
-    public Collider2D Col {get; private set;}
-    private SpriteRenderer _spriteRenderer;
-    //private bool _isFree;
+    [SerializeField] private float MaxHealth;
+    private float m_CurrentHealth;
+    private const float k_Threshhold = 0.2f;
+    private Animation m_Animation;
+    private string m_ClipName;
 
     private void Awake()
     {
-      Rb = GetComponent<Rigidbody2D>();
-      Col = GetComponent<Collider2D>();
-      _spriteRenderer = GetComponent<SpriteRenderer>();
-
-      //SetCaptive();
+      m_CurrentHealth = MaxHealth;
+      m_Animation = GetComponent<Animation>();
+      m_ClipName = m_Animation.clip.name;
     }
 
-
-    private void FixedUpdate()
+    private void Update()
     {
-      /*
-      if (true)
+      if (Input.GetKeyDown(KeyCode.S))
       {
-        SetFree();
+        m_Animation.Play(m_ClipName);
       }
-      SetCaptive();
-      */
     }
 
-    /*
-    private void SetFree()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-      _isFree = true;
+      var velocity = other.relativeVelocity.magnitude;
+      if (!(velocity > k_Threshhold)) return;
+      m_CurrentHealth -= velocity;
+      if (m_CurrentHealth <= 0f)
+      {
+        OnDistroyed();
+      }
     }
 
-    private void SetCaptive()
+    private void OnDistroyed()
     {
-      _isFree = false;
+      Destroy(gameObject);
     }
-    */
   }
 }

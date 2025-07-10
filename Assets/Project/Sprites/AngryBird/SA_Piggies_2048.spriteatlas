@@ -1,0 +1,615 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SA_Piggies_2048
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: bfc58172601a9f3db8a2a38e67b734ee, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 69f96b1842615d70e8334da5f9823689: 3810725907568933616
+    - 69f96b1842615d70e8334da5f9823689: -1074067024815802621
+    - 69f96b1842615d70e8334da5f9823689: 2552061650745042033
+    - 69f96b1842615d70e8334da5f9823689: -166243477827697053
+    - 69f96b1842615d70e8334da5f9823689: 7735455580013844609
+    - 69f96b1842615d70e8334da5f9823689: 7772161309678391147
+    - 69f96b1842615d70e8334da5f9823689: 1753828060313586997
+    - 69f96b1842615d70e8334da5f9823689: -8180525395677653640
+    - 69f96b1842615d70e8334da5f9823689: -4480043481994516253
+    - 69f96b1842615d70e8334da5f9823689: 6859631830048915731
+    - 69f96b1842615d70e8334da5f9823689: 6135403148977230741
+    - 69f96b1842615d70e8334da5f9823689: 8539128565075133316
+    - 69f96b1842615d70e8334da5f9823689: 5083768081764507285
+    - 69f96b1842615d70e8334da5f9823689: -8383428039135318713
+    - 69f96b1842615d70e8334da5f9823689: 7617982654733972662
+    - 69f96b1842615d70e8334da5f9823689: 1459139025971703213
+    - 69f96b1842615d70e8334da5f9823689: 2421909664660394821
+    - 69f96b1842615d70e8334da5f9823689: -4906197220219879274
+    - 69f96b1842615d70e8334da5f9823689: 6203157255104899896
+    - 69f96b1842615d70e8334da5f9823689: -1131802484396026386
+    - 69f96b1842615d70e8334da5f9823689: 937195079637479585
+    - 69f96b1842615d70e8334da5f9823689: -1506913443144293515
+    - 69f96b1842615d70e8334da5f9823689: -6479667317009242161
+    - 69f96b1842615d70e8334da5f9823689: -931763480784680447
+    - 69f96b1842615d70e8334da5f9823689: 2660714963364681133
+    - 69f96b1842615d70e8334da5f9823689: -8355654348732051373
+    - 69f96b1842615d70e8334da5f9823689: -7908861659411896637
+    - 69f96b1842615d70e8334da5f9823689: 5793067615846099081
+    - 69f96b1842615d70e8334da5f9823689: 2979958179329592266
+    - 69f96b1842615d70e8334da5f9823689: -4576278662615577577
+    - 69f96b1842615d70e8334da5f9823689: -4569485796386893609
+    - 69f96b1842615d70e8334da5f9823689: 245512682994220464
+    - 69f96b1842615d70e8334da5f9823689: -3104593047332014125
+    - 69f96b1842615d70e8334da5f9823689: -7802435159130882436
+    - 69f96b1842615d70e8334da5f9823689: 1740519654698852535
+    - 69f96b1842615d70e8334da5f9823689: -4731025716250656716
+    - 69f96b1842615d70e8334da5f9823689: 4126313063166608788
+    - 69f96b1842615d70e8334da5f9823689: -1225710396399043967
+    - 69f96b1842615d70e8334da5f9823689: -5882269803081144941
+    - 69f96b1842615d70e8334da5f9823689: -6634006527779352766
+    - 69f96b1842615d70e8334da5f9823689: -7546037567199070074
+    - 69f96b1842615d70e8334da5f9823689: -3215280634989159021
+    - 69f96b1842615d70e8334da5f9823689: 497315114895184161
+    - 69f96b1842615d70e8334da5f9823689: 8390832331960387425
+    - 69f96b1842615d70e8334da5f9823689: -4125092198486845230
+    - 69f96b1842615d70e8334da5f9823689: 1250518381478926267
+    - 69f96b1842615d70e8334da5f9823689: 1512749657641295588
+    - 69f96b1842615d70e8334da5f9823689: 2261453750059260079
+    - 69f96b1842615d70e8334da5f9823689: 6128202001079803886
+    - 69f96b1842615d70e8334da5f9823689: 4365445491044107532
+    - 69f96b1842615d70e8334da5f9823689: 2713140741511388875
+    - 69f96b1842615d70e8334da5f9823689: 8606795823076238979
+    - 69f96b1842615d70e8334da5f9823689: -7504913370926939334
+    - 69f96b1842615d70e8334da5f9823689: 5635783478036197881
+    - 69f96b1842615d70e8334da5f9823689: 4863832673927349614
+    - 69f96b1842615d70e8334da5f9823689: -7586715232117041506
+    - 69f96b1842615d70e8334da5f9823689: -8120861130852093063
+    - 69f96b1842615d70e8334da5f9823689: -1720037801102970257
+    - 69f96b1842615d70e8334da5f9823689: 395014098408685900
+    - 69f96b1842615d70e8334da5f9823689: 9029357224692830229
+    - 69f96b1842615d70e8334da5f9823689: -6747610655597116366
+    - 69f96b1842615d70e8334da5f9823689: 3047707722634600247
+    - 69f96b1842615d70e8334da5f9823689: 7600832023028642566
+    - 69f96b1842615d70e8334da5f9823689: -5168122177679462006
+    - 69f96b1842615d70e8334da5f9823689: 3097522481375894582
+    - 69f96b1842615d70e8334da5f9823689: 3443462015049883265
+    - 69f96b1842615d70e8334da5f9823689: 3650405323836532215
+    - 69f96b1842615d70e8334da5f9823689: -7212177694488083341
+    - 69f96b1842615d70e8334da5f9823689: 5962728661628244933
+    - 69f96b1842615d70e8334da5f9823689: 8610601528699336841
+    - 69f96b1842615d70e8334da5f9823689: 5116409929489272233
+    - 69f96b1842615d70e8334da5f9823689: -3683563431218776198
+    - 69f96b1842615d70e8334da5f9823689: 1971917668829465702
+    - 69f96b1842615d70e8334da5f9823689: -6359305561040434712
+    - 69f96b1842615d70e8334da5f9823689: -9127054959385161051
+    - 69f96b1842615d70e8334da5f9823689: -358740070107689017
+    - 69f96b1842615d70e8334da5f9823689: -3705653595951172970
+    - 69f96b1842615d70e8334da5f9823689: 6900628693188238674
+    - 69f96b1842615d70e8334da5f9823689: -5113277718199006007
+    - 69f96b1842615d70e8334da5f9823689: 5095495982879354764
+    - 69f96b1842615d70e8334da5f9823689: 308080654968442341
+    - 69f96b1842615d70e8334da5f9823689: -5389206872115891371
+    - 69f96b1842615d70e8334da5f9823689: 323152734147704137
+    - 69f96b1842615d70e8334da5f9823689: -8056087786556758487
+    - 69f96b1842615d70e8334da5f9823689: 1115833414659537833
+    - 69f96b1842615d70e8334da5f9823689: -352617903166150614
+    - 69f96b1842615d70e8334da5f9823689: -4691387771165864630
+    - 69f96b1842615d70e8334da5f9823689: 5775744269995817289
+    - 69f96b1842615d70e8334da5f9823689: -6616057434931237493
+    - 69f96b1842615d70e8334da5f9823689: 6731041529807364336
+    - 69f96b1842615d70e8334da5f9823689: 1834204604511420957
+    - 69f96b1842615d70e8334da5f9823689: 4434950373472506930
+    - 69f96b1842615d70e8334da5f9823689: -8057881186664697842
+    - 69f96b1842615d70e8334da5f9823689: 754579697707076987
+    - 69f96b1842615d70e8334da5f9823689: 7308567585837095900
+    - 69f96b1842615d70e8334da5f9823689: 4432747111272498981
+    - 69f96b1842615d70e8334da5f9823689: -5185742867313045601
+    - 69f96b1842615d70e8334da5f9823689: -4789814234420484433
+    - 69f96b1842615d70e8334da5f9823689: -8578409080710714229
+    - 69f96b1842615d70e8334da5f9823689: 9167119122348748990
+    - 69f96b1842615d70e8334da5f9823689: 5363508981019713665
+    - 69f96b1842615d70e8334da5f9823689: -1012180776142064109
+    - 69f96b1842615d70e8334da5f9823689: -1343046445847104336
+    - 69f96b1842615d70e8334da5f9823689: -3064172296552841191
+    - 69f96b1842615d70e8334da5f9823689: -3283054539593369786
+    - 69f96b1842615d70e8334da5f9823689: 3186542617612375004
+    - 69f96b1842615d70e8334da5f9823689: -2902188855182123802
+    - 69f96b1842615d70e8334da5f9823689: 3942117400938972109
+    - 69f96b1842615d70e8334da5f9823689: -3779195787082710163
+    - 69f96b1842615d70e8334da5f9823689: -5482573622063510272
+    - 69f96b1842615d70e8334da5f9823689: -766240406548397464
+    - 69f96b1842615d70e8334da5f9823689: 3775111717529227259
+    - 69f96b1842615d70e8334da5f9823689: 3541534090913766213
+    - 69f96b1842615d70e8334da5f9823689: 5590338358409723269
+    - 69f96b1842615d70e8334da5f9823689: -4988435759961884702
+    - 69f96b1842615d70e8334da5f9823689: -6612480006319381896
+    - 69f96b1842615d70e8334da5f9823689: 9033722943457544715
+    - 69f96b1842615d70e8334da5f9823689: 1738495103941246812
+    - 69f96b1842615d70e8334da5f9823689: -5318770594053990559
+    - 69f96b1842615d70e8334da5f9823689: 7993543512975754236
+    - 69f96b1842615d70e8334da5f9823689: -7123094419797670949
+    - 69f96b1842615d70e8334da5f9823689: 3043623855793919183
+    - 69f96b1842615d70e8334da5f9823689: -5802953025238550777
+    - 69f96b1842615d70e8334da5f9823689: -6854859999672531595
+    - 69f96b1842615d70e8334da5f9823689: -1783136651114728305
+    - 69f96b1842615d70e8334da5f9823689: 7670567678054653144
+    - 69f96b1842615d70e8334da5f9823689: 1321446756670094686
+    - 69f96b1842615d70e8334da5f9823689: -7757661253316439328
+    - 69f96b1842615d70e8334da5f9823689: -8848333499129424791
+    - 69f96b1842615d70e8334da5f9823689: 2497455916938090032
+    - 69f96b1842615d70e8334da5f9823689: -2462027549951775192
+    - 69f96b1842615d70e8334da5f9823689: 4008342340554834137
+    - 69f96b1842615d70e8334da5f9823689: 2926816598797066998
+    - 69f96b1842615d70e8334da5f9823689: 37547852442559568
+    - 69f96b1842615d70e8334da5f9823689: -3175270027390660967
+    - 69f96b1842615d70e8334da5f9823689: 7778062244918943894
+    - 69f96b1842615d70e8334da5f9823689: 1194322477384871308
+    - 69f96b1842615d70e8334da5f9823689: 7826107220256981508
+    - 69f96b1842615d70e8334da5f9823689: -239838825858356151
+    - 69f96b1842615d70e8334da5f9823689: 2131032286709749128
+    - 69f96b1842615d70e8334da5f9823689: -2269851361243865442
+    - 69f96b1842615d70e8334da5f9823689: -428873050232740668
+    - 69f96b1842615d70e8334da5f9823689: -5863279950598228913
+    - 69f96b1842615d70e8334da5f9823689: -6074180426616765033
+    - 69f96b1842615d70e8334da5f9823689: -8003827499425592163
+    - 69f96b1842615d70e8334da5f9823689: 8007201981853609446
+    - 69f96b1842615d70e8334da5f9823689: -1284675542082045732
+    - 69f96b1842615d70e8334da5f9823689: 3310207404792047218
+    - 69f96b1842615d70e8334da5f9823689: 2034954883218272928
+    - 69f96b1842615d70e8334da5f9823689: 1928147227851760627
+    - 69f96b1842615d70e8334da5f9823689: -7983022604681879963
+    - 69f96b1842615d70e8334da5f9823689: 8697167059763620525
+    - 69f96b1842615d70e8334da5f9823689: 4395928975211427597
+    - 69f96b1842615d70e8334da5f9823689: -6303428707741643922
+    - 69f96b1842615d70e8334da5f9823689: -4790252707247095080
+    - 69f96b1842615d70e8334da5f9823689: 742408143519490230
+    - 69f96b1842615d70e8334da5f9823689: 4713157280338940254
+    - 69f96b1842615d70e8334da5f9823689: 6041674705527658710
+    - 69f96b1842615d70e8334da5f9823689: -3123693981292031296
+    - 69f96b1842615d70e8334da5f9823689: 276815268408504546
+    - 69f96b1842615d70e8334da5f9823689: 2325000052295557544
+    - 69f96b1842615d70e8334da5f9823689: 5956269681022083013
+    - 69f96b1842615d70e8334da5f9823689: -6648991507822292244
+    - 69f96b1842615d70e8334da5f9823689: -4766843190743715177
+    - 69f96b1842615d70e8334da5f9823689: 192705517515754846
+    - 69f96b1842615d70e8334da5f9823689: 2050213189345401651
+    - 69f96b1842615d70e8334da5f9823689: -164688510393055952
+    - 69f96b1842615d70e8334da5f9823689: -722207285361456260
+    - 69f96b1842615d70e8334da5f9823689: 3407473474590316348
+    - 69f96b1842615d70e8334da5f9823689: -5121720986537672843
+    - 69f96b1842615d70e8334da5f9823689: 602612964013152573
+    - 69f96b1842615d70e8334da5f9823689: 4520688762809997427
+    - 69f96b1842615d70e8334da5f9823689: -4061522525092594314
+    - 69f96b1842615d70e8334da5f9823689: -4886871538612977459
+    - 69f96b1842615d70e8334da5f9823689: 6416334673404899528
+    - 69f96b1842615d70e8334da5f9823689: -6221604713480565707
+    - 69f96b1842615d70e8334da5f9823689: 5280752246559514151
+    - 69f96b1842615d70e8334da5f9823689: -3042173906245936819
+    - 69f96b1842615d70e8334da5f9823689: 1660446298648973789
+    - 69f96b1842615d70e8334da5f9823689: 8423733891211630785
+    - 69f96b1842615d70e8334da5f9823689: 1249104995219767210
+    - 69f96b1842615d70e8334da5f9823689: -3052311029496906890
+    - 69f96b1842615d70e8334da5f9823689: -7172775701143841618
+    - 69f96b1842615d70e8334da5f9823689: 4907478583373396476
+    - 69f96b1842615d70e8334da5f9823689: 1233123369026794205
+    - 69f96b1842615d70e8334da5f9823689: -964934963615487160
+    - 69f96b1842615d70e8334da5f9823689: 7032674282173404659
+    - 69f96b1842615d70e8334da5f9823689: 375403677325769585
+    - 69f96b1842615d70e8334da5f9823689: 769257665860576760
+    - 69f96b1842615d70e8334da5f9823689: -3782729807445457127
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 3810725907568933616, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1074067024815802621, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2552061650745042033, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -166243477827697053, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7735455580013844609, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7772161309678391147, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1753828060313586997, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8180525395677653640, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4480043481994516253, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6859631830048915731, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6135403148977230741, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8539128565075133316, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5083768081764507285, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8383428039135318713, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7617982654733972662, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1459139025971703213, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2421909664660394821, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4906197220219879274, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6203157255104899896, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1131802484396026386, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 937195079637479585, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1506913443144293515, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6479667317009242161, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -931763480784680447, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2660714963364681133, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8355654348732051373, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7908861659411896637, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5793067615846099081, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2979958179329592266, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4576278662615577577, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4569485796386893609, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 245512682994220464, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3104593047332014125, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7802435159130882436, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1740519654698852535, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4731025716250656716, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4126313063166608788, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1225710396399043967, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5882269803081144941, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6634006527779352766, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7546037567199070074, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3215280634989159021, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 497315114895184161, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8390832331960387425, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4125092198486845230, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1250518381478926267, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1512749657641295588, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2261453750059260079, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6128202001079803886, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4365445491044107532, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2713140741511388875, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8606795823076238979, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7504913370926939334, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5635783478036197881, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4863832673927349614, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7586715232117041506, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8120861130852093063, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1720037801102970257, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 395014098408685900, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 9029357224692830229, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6747610655597116366, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3047707722634600247, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7600832023028642566, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5168122177679462006, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3097522481375894582, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3443462015049883265, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3650405323836532215, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7212177694488083341, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5962728661628244933, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8610601528699336841, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5116409929489272233, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3683563431218776198, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1971917668829465702, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6359305561040434712, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -9127054959385161051, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -358740070107689017, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3705653595951172970, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6900628693188238674, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5113277718199006007, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5095495982879354764, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 308080654968442341, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5389206872115891371, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 323152734147704137, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8056087786556758487, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1115833414659537833, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -352617903166150614, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4691387771165864630, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5775744269995817289, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6616057434931237493, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6731041529807364336, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1834204604511420957, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4434950373472506930, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8057881186664697842, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 754579697707076987, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7308567585837095900, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4432747111272498981, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5185742867313045601, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4789814234420484433, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8578409080710714229, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 9167119122348748990, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5363508981019713665, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1012180776142064109, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1343046445847104336, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3064172296552841191, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3283054539593369786, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3186542617612375004, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -2902188855182123802, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3942117400938972109, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3779195787082710163, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5482573622063510272, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -766240406548397464, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3775111717529227259, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3541534090913766213, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5590338358409723269, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4988435759961884702, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6612480006319381896, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 9033722943457544715, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1738495103941246812, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5318770594053990559, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7993543512975754236, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7123094419797670949, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3043623855793919183, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5802953025238550777, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6854859999672531595, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1783136651114728305, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7670567678054653144, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1321446756670094686, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7757661253316439328, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8848333499129424791, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2497455916938090032, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -2462027549951775192, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4008342340554834137, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2926816598797066998, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 37547852442559568, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3175270027390660967, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7778062244918943894, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1194322477384871308, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7826107220256981508, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -239838825858356151, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2131032286709749128, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -2269851361243865442, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -428873050232740668, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5863279950598228913, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6074180426616765033, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -8003827499425592163, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8007201981853609446, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -1284675542082045732, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3310207404792047218, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2034954883218272928, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1928147227851760627, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7983022604681879963, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8697167059763620525, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4395928975211427597, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6303428707741643922, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4790252707247095080, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 742408143519490230, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4713157280338940254, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6041674705527658710, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3123693981292031296, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 276815268408504546, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2325000052295557544, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5956269681022083013, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6648991507822292244, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4766843190743715177, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 192705517515754846, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 2050213189345401651, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -164688510393055952, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -722207285361456260, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 3407473474590316348, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -5121720986537672843, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 602612964013152573, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4520688762809997427, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4061522525092594314, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -4886871538612977459, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 6416334673404899528, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -6221604713480565707, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 5280752246559514151, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3042173906245936819, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1660446298648973789, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 8423733891211630785, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1249104995219767210, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3052311029496906890, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -7172775701143841618, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 4907478583373396476, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 1233123369026794205, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -964934963615487160, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 7032674282173404659, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 375403677325769585, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: 769257665860576760, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  - {fileID: -3782729807445457127, guid: 69f96b1842615d70e8334da5f9823689, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Mobile - Angry Birds - Pre-Chrome Characters_17
+  - Mobile - Angry Birds - Pre-Chrome Characters_37
+  - Mobile - Angry Birds - Pre-Chrome Characters_77
+  - Mobile - Angry Birds - Pre-Chrome Characters_67
+  - Mobile - Angry Birds - Pre-Chrome Characters_34
+  - Mobile - Angry Birds - Pre-Chrome Characters_74
+  - Mobile - Angry Birds - Pre-Chrome Characters_66
+  - Mobile - Angry Birds - Pre-Chrome Characters_35
+  - Mobile - Angry Birds - Pre-Chrome Characters_75
+  - Mobile - Angry Birds - Pre-Chrome Characters_61
+  - Mobile - Angry Birds - Pre-Chrome Characters_32
+  - Mobile - Angry Birds - Pre-Chrome Characters_60
+  - Mobile - Angry Birds - Pre-Chrome Characters_33
+  - Mobile - Angry Birds - Pre-Chrome Characters_63
+  - Mobile - Angry Birds - Pre-Chrome Characters_30
+  - Mobile - Angry Birds - Pre-Chrome Characters_62
+  - Mobile - Angry Birds - Pre-Chrome Characters_31
+  - Mobile - Angry Birds - Pre-Chrome Characters_180
+  - Mobile - Angry Birds - Pre-Chrome Characters_181
+  - Mobile - Angry Birds - Pre-Chrome Characters_182
+  - Mobile - Angry Birds - Pre-Chrome Characters_183
+  - Mobile - Angry Birds - Pre-Chrome Characters_184
+  - Mobile - Angry Birds - Pre-Chrome Characters_144
+  - Mobile - Angry Birds - Pre-Chrome Characters_185
+  - Mobile - Angry Birds - Pre-Chrome Characters_145
+  - Mobile - Angry Birds - Pre-Chrome Characters_186
+  - Mobile - Angry Birds - Pre-Chrome Characters_146
+  - Mobile - Angry Birds - Pre-Chrome Characters_187
+  - Mobile - Angry Birds - Pre-Chrome Characters_147
+  - Mobile - Angry Birds - Pre-Chrome Characters_157
+  - Mobile - Angry Birds - Pre-Chrome Characters_188
+  - Mobile - Angry Birds - Pre-Chrome Characters_108
+  - Mobile - Angry Birds - Pre-Chrome Characters_140
+  - Mobile - Angry Birds - Pre-Chrome Characters_156
+  - Mobile - Angry Birds - Pre-Chrome Characters_189
+  - Mobile - Angry Birds - Pre-Chrome Characters_109
+  - Mobile - Angry Birds - Pre-Chrome Characters_141
+  - Mobile - Angry Birds - Pre-Chrome Characters_155
+  - Mobile - Angry Birds - Pre-Chrome Characters_142
+  - Mobile - Angry Birds - Pre-Chrome Characters_154
+  - Mobile - Angry Birds - Pre-Chrome Characters_143
+  - Mobile - Angry Birds - Pre-Chrome Characters_153
+  - Mobile - Angry Birds - Pre-Chrome Characters_152
+  - Mobile - Angry Birds - Pre-Chrome Characters_168
+  - Mobile - Angry Birds - Pre-Chrome Characters_151
+  - Mobile - Angry Birds - Pre-Chrome Characters_169
+  - Mobile - Angry Birds - Pre-Chrome Characters_150
+  - Mobile - Angry Birds - Pre-Chrome Characters_100
+  - Mobile - Angry Birds - Pre-Chrome Characters_148
+  - Mobile - Angry Birds - Pre-Chrome Characters_101
+  - Mobile - Angry Birds - Pre-Chrome Characters_149
+  - Mobile - Angry Birds - Pre-Chrome Characters_179
+  - Mobile - Angry Birds - Pre-Chrome Characters_102
+  - Mobile - Angry Birds - Pre-Chrome Characters_162
+  - Mobile - Angry Birds - Pre-Chrome Characters_178
+  - Mobile - Angry Birds - Pre-Chrome Characters_103
+  - Mobile - Angry Birds - Pre-Chrome Characters_163
+  - Mobile - Angry Birds - Pre-Chrome Characters_104
+  - Mobile - Angry Birds - Pre-Chrome Characters_160
+  - Mobile - Angry Birds - Pre-Chrome Characters_105
+  - Mobile - Angry Birds - Pre-Chrome Characters_159
+  - Mobile - Angry Birds - Pre-Chrome Characters_161
+  - Mobile - Angry Birds - Pre-Chrome Characters_175
+  - Mobile - Angry Birds - Pre-Chrome Characters_106
+  - Mobile - Angry Birds - Pre-Chrome Characters_158
+  - Mobile - Angry Birds - Pre-Chrome Characters_166
+  - Mobile - Angry Birds - Pre-Chrome Characters_174
+  - Mobile - Angry Birds - Pre-Chrome Characters_107
+  - Mobile - Angry Birds - Pre-Chrome Characters_167
+  - Mobile - Angry Birds - Pre-Chrome Characters_177
+  - Mobile - Angry Birds - Pre-Chrome Characters_164
+  - Mobile - Angry Birds - Pre-Chrome Characters_176
+  - Mobile - Angry Birds - Pre-Chrome Characters_165
+  - Mobile - Angry Birds - Pre-Chrome Characters_171
+  - Mobile - Angry Birds - Pre-Chrome Characters_170
+  - Mobile - Angry Birds - Pre-Chrome Characters_173
+  - Mobile - Angry Birds - Pre-Chrome Characters_172
+  - Mobile - Angry Birds - Pre-Chrome Characters_21
+  - Mobile - Angry Birds - Pre-Chrome Characters_20
+  - Mobile - Angry Birds - Pre-Chrome Characters_23
+  - Mobile - Angry Birds - Pre-Chrome Characters_22
+  - Mobile - Angry Birds - Pre-Chrome Characters_54
+  - Mobile - Angry Birds - Pre-Chrome Characters_25
+  - Mobile - Angry Birds - Pre-Chrome Characters_55
+  - Mobile - Angry Birds - Pre-Chrome Characters_24
+  - Mobile - Angry Birds - Pre-Chrome Characters_56
+  - Mobile - Angry Birds - Pre-Chrome Characters_27
+  - Mobile - Angry Birds - Pre-Chrome Characters_57
+  - Mobile - Angry Birds - Pre-Chrome Characters_47
+  - Mobile - Angry Birds - Pre-Chrome Characters_26
+  - Mobile - Angry Birds - Pre-Chrome Characters_50
+  - Mobile - Angry Birds - Pre-Chrome Characters_46
+  - Mobile - Angry Birds - Pre-Chrome Characters_29
+  - Mobile - Angry Birds - Pre-Chrome Characters_51
+  - Mobile - Angry Birds - Pre-Chrome Characters_45
+  - Mobile - Angry Birds - Pre-Chrome Characters_28
+  - Mobile - Angry Birds - Pre-Chrome Characters_52
+  - Mobile - Angry Birds - Pre-Chrome Characters_44
+  - Mobile - Angry Birds - Pre-Chrome Characters_53
+  - Mobile - Angry Birds - Pre-Chrome Characters_43
+  - Mobile - Angry Birds - Pre-Chrome Characters_42
+  - Mobile - Angry Birds - Pre-Chrome Characters_41
+  - Mobile - Angry Birds - Pre-Chrome Characters_9
+  - Mobile - Angry Birds - Pre-Chrome Characters_40
+  - Mobile - Angry Birds - Pre-Chrome Characters_8
+  - Mobile - Angry Birds - Pre-Chrome Characters_58
+  - Mobile - Angry Birds - Pre-Chrome Characters_59
+  - Mobile - Angry Birds - Pre-Chrome Characters_49
+  - Mobile - Angry Birds - Pre-Chrome Characters_1
+  - Mobile - Angry Birds - Pre-Chrome Characters_48
+  - Mobile - Angry Birds - Pre-Chrome Characters_0
+  - Mobile - Angry Birds - Pre-Chrome Characters_3
+  - Mobile - Angry Birds - Pre-Chrome Characters_2
+  - Mobile - Angry Birds - Pre-Chrome Characters_5
+  - Mobile - Angry Birds - Pre-Chrome Characters_4
+  - Mobile - Angry Birds - Pre-Chrome Characters_7
+  - Mobile - Angry Birds - Pre-Chrome Characters_6
+  - Mobile - Angry Birds - Pre-Chrome Characters_131
+  - Mobile - Angry Birds - Pre-Chrome Characters_130
+  - Mobile - Angry Birds - Pre-Chrome Characters_133
+  - Mobile - Angry Birds - Pre-Chrome Characters_132
+  - Mobile - Angry Birds - Pre-Chrome Characters_135
+  - Mobile - Angry Birds - Pre-Chrome Characters_134
+  - Mobile - Angry Birds - Pre-Chrome Characters_137
+  - Mobile - Angry Birds - Pre-Chrome Characters_136
+  - Mobile - Angry Birds - Pre-Chrome Characters_139
+  - Mobile - Angry Birds - Pre-Chrome Characters_138
+  - Mobile - Angry Birds - Pre-Chrome Characters_119
+  - Mobile - Angry Birds - Pre-Chrome Characters_118
+  - Mobile - Angry Birds - Pre-Chrome Characters_113
+  - Mobile - Angry Birds - Pre-Chrome Characters_112
+  - Mobile - Angry Birds - Pre-Chrome Characters_128
+  - Mobile - Angry Birds - Pre-Chrome Characters_111
+  - Mobile - Angry Birds - Pre-Chrome Characters_129
+  - Mobile - Angry Birds - Pre-Chrome Characters_110
+  - Mobile - Angry Birds - Pre-Chrome Characters_126
+  - Mobile - Angry Birds - Pre-Chrome Characters_117
+  - Mobile - Angry Birds - Pre-Chrome Characters_127
+  - Mobile - Angry Birds - Pre-Chrome Characters_116
+  - Mobile - Angry Birds - Pre-Chrome Characters_124
+  - Mobile - Angry Birds - Pre-Chrome Characters_115
+  - Mobile - Angry Birds - Pre-Chrome Characters_125
+  - Mobile - Angry Birds - Pre-Chrome Characters_114
+  - Mobile - Angry Birds - Pre-Chrome Characters_122
+  - Mobile - Angry Birds - Pre-Chrome Characters_123
+  - Mobile - Angry Birds - Pre-Chrome Characters_120
+  - Mobile - Angry Birds - Pre-Chrome Characters_121
+  - Mobile - Angry Birds - Pre-Chrome Characters_90
+  - Mobile - Angry Birds - Pre-Chrome Characters_91
+  - Mobile - Angry Birds - Pre-Chrome Characters_92
+  - Mobile - Angry Birds - Pre-Chrome Characters_93
+  - Mobile - Angry Birds - Pre-Chrome Characters_83
+  - Mobile - Angry Birds - Pre-Chrome Characters_94
+  - Mobile - Angry Birds - Pre-Chrome Characters_82
+  - Mobile - Angry Birds - Pre-Chrome Characters_95
+  - Mobile - Angry Birds - Pre-Chrome Characters_81
+  - Mobile - Angry Birds - Pre-Chrome Characters_96
+  - Mobile - Angry Birds - Pre-Chrome Characters_80
+  - Mobile - Angry Birds - Pre-Chrome Characters_97
+  - Mobile - Angry Birds - Pre-Chrome Characters_87
+  - Mobile - Angry Birds - Pre-Chrome Characters_98
+  - Mobile - Angry Birds - Pre-Chrome Characters_86
+  - Mobile - Angry Birds - Pre-Chrome Characters_18
+  - Mobile - Angry Birds - Pre-Chrome Characters_99
+  - Mobile - Angry Birds - Pre-Chrome Characters_85
+  - Mobile - Angry Birds - Pre-Chrome Characters_19
+  - Mobile - Angry Birds - Pre-Chrome Characters_84
+  - Mobile - Angry Birds - Pre-Chrome Characters_78
+  - Mobile - Angry Birds - Pre-Chrome Characters_89
+  - Mobile - Angry Birds - Pre-Chrome Characters_79
+  - Mobile - Angry Birds - Pre-Chrome Characters_88
+  - Mobile - Angry Birds - Pre-Chrome Characters_10
+  - Mobile - Angry Birds - Pre-Chrome Characters_11
+  - Mobile - Angry Birds - Pre-Chrome Characters_69
+  - Mobile - Angry Birds - Pre-Chrome Characters_12
+  - Mobile - Angry Birds - Pre-Chrome Characters_72
+  - Mobile - Angry Birds - Pre-Chrome Characters_68
+  - Mobile - Angry Birds - Pre-Chrome Characters_13
+  - Mobile - Angry Birds - Pre-Chrome Characters_73
+  - Mobile - Angry Birds - Pre-Chrome Characters_14
+  - Mobile - Angry Birds - Pre-Chrome Characters_38
+  - Mobile - Angry Birds - Pre-Chrome Characters_70
+  - Mobile - Angry Birds - Pre-Chrome Characters_15
+  - Mobile - Angry Birds - Pre-Chrome Characters_39
+  - Mobile - Angry Birds - Pre-Chrome Characters_71
+  - Mobile - Angry Birds - Pre-Chrome Characters_65
+  - Mobile - Angry Birds - Pre-Chrome Characters_16
+  - Mobile - Angry Birds - Pre-Chrome Characters_36
+  - Mobile - Angry Birds - Pre-Chrome Characters_76
+  - Mobile - Angry Birds - Pre-Chrome Characters_64
+  m_RenderDataMap: {}
+  m_Tag: SA_Piggies_2048
+  m_IsVariant: 0

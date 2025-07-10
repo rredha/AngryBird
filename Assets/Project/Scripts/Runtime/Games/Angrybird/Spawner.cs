@@ -6,13 +6,14 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 {
   public class Spawner : MonoBehaviour
   {
-    public Projectile Projectile;
-    public Birds Bird;
+    public Projectile Projectile { get; set; }
+    public GameObject ProjectileRef { get; set; }
+    public Birds Bird { get; set; }
 
-    public Transform ProjectileLocation;
-    public Transform BirdLocation;
+    public Transform ProjectileLocation { get; set; }
+    public Transform BirdLocation { get; set; }
 
-    public GameObject SpawnedProjectile;
+    public GameObject SpawnedProjectile { get; set; }
 
     public void CoroutineStartBird()
     {
@@ -24,12 +25,27 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       StartCoroutine(SpawnProjectile(ProjectileLocation));
     }
 
+    public IEnumerator Spawn(GameObject prefab, Transform location)
+    {
+
+      SpawnedProjectile = Instantiate(prefab,
+        location.position ,Quaternion.identity);
+      ProjectileRef = SpawnedProjectile;
+      yield return null;
+    }
     public IEnumerator SpawnProjectile(Transform location)
     {
 
       SpawnedProjectile = Instantiate(Projectile.gameObject,
                   location.position ,Quaternion.identity);
       yield return null;
+    }
+    public IEnumerator SpawnProjectile(Transform location, float delay)
+    {
+      yield return new WaitForSeconds(delay);
+      
+      SpawnedProjectile = Instantiate(Projectile.gameObject,
+        location.position ,Quaternion.identity);
     }
 
     public IEnumerator SpawnBird(Transform location)
