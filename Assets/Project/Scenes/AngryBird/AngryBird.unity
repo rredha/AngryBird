@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 182507185}
   - component: {fileID: 182507184}
   - component: {fileID: 182507183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,6 +562,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1355931210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &324175706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 324175707}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &324175707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324175706}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.16, y: -3.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &408725771
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 466106491}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.36, y: -3.4, z: 0}
+  m_LocalPosition: {x: 3.98, y: -3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -990,7 +1021,6 @@ GameObject:
   m_Component:
   - component: {fileID: 539527643}
   - component: {fileID: 539527645}
-  - component: {fileID: 539527646}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1010,7 +1040,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1191231099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &539527645
@@ -1025,23 +1056,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a50d1f74de416ed59cd3d13f1ca4e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Configuration: {fileID: 11400000, guid: f6dd6d89f652661a9a7b42c87d71c54d, type: 2}
+  WonUI: {fileID: 4213490013021013264, guid: c48823c64c23d09df9cac5c9e15322f2, type: 3}
+  LostUI: {fileID: 2972761930674199296, guid: 0b2d19cd0a234fa9f9e8170609527f33, type: 3}
   m_Pointer: {fileID: 240641260}
-  m_Projectile: {fileID: 1540234852016653049, guid: d1c2625f194f752818182b45cbddef35, type: 3}
-  m_Bird: {fileID: 6490768454047996905, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
-  m_ProjectileSpawnLocation: {fileID: 310609501}
-  m_BirdSpawnPosition: {fileID: 1987644548}
---- !u!114 &539527646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 539527641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dfa1eda5b00244fa8254cc354ef9649, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Spawner: {fileID: 1191231098}
+  m_ProjectileLocation: {fileID: 310609501}
+  m_BirdLocations:
+  - {fileID: 1917442433}
+  - {fileID: 324175707}
+  - {fileID: 1455673660}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1487,7 @@ GameObject:
   - component: {fileID: 1146527186}
   - component: {fileID: 1146527185}
   - component: {fileID: 1146527184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1700,6 +1724,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1191231097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1191231099}
+  - component: {fileID: 1191231098}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1191231098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191231097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfa1eda5b00244fa8254cc354ef9649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Projectile: {fileID: 1540234852016653049, guid: d1c2625f194f752818182b45cbddef35, type: 3}
+  m_Bird: {fileID: 6490768454047996905, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
+  m_ProjectileLocation: {fileID: 310609501}
+  m_BirdLocation: {fileID: 1987644548}
+--- !u!4 &1191231099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191231097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 539527643}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355931206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,6 +1935,37 @@ Transform:
   - {fileID: 310609501}
   m_Father: {fileID: 885806670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1455673659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455673660}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1455673660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455673659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.51, y: 1.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1580551117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,7 +1978,7 @@ GameObject:
   - component: {fileID: 1580551120}
   - component: {fileID: 1580551119}
   - component: {fileID: 1580551118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2232,6 +2335,37 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1 &1917442432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1917442433}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1917442433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917442432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966647516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,3 +2663,6 @@ SceneRoots:
   - {fileID: 22309007}
   - {fileID: 218976499}
   - {fileID: 539527643}
+  - {fileID: 1917442433}
+  - {fileID: 324175707}
+  - {fileID: 1455673660}

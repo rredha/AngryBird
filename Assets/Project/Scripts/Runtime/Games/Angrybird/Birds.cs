@@ -1,31 +1,25 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Arcade.Project.Runtime.Games.AngryBird
 {
   public class Birds : MonoBehaviour
   {
+    private static readonly int IsDead = Animator.StringToHash("isDead");
     [SerializeField] private float MaxHealth;
     private float m_CurrentHealth;
     private const float k_Threshhold = 0.2f;
-    private Animation m_Animation;
-    private string m_ClipName;
-
+    private Animator m_Animator;
+    public int Id { get; set; }
+    public event EventHandler OnDeath;
     private void Awake()
     {
       m_CurrentHealth = MaxHealth;
-      m_Animation = GetComponent<Animation>();
-      m_ClipName = m_Animation.clip.name;
+      m_Animator = GetComponent<Animator>();
+      OnDeath += OnBirdDeath_PlayAnimation;
+      OnDeath += OnBirdDeath_Destroy;
     }
-
-    private void Update()
-    {
-      if (Input.GetKeyDown(KeyCode.S))
-      {
-        m_Animation.Play(m_ClipName);
-      }
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
       var velocity = other.relativeVelocity.magnitude;
@@ -33,13 +27,21 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       m_CurrentHealth -= velocity;
       if (m_CurrentHealth <= 0f)
       {
-        OnDistroyed();
+        OnDeath?.Invoke(this, EventArgs.Empty);
       }
     }
-
-    private void OnDistroyed()
+    private void OnDestroy()
     {
+      OnDeath -= OnBirdDeath_PlayAnimation;
+      OnDeath -= OnBirdDeath_Destroy;
+    }
+    private IEnumerator DestroyCoroutine(float ms)
+    {
+      yield return new WaitForSeconds(ms);
       Destroy(gameObject);
     }
+    private void OnBirdDeath_Destroy(object sender, EventArgs e) => DestroyAfter(1f);
+    private void DestroyAfter(float ms) => StartCoroutine(DestroyCoroutine(ms));
+    private void OnBirdDeath_PlayAnimation(object sender, EventArgs e) => m_Animator.SetBool(IsDead , true);
   }
 }

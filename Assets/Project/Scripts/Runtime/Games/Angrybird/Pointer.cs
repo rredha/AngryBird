@@ -43,13 +43,17 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 
       _playerInputActions = new PlayerInputActions();
       _playerInputActions.Player.Enable();
-      _playerInputActions.Player.Move.performed += Move_performed;
-      _playerInputActions.Player.Select.performed += Select_performed;
 
 
 
       // dont forget to unsubscribe.
       //_playerInputActions.Player.Select.canceled += Select_canceled;
+    }
+
+    public void Subscribe()
+    {
+      _playerInputActions.Player.Move.performed += Move_performed;
+      _playerInputActions.Player.Select.performed += Select_performed;
     }
 
     private void FixedUpdate()

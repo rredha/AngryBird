@@ -42,6 +42,10 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 
   public partial class Slingshot
   {
+    public void EmptyStateEnter()
+    {
+      m_Pointer.Subscribe();
+    }
     public void EmptyStateUpdate()
     {
       InitializeRubber();

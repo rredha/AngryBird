@@ -16,6 +16,7 @@ namespace Project.Runtime.Game.AngryBird.Project.Scripts.Runtime.Games.Angrybird
 
             m_SlingshotStateMachine.AddState("Empty",
                 new State(
+                    onEnter: state => m_Slingshot.EmptyStateEnter(),
                     onLogic: state => m_Slingshot.EmptyStateUpdate()
                     )
                 );

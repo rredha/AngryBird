@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3227586302699202275}
-  - component: {fileID: 4409308043625397744}
+  - component: {fileID: 6050344217686554898}
   - component: {fileID: 2604973350962444655}
   - component: {fileID: 1540234852016653049}
   m_Layer: 7
@@ -35,8 +35,8 @@ Transform:
   - {fileID: 8913360136577016073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4409308043625397744
-CircleCollider2D:
+--- !u!70 &6050344217686554898
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -69,8 +69,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: -0.0022777324, y: -0.0022749305}
+  m_Size: {x: 0.8135103, y: 0.7407314}
+  m_Direction: 1
 --- !u!50 &2604973350962444655
 Rigidbody2D:
   serializedVersion: 5
@@ -110,6 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394cea01766ce4140b418645971b073d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsMoving:
+    _value: 1
+  IsTouchingGround:
+    _value: 0
+  IsUsed:
+    _value: 0
 --- !u!1 &3778502939342959847
 GameObject:
   m_ObjectHideFlags: 0
