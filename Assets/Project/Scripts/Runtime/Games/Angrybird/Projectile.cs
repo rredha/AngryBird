@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 //using Arcade.Project.Runtime.Games.AngryBird.Cues;
 using Arcade.Project.Runtime.Games.AngryBird.Interfaces;
+using Arcade.Project.Runtime.Games.AngryBird.Utils.Events;
 using Project.Scripts.Runtime.Games;
 
 namespace Arcade.Project.Runtime.Games.AngryBird
@@ -10,29 +11,37 @@ namespace Arcade.Project.Runtime.Games.AngryBird
   // projectile is better suited to be event based.
     public class Projectile : MonoBehaviour
     {
-      private LayerMask _environmentLayer;
-      private LayerMask _groundLayer;
+      private LayerMask m_EnvironmentLayer;
+      private LayerMask m_GroundLayer;
       public Rigidbody2D Rb {get; private set;}
       public Collider2D Col {get; private set;}
-      private SpriteRenderer _spriteRenderer;
       public bool IsSelected {get; private set;}
-      public bool IsMoving {get; private set;}
-      public bool IsInContactWithGround {get; private set;}
+      public ObservableValue<bool> IsMoving = new ObservableValue<bool>(true);
+      public ObservableValue<bool> IsTouchingGround = new ObservableValue<bool>(false);
+      public ObservableValue<bool> IsUsed = new ObservableValue<bool>(false);
+
+      public event EventHandler OnProjectileUsed;
       public bool IsFlying { get; set; }
 
       private void Awake()
       {
-        _environmentLayer = LayerMask.GetMask("Environment");
-        _groundLayer = LayerMask.GetMask("Ground");
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        m_EnvironmentLayer = LayerMask.GetMask("Environment");
+        m_GroundLayer = LayerMask.GetMask("Ground");
 
         Rb = GetComponent<Rigidbody2D>();
         Col = GetComponent<Collider2D>();
 
         IsSelected = false;
         IsFlying = false;
+        IsUsed.ValueChanged += DisableBehaviour;
       }
 
+      private void OnDisable()
+      {
+        IsUsed.ValueChanged -= DisableBehaviour;
+      }
+
+      private void DisableBehaviour(object sender, ValueChangedEventArgs<bool> e) => enabled = false;
       public void SetStatic()
       {
         Col.enabled = true;
@@ -50,39 +59,10 @@ namespace Arcade.Project.Runtime.Games.AngryBird
         IsSelected = true;
       }
 
-      // TO FIX
-      // Minor bug regarding linear velocity.
-
-      public bool GetProjectileIsMoving()
-      {
-        const float THRESHHOLD = 0.5f;
-        if (Rb.velocity.magnitude <= THRESHHOLD)
-        {
-          return false;
-          //IsMoving = false;
-        } else
-        {
-          return true;
-          //IsMoving = true;
-        }
-      }
-
-      public bool GetProjectileInContactWithGround()
-      {
-        if (Col.IsTouchingLayers(_groundLayer))
-        {
-          //IsInContactWithGround = true;
-          return true;
-        }else
-        {
-          return false;
-          //IsInContactWithGround = false;
-        }
-
       private void Update()
       {
         IsTouchingGround.Value = Col.IsTouchingLayers(m_GroundLayer) || Col.IsTouchingLayers(m_EnvironmentLayer);
-        IsMoving.Value = !(Rb.linearVelocity.magnitude <= 0.5f);
+        IsMoving.Value = !(Rb.velocity.magnitude <= 0.5f);
         
         IsUsed.Value = (IsTouchingGround.Value && IsMoving.Value);
         

@@ -20,6 +20,14 @@ namespace Arcade.Project.Runtime.Games.AngryBird
             m_HPlugin = HapticGameObject.GetComponent<HapticPlugin>();
         }
 
+        public void Subscribe()
+        {
+        }
+
+        public void Unsubscribe()
+        {
+        }
+
         public bool MoveEventRaised { get; private set; }
 
         public Vector3 GetPointerPosition()

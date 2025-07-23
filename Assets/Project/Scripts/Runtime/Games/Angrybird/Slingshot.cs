@@ -10,7 +10,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
   {
     [SerializeField] private GameObject m_Holder;
     [SerializeField] private DropZone m_DropZone;
-    [SerializeField] private Pointer m_Pointer;
+    [SerializeField] private MousePointer m_Pointer;
 
     private Rubber m_Rubber;
     private Projectile m_Projectile;
@@ -44,6 +44,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
   {
     public void EmptyStateEnter()
     {
+      m_Pointer.Initialize();
       m_Pointer.Subscribe();
     }
     public void EmptyStateUpdate()
@@ -62,7 +63,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     public void LoadedStateEnter()
     {
       _playerInputActions.Player.Enable();
-      //m_Pointer.Unsubscribe();
+      m_Pointer.Unsubscribe();
 
       _playerInputActions.Player.Release.performed += Release_performed;
       _playerInputActions.Player.Move.performed += Move_performed;

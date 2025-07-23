@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 5754483233732443076}
   - component: {fileID: 663624305068572788}
   - component: {fileID: 4061699970898943054}
-  - component: {fileID: 3018208667871154082}
-  - component: {fileID: 1915685331365366168}
+  - component: {fileID: 1414770837135956600}
   m_Layer: 0
   m_Name: Pointer
   m_TagString: Untagged
@@ -122,7 +121,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3018208667871154082
+--- !u!114 &1414770837135956600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,25 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4440574606531188197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e6a97604ae4a91b9cebc007b8246bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 59e2b8572d29423c9b0b2bf3a8c657e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proj: {fileID: 0}
-  onSelectTriggered:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1915685331365366168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4440574606531188197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55089ff294f463596135f53bf278c02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Bias: {x: 0, y: -1.64}
-  m_ScaleFactor: {x: -0.055, y: 0.033}
-  HapticPluginPrefab: {fileID: 5859006658146060957, guid: d89315514e120084a9df73577bf01151, type: 3}
+  m_Camera: {fileID: 0}
