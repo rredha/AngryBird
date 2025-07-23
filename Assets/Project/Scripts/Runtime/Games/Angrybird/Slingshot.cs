@@ -62,7 +62,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     public void LoadedStateEnter()
     {
       _playerInputActions.Player.Enable();
-      m_Pointer.Unsubscribe();
+      //m_Pointer.Unsubscribe();
 
       _playerInputActions.Player.Release.performed += Release_performed;
       _playerInputActions.Player.Move.performed += Move_performed;
@@ -98,7 +98,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     {
       m_Projectile.transform.SetParent(null);
       m_Projectile.SetDynamic();
-      m_Projectile.Rb.linearVelocity = (_pointerWorldPosition - m_Rubber.Center.position) * m_Rubber.Config.force * -1;
+      m_Projectile.Rb.velocity = (_pointerWorldPosition - m_Rubber.Center.position) * m_Rubber.Config.force * -1;
       m_Rubber.Animation();
     }
 

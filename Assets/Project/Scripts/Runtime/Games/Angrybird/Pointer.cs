@@ -11,11 +11,17 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 {
   public class Pointer : MonoBehaviour
   {
-    private List<IVisualHint> _colorChangeHints = new List<IVisualHint>();
+    public List<IVisualHint> ColorChangeHints { get; private set; }
 
     private Camera _camera;
     private Color _defaultColor;
     private LayerMask _layerMask;
+    public bool PointerOverlapProjectile { get; set; }
+
+    public void SetPointerOverlapProjectile(bool value)
+    {
+      PointerOverlapProjectile = value;
+    }
 
     private Collider2D _collider;
     private SpriteRenderer _spriteRenderer;
@@ -23,8 +29,8 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     private Vector3 _pointerWorldPosition;
     private Vector2 _pointerScreenPosition;
 
-    private PlayerInputActions _playerInputActions;
-
+    private HapticPointer m_MovementProvider;
+    //private MousePointer m_MovementProvider;
     public Projectile proj;
 
     private void Awake()
@@ -36,75 +42,20 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       _layerMask = LayerMask.GetMask("Selectables");
 
       // it work but it need to be implemented using IEnumerator
-      _colorChangeHints.Add(new ColorChangeHintFactory().CreateVisualHint());
-      _colorChangeHints.Add(new ColorChangeWithDelayFactory().CreateVisualHint());
-      _colorChangeHints[0].Initialize(_spriteRenderer, Color.blue);
-      _colorChangeHints[1].Initialize(_spriteRenderer, Color.red);
-
-      _playerInputActions = new PlayerInputActions();
-      _playerInputActions.Player.Enable();
-
-
-
-      // dont forget to unsubscribe.
-      //_playerInputActions.Player.Select.canceled += Select_canceled;
-    }
-
-    public void Subscribe()
-    {
-      _playerInputActions.Player.Move.performed += Move_performed;
-      _playerInputActions.Player.Select.performed += Select_performed;
+      ColorChangeHints = new List<IVisualHint>();
+      ColorChangeHints.Add(new ColorChangeHintFactory().CreateVisualHint());
+      ColorChangeHints.Add(new ColorChangeWithDelayFactory().CreateVisualHint());
+      ColorChangeHints[0].Initialize(_spriteRenderer, Color.blue);
+      ColorChangeHints[1].Initialize(_spriteRenderer, Color.red);
+      
+      //m_MovementProvider = GetComponent<MousePointer>();
+      m_MovementProvider = GetComponent<HapticPointer>();
+      m_MovementProvider.Initialize();
     }
 
     private void FixedUpdate()
     {
-      transform.position = _pointerWorldPosition;
-    }
-
-    private void Select_performed(InputAction.CallbackContext ctx)
-    {
-      var collider = Physics2D.OverlapPoint(transform.position, _layerMask, -Mathf.Infinity, +Mathf.Infinity);
-      if (collider == null) return;
-      if (collider.TryGetComponent<Projectile>(out proj))
-      {
-        foreach (IVisualHint hint in _colorChangeHints)
-        {
-          hint.OnHintEnabled();
-        }
-        proj.SetStatic();
-        proj.transform.SetParent(this.transform);
-        proj.SetProjectileSelected();
-      }
-    }
-
-    /*
-    private void Select_canceled(InputAction.CallbackContext ctx)
-    {
-      // bug : when entering the game and selecting, after the select is Move_performed -> object not set to an instance.
-      // for now disabling this portion of code
-      ResetColor();
-      proj.SetDynamic();
-      proj.transform.SetParent(null);
-    }
-    */
-
-    private void Move_performed(InputAction.CallbackContext ctx)
-    {
-      // convert form screen to world position.
-      _pointerWorldPosition = ScreenToWorldPosition(ctx.ReadValue<Vector2>());
-    }
-
-    private Vector3 ScreenToWorldPosition(Vector2 screenPosition)
-    {
-      var worldPosition = _camera.ScreenToWorldPoint(screenPosition);
-      return new Vector3(worldPosition.x, worldPosition.y, 5);
-    }
-
-    public void Unsubscribe()
-    {
-      _playerInputActions.Player.Move.performed -= Move_performed;
-      _playerInputActions.Player.Select.performed -= Select_performed;
-      
+      transform.position = m_MovementProvider.GetPointerPosition();
     }
   }
 }
