@@ -1575,7 +1575,7 @@ public class HapticPlugin : MonoBehaviour
         if (transformDirect==true)
         {
             rBody.position = targetPos;
-            rBody.drag = 0;
+            rBody.linearDamping = 0;
             VisualizationMesh.transform.SetPositionAndRotation(newMatrix.ExtractPosition(), newMatrix.ExtractRotation());
 
         }
@@ -1587,16 +1587,16 @@ public class HapticPlugin : MonoBehaviour
             {
                 magnitude = 20.0f;
                 //rBody.drag = 10.0f;
-                rBody.drag = 1;
+                rBody.linearDamping = 1;
                 rBody.AddForce(deltaPos * magnitude, ForceMode.VelocityChange);
                 //Debug.Log("DeltaPos:" + deltaPos.x);
             }
             else
             {
-                rBody.velocity = Vector3.zero;
+                rBody.linearVelocity = Vector3.zero;
                 magnitude = 0.0f;
                 //rBody.drag = 50;
-                rBody.drag = 1;
+                rBody.linearDamping = 1;
                 
 
                 
@@ -1614,7 +1614,7 @@ public class HapticPlugin : MonoBehaviour
         {
             rBody.rotation = newMatrix.ExtractRotation();
         }
-        rBody.velocity = Vector3.zero;
+        rBody.linearVelocity = Vector3.zero;
         rBody.angularVelocity = Vector3.zero;
 
         FixedJoint[] joints = CollisionMesh.GetComponentsInChildren<FixedJoint>();
@@ -1791,7 +1791,7 @@ public class HapticPlugin : MonoBehaviour
 
 
 
-            debug_force_collider = CollisionMesh.GetComponent<Rigidbody>().velocity / Time.fixedDeltaTime;
+            debug_force_collider = CollisionMesh.GetComponent<Rigidbody>().linearVelocity / Time.fixedDeltaTime;
             debug_force_collider_mag = Time.fixedDeltaTime;//debug_force_collider.magnitude;
 
             if (collision.collider.GetComponent<HapticMaterial>() != null)
@@ -1804,7 +1804,7 @@ public class HapticPlugin : MonoBehaviour
             }
             if (collision.rigidbody != null)
             {
-                debug_collision_obj = CollisionMesh.GetComponent<Rigidbody>().velocity / Time.fixedDeltaTime;
+                debug_collision_obj = CollisionMesh.GetComponent<Rigidbody>().linearVelocity / Time.fixedDeltaTime;
                 debug_collision_mag = debug_collision_obj.magnitude;
                 //CollisionMesh.GetComponent<Rigidbody>().AddForce(-1.0f*debug_collision_obj, ForceMode.Force);
                 //debug_collision_obj = collision.impulse / Time.fixedDeltaTime;
@@ -2007,8 +2007,8 @@ public class HapticPlugin : MonoBehaviour
 
                 if (collision.collider.GetComponent<Rigidbody>() != null)
                 {
-                    contInfo.RigBodySpeed = collision.collider.GetComponent<Rigidbody>().velocity.magnitude;
-                    contInfo.RigBodyVelocity = collision.collider.GetComponent<Rigidbody>().velocity;
+                    contInfo.RigBodySpeed = collision.collider.GetComponent<Rigidbody>().linearVelocity.magnitude;
+                    contInfo.RigBodyVelocity = collision.collider.GetComponent<Rigidbody>().linearVelocity;
                     contInfo.RigBodyAngularVelocity = collision.collider.GetComponent<Rigidbody>().angularVelocity;
                     contInfo.RigBodyMass = collision.collider.GetComponent<Rigidbody>().mass;
                     //contInfo.ColImpulse = collision.impulse.magnitude * contInfo.Normal;
@@ -2155,10 +2155,10 @@ public class HapticPlugin : MonoBehaviour
                 if(HMat.bGrabbing == true)
                 {
                     CollisionMesh.GetComponent<Rigidbody>().detectCollisions = false;
-                    oldDrag = grabObjectbody.drag;
-                    oldAngularDrag = grabObjectbody.angularDrag;
-                    grabObjectbody.drag = 10;
-                    grabObjectbody.angularDrag = 1.0f;
+                    oldDrag = grabObjectbody.linearDamping;
+                    oldAngularDrag = grabObjectbody.angularDamping;
+                    grabObjectbody.linearDamping = 10;
+                    grabObjectbody.angularDamping = 1.0f;
                     grabObjectbody.useGravity = false;
                     joint = (FixedJoint)CollisionMesh.AddComponent(typeof(FixedJoint));
                     joint.connectedBody = grabObjectbody;
@@ -2189,8 +2189,8 @@ public class HapticPlugin : MonoBehaviour
         Destroy(joint);
         Rigidbody grabObjectbody = GrabObject.GetComponent<Rigidbody>();
 
-        grabObjectbody.drag = oldDrag;
-        grabObjectbody.angularDrag = oldAngularDrag;
+        grabObjectbody.linearDamping = oldDrag;
+        grabObjectbody.angularDamping = oldAngularDrag;
         grabObjectbody.useGravity = true; ;
         GrabObject = null;
         bIsGrabbingActive = false;

@@ -23,7 +23,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
     [SerializeField] private GameObject WonUI;
     [SerializeField] private GameObject LostUI;
     
-    [SerializeField] private Pointer m_Pointer;
+    //private Pointer m_Pointer;
     [SerializeField] private Spawner m_Spawner;
     
     private GameObject m_ActiveProjectile;
@@ -165,12 +165,12 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
   // Won State
   public partial class GameManager
   {
-    private void WonStateEnter() => Instantiate(WonUI);
+    private void WonStateEnter() => Debug.Log("Congratulations");
   }
   
   // Lost State
   public partial class GameManager
   {
-    private void LostStateEnter() => Instantiate(LostUI);
+    private void LostStateEnter() => Debug.Log("You lost");
   }
 }

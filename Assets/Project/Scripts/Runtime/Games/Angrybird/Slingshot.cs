@@ -10,7 +10,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
   {
     [SerializeField] private GameObject m_Holder;
     [SerializeField] private DropZone m_DropZone;
-    [SerializeField] private MousePointer m_Pointer;
+    private MousePointer m_Pointer;
 
     private Rubber m_Rubber;
     private Projectile m_Projectile;
@@ -27,6 +27,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     private void Awake()
     {
       _camera = Camera.main;
+      m_Pointer = new MousePointer(_camera);
       m_Rubber = GetComponent<Rubber>();
       _playerInputActions = new PlayerInputActions();
     }
@@ -99,7 +100,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     {
       m_Projectile.transform.SetParent(null);
       m_Projectile.SetDynamic();
-      m_Projectile.Rb.velocity = (_pointerWorldPosition - m_Rubber.Center.position) * m_Rubber.Config.force * -1;
+      m_Projectile.Rb.linearVelocity = (_pointerWorldPosition - m_Rubber.Center.position) * m_Rubber.Config.force * -1;
       m_Rubber.Animation();
     }
 

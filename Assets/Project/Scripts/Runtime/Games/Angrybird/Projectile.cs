@@ -62,7 +62,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       private void Update()
       {
         IsTouchingGround.Value = Col.IsTouchingLayers(m_GroundLayer) || Col.IsTouchingLayers(m_EnvironmentLayer);
-        IsMoving.Value = !(Rb.velocity.magnitude <= 0.5f);
+        IsMoving.Value = !(Rb.linearVelocity.magnitude <= 0.5f);
         
         IsUsed.Value = (IsTouchingGround.Value && IsMoving.Value);
         

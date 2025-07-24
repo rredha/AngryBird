@@ -4,13 +4,18 @@ using UnityEngine.InputSystem;
 
 namespace Arcade.Project.Runtime.Games.AngryBird
 {
-    public class MousePointer : MonoBehaviour, IMovementProvider
+    public class MousePointer : IMovementProvider
     {
-        [SerializeField] private Camera m_Camera;
+        private Camera m_Camera;
         private PlayerInputActions m_playerInputActions;
         public Vector3 PointerWorldPosition { get; private set; }
 
-        public void Initialize()
+        public MousePointer(Camera camera)
+        {
+            m_Camera = camera;
+        }
+
+    public void Initialize()
         {
             m_playerInputActions = new PlayerInputActions();
             m_playerInputActions.Player.Enable();
