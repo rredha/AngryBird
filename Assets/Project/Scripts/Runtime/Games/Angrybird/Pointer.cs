@@ -11,8 +11,9 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     private void Awake()
     {
       _behaviour = GetComponent<PointerBehaviour>();
-      _behaviour.OnProjectileOverlap += OnOnProjectileOverlap_SetToPointer;
       _visual = GetComponent<PointerVisual>();
+      
+      _behaviour.OnProjectileOverlap += OnOnProjectileOverlap_SetToPointer;
     }
 
     private void OnDisable()
@@ -22,6 +23,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 
     private void OnOnProjectileOverlap_SetToPointer(object sender, Projectile e)
     {
+      e.IsSelected = true;
       e.SetStatic();
       e.transform.SetParent(transform);
     }

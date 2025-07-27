@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Arcade.Project.Runtime.Games.AngryBird.Utils.Events;
-using UnityEngine.Serialization;
 using UnityHFSM;
 
 namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
 {
+  /*
   public class Level
   {
     public int NumberOfBirds { get; set; }
     public int NumberOfProjectiles { get; set; }
     public Transform[] BirdsLocations { get; set; }
   }
+  */
   public partial class GameManager : MonoBehaviour
   {
     public static GameManager current;
@@ -23,7 +22,6 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
     [SerializeField] private GameObject WonUI;
     [SerializeField] private GameObject LostUI;
     
-    //private Pointer m_Pointer;
     [SerializeField] private Spawner m_Spawner;
     
     private GameObject m_ActiveProjectile;
@@ -36,7 +34,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
 
     private ProjectileHandler _projectileHandler;
     private BirdsHandler _birdsHandler;
-    private Level _levelOne;
+    //private Level _levelOne;
     
     private bool m_NoMoreAttemptsLeft;
     private bool m_BirdsDestroyed;
@@ -44,15 +42,17 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
 
     private void Awake()
     {
-      current = this; // singleton
-      
+      /*
       _levelOne = new Level();
       _levelOne.NumberOfBirds = 3;
       _levelOne.NumberOfProjectiles = 3;
+      */
       
-      _projectileHandler = new ProjectileHandler(3, m_Spawner);
-      _birdsHandler = new BirdsHandler(_levelOne.NumberOfBirds, m_BirdLocations, m_Spawner);
+      current = this; // singleton
       
+      _projectileHandler = new ProjectileHandler(m_Spawner);
+      _projectileHandler.CacheProjectiles(3);
+      _birdsHandler = new BirdsHandler(3, m_BirdLocations, m_Spawner);
       
       SetupStateMachine();
     }
@@ -83,13 +83,15 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
        "Init", "Playing", transition => true));
      
      m_GameStateMachine.AddTransition(new Transition(
-       "Playing", "Init", transition => m_ProjectileUsed));
+       "Playing", "Init", transition => m_Projectile.IsUsed));
+     
+     /*
+     m_GameStateMachine.AddTransition(new Transition(
+       "Init", "Won", transition => m_BirdsDestroyed));
+       */
      
      m_GameStateMachine.AddTransition(new Transition(
-       "Playing", "Won", transition => m_NoMoreAttemptsLeft));
-     
-     m_GameStateMachine.AddTransition(new Transition(
-       "Playing", "Lost", transition => m_BirdsDestroyed));
+       "Playing", "Lost", transition => m_NoMoreAttemptsLeft));
      
      m_GameStateMachine.SetStartState("Init");
      m_GameStateMachine.Init();
@@ -99,25 +101,6 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
     {
       m_GameStateMachine.OnLogic();
     }
-
-    #region Utility Methods
-    /*
-    private void ResolveDependencies(object sender, DependencyEventArgs args)
-    {
-      m_Projectile = args.Projectile;
-      m_ProjectileLocation = args.ProjectileLocation;
-      m_Bird = args.Bird;
-
-    }
-    private void SpawnNewProjectile(object sender, ValueChangedEventArgs<bool> e)
-    {
-      if (e.NewValue)
-        StartCoroutine(Spawner.current.Spawn(
-          m_Projectile.gameObject,
-          m_ProjectileLocation));
-    }
-    */
-    #endregion
   }
 
   // Setup state
@@ -125,7 +108,11 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
   {
     private void InitStateEnter()
     {
-      m_Projectile = _projectileHandler.GetCurrent();
+      _projectileHandler.GetProjectile();
+      m_Projectile = _projectileHandler.Current;
+      
+      m_ProjectileUsed = false;
+      m_BirdsDestroyed = false;
     }
   }
   // Playing state
@@ -133,20 +120,11 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
   {
     private void PlayingStateEnter()
     {
-      m_ProjectileUsed = false;
-      m_NoMoreAttemptsLeft = false;
-      m_BirdsDestroyed = false;
-      m_Projectile.OnProjectileUsed += OnProjectileUsed_Perform;
       _projectileHandler.OnEmpty += OnProjectileStackEmpty_Perform;
       _birdsHandler.OnListEmpty += OnBirdListEmpty_Perform;
     }
-    private void OnProjectileUsed_Perform(object sender, EventArgs e)
-    {
-      m_ProjectileUsed = true;
-    }
     private void OnProjectileStackEmpty_Perform(object sender, EventArgs e)
     {
-      Debug.Log("Hello");
       m_NoMoreAttemptsLeft = true;
     }
 
@@ -156,7 +134,6 @@ namespace Arcade.Project.Runtime.Games.AngryBird.Utils.GameState
     }
     private void PlayingStateExit()
     {
-      m_Projectile.OnProjectileUsed -= OnProjectileUsed_Perform;
       _projectileHandler.OnEmpty -= OnProjectileStackEmpty_Perform;
       _birdsHandler.OnListEmpty -= OnBirdListEmpty_Perform;
     }

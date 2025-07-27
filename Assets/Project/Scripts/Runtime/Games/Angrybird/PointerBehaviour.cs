@@ -35,6 +35,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
             {
                 var projectile = other.GetComponent<Projectile>();
                 OnProjectileOverlap?.Invoke(this, projectile);
+                _mouseMovement.SelectEventRaised = false;
             }
         }
 

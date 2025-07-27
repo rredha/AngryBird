@@ -9,39 +9,112 @@ using Project.Scripts.Runtime.Games;
 namespace Arcade.Project.Runtime.Games.AngryBird
 {
   // projectile is better suited to be event based.
-    public class Projectile : MonoBehaviour
+
+  public partial class Projectile
+  // Idle state
+  {
+    public void IdleStateEnter()
+    {
+      
+    }
+    public void IdleStateUpdate()
+    {
+      
+    }
+    public void IdleStateExit()
+    {
+      
+    }
+    
+  }
+  public partial class Projectile
+  // Selected State
+  {
+    public void SelectedStateEnter()
+    {
+      
+    }
+    public void SelectedStateUpdate()
+    {
+      
+    }
+    public void SelectedStateExit()
+    {
+      
+    }
+    
+  }
+  public partial class Projectile
+    // Used State
+  {
+    private void OnProjectileUsed_Perform(object sender, EventArgs e)
+    {
+      IsUsed = true;
+    }
+    private void OnProjectileUsed_Notify(object sender, EventArgs e)
+    {
+      Debug.Log(gameObject.name + " Used");
+    }
+    private void OnProjectileUsed_Set(object sender, EventArgs e)
+    {
+      IsUsed = true;
+    }
+    public void UsedStateEnter()
+    {
+      IsSelected = false;
+    }
+    public void UsedStateUpdate()
+    {
+      var isLaunched = !Col.IsTouchingLayers(m_EnvironmentLayer) &&
+                       (Col.IsTouchingLayers(m_ObstacleLayer) ||
+                        Col.IsTouchingLayers(m_GroundLayer));
+      var isMoving = Rb.velocity.sqrMagnitude <= 1f;
+      if (!isMoving && isLaunched)
+        OnProjectileUsed?.Invoke(this, EventArgs.Empty);
+    }
+    public void UsedStateExit()
+    {
+      
+    }
+    
+  }
+    public partial class Projectile : MonoBehaviour
     {
       private LayerMask m_EnvironmentLayer;
+      private LayerMask m_ObstacleLayer; 
       private LayerMask m_GroundLayer;
       public Rigidbody2D Rb {get; private set;}
       public Collider2D Col {get; private set;}
-      public bool IsSelected {get; private set;}
-      public ObservableValue<bool> IsMoving = new ObservableValue<bool>(true);
-      public ObservableValue<bool> IsTouchingGround = new ObservableValue<bool>(false);
-      public ObservableValue<bool> IsUsed = new ObservableValue<bool>(false);
+      public bool IsUsed { get; set; }
+      public bool IsSelected { get; set; }
+      public bool IsThrown { get; set; }
 
       public event EventHandler OnProjectileUsed;
       public bool IsFlying { get; set; }
 
-      private void Awake()
+      private void OnEnable()
       {
-        m_EnvironmentLayer = LayerMask.GetMask("Environment");
-        m_GroundLayer = LayerMask.GetMask("Ground");
-
-        Rb = GetComponent<Rigidbody2D>();
-        Col = GetComponent<Collider2D>();
-
-        IsSelected = false;
-        IsFlying = false;
-        IsUsed.ValueChanged += DisableBehaviour;
+        OnProjectileUsed += OnProjectileUsed_Perform;
+        OnProjectileUsed += OnProjectileUsed_Set;
       }
 
       private void OnDisable()
       {
-        IsUsed.ValueChanged -= DisableBehaviour;
+        OnProjectileUsed -= OnProjectileUsed_Perform;
+        OnProjectileUsed -= OnProjectileUsed_Set;
       }
+      private void Awake()
+      {
+        m_EnvironmentLayer = LayerMask.GetMask("Environment");
+        m_ObstacleLayer = LayerMask.GetMask("Obstacles");
+        m_GroundLayer = LayerMask.GetMask("Ground");
 
-      private void DisableBehaviour(object sender, ValueChangedEventArgs<bool> e) => enabled = false;
+        Rb = GetComponent<Rigidbody2D>();
+        Col = GetComponent<Collider2D>();
+        
+
+        IsFlying = false;
+      }
       public void SetStatic()
       {
         Col.enabled = true;
@@ -53,21 +126,8 @@ namespace Arcade.Project.Runtime.Games.AngryBird
         Col.enabled = true;
         Rb.bodyType = RigidbodyType2D.Dynamic;
       }
-
-      public void SetProjectileSelected()
-      {
-        IsSelected = true;
-      }
-
       private void Update()
       {
-        IsTouchingGround.Value = Col.IsTouchingLayers(m_GroundLayer) || Col.IsTouchingLayers(m_EnvironmentLayer);
-        IsMoving.Value = !(Rb.linearVelocity.magnitude <= 0.5f);
-        
-        IsUsed.Value = (IsTouchingGround.Value && IsMoving.Value);
-        
-        if (IsUsed.Value)
-          OnProjectileUsed?.Invoke(this, EventArgs.Empty);
       }
     }
 }

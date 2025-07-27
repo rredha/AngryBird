@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155652264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 182507185}
   - component: {fileID: 182507184}
   - component: {fileID: 182507183}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,17 +469,6 @@ Transform:
   - {fileID: 885806670}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &240641260 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3018208667871154082, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
-  m_PrefabInstance: {fileID: 3235547238807279009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e6a97604ae4a91b9cebc007b8246bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &310609500
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 310609501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +660,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 46.91, y: 2.05}
+  m_Size: {x: 151.7, y: 2.05}
   m_EdgeRadius: 0
 --- !u!50 &408725775
 Rigidbody2D:
@@ -709,7 +698,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466106492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BirdSpawnLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -880,7 +869,7 @@ GameObject:
   - component: {fileID: 533977497}
   - component: {fileID: 533977496}
   - component: {fileID: 533977498}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slingshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +912,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Holder: {fileID: 1610692386}
   m_DropZone: {fileID: 2073245539}
-  m_Pointer: {fileID: 240641260}
 --- !u!114 &533977497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +973,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: [{fileID: 1191231099}]
+  m_Children:
+  - {fileID: 1191231099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &539527645
@@ -1003,7 +992,6 @@ MonoBehaviour:
   m_Configuration: {fileID: 11400000, guid: f6dd6d89f652661a9a7b42c87d71c54d, type: 2}
   WonUI: {fileID: 4213490013021013264, guid: c48823c64c23d09df9cac5c9e15322f2, type: 3}
   LostUI: {fileID: 2972761930674199296, guid: 0b2d19cd0a234fa9f9e8170609527f33, type: 3}
-  m_Pointer: {fileID: 240641260}
   m_Spawner: {fileID: 1191231098}
   m_ProjectileLocation: {fileID: 310609501}
   m_BirdLocations:
@@ -1102,7 +1090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 685199100}
   - component: {fileID: 685199101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightRubber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,7 +1226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 790645290}
   - component: {fileID: 790645289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 885806670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1358,7 +1346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 892099863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1389,7 +1377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1108984185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Elastic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1423,7 +1411,7 @@ GameObject:
   - component: {fileID: 1146527186}
   - component: {fileID: 1146527185}
   - component: {fileID: 1146527184}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,7 +1567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1168953556}
   - component: {fileID: 1168953557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftSlingshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1663,7 +1651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191231099}
   - component: {fileID: 1191231098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1701,7 @@ GameObject:
   - component: {fileID: 1355931209}
   - component: {fileID: 1355931208}
   - component: {fileID: 1355931207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ProjectileSpawingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1891,7 @@ GameObject:
   - component: {fileID: 1580551120}
   - component: {fileID: 1580551119}
   - component: {fileID: 1580551118}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2059,7 +2047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1610692387}
   - component: {fileID: 1610692388}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2126,7 +2114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1654076822}
   - component: {fileID: 1654076823}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftRubber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2293,7 +2281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966647517}
   - component: {fileID: 1966647518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightSlingshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2376,7 +2364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1987644548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BirdPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2409,7 +2397,7 @@ GameObject:
   - component: {fileID: 2073245538}
   - component: {fileID: 2073245537}
   - component: {fileID: 2073245539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2488,7 +2476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2123204324}
   - component: {fileID: 2123204323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,7 +2602,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1414770837135956600, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
