@@ -4,42 +4,56 @@ using UnityEngine;
 
 namespace Arcade.Project.Runtime.Games.AngryBird
 {
-    // these should get from a scriptableobject or level thingy
     // fix to be when m_BirdsDictionary == 0
     public class BirdsHandler
     {
-        private Birds m_Bird;
-        private Spawner m_Spawner;
-        private Dictionary<int, Birds> m_BirdsDictionary;
+        public GameObject Prefab;
+        private Birds _bird;
+        private Spawner _spawner;
+        private Dictionary<int, Birds> _birdsDictionary;
         public event EventHandler OnListEmpty;
-        public BirdsHandler(int number, List<Transform> locations, Spawner spawner)
+
+        public BirdsHandler(Spawner spawner)
         {
-            m_Spawner = spawner;
-            m_BirdsDictionary = new Dictionary<int, Birds>();
+            _spawner = spawner;
+        }
+
+        public void Subscribe()
+        {
+            
+        }
+
+        public void Unsubscribe()
+        {
+            _spawner.SpawnedRef.GetComponent<Birds>().OnDeath -= OnDeath_Perform;
+        }
+        public void CreateBirds(int number, List<Transform> locations)
+        {
+            _birdsDictionary = new Dictionary<int, Birds>();
             
             for (int i = 0; i < number; i++)
             {
-                m_Spawner.SpawnBirds(locations[i]);
-                var bird = m_Spawner.SpawnedBird.GetComponent<Birds>();
+                _spawner.SpawnAt(Prefab, locations[i]);
+                var bird = _spawner.SpawnedRef.GetComponent<Birds>();
                 bird.Id = i;
-                m_BirdsDictionary.TryAdd(bird.Id, bird);
+                _birdsDictionary.TryAdd(bird.Id, bird);
                 bird.OnDeath += OnDeath_Perform;
             }
         }
 
         ~BirdsHandler()
         {
-            m_Spawner.SpawnedBird.GetComponent<Birds>().OnDeath -= OnDeath_Perform;
+            Unsubscribe();
         }
         private void OnDeath_Perform(object sender, EventArgs e)
         {
-            if (m_BirdsDictionary.Count == 1)
+            if (_birdsDictionary.Count == 1)
             {
                 OnListEmpty?.Invoke(this, EventArgs.Empty);
             }
             else
             {
-                m_BirdsDictionary.Remove(m_BirdsDictionary.Keys.Count - 1);
+                _birdsDictionary.Remove(_birdsDictionary.Keys.Count - 1);
             }
         }
     }

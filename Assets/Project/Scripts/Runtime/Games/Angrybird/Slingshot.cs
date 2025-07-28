@@ -106,10 +106,10 @@ namespace Arcade.Project.Runtime.Games.AngryBird
     }
     private void Shoot()
     {
-      m_Projectile.IsThrown = true;
       m_Projectile.transform.SetParent(null);
       m_Projectile.SetDynamic();
       m_Projectile.Rb.velocity = (_pointerWorldPosition - m_Rubber.Center.position) * m_Rubber.Config.force * -1;
+      m_Projectile.IsThrown = true;
       m_Rubber.Animation();
     }
 

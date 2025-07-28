@@ -89,6 +89,9 @@ namespace Arcade.Project.Runtime.Games.AngryBird
       public bool IsSelected { get; set; }
       public bool IsThrown { get; set; }
 
+      public bool IsTouchingGround => !Col.IsTouchingLayers(m_EnvironmentLayer) &&
+                              (Col.IsTouchingLayers(m_ObstacleLayer) || Col.IsTouchingLayers(m_GroundLayer)); 
+      
       public event EventHandler OnProjectileUsed;
       public bool IsFlying { get; set; }
 

@@ -6,32 +6,38 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 {
     public class ProjectileHandler
     {
-        public Projectile Current => m_Current;
-        private bool m_StackEmpty => m_Stack.Count == 0;
+        public GameObject Prefab;
+        public Projectile Current => _current;
+        public bool IsStackEmpty => _stackEmpty;
+        private bool _stackEmpty => _stack.Count == 0;
         
-        private Projectile m_Current;
-        private Projectile m_Next;
+        private Projectile _current;
+        private Projectile _next;
         
-        private Spawner m_Spawner;
-        private Stack<Projectile> m_Stack;
+        private Spawner _spawner;
+        private Stack<Projectile> _stack;
 
         public event EventHandler OnEmpty;
 
         public ProjectileHandler(Spawner spawner)
         {
-            m_Spawner = spawner;
-            m_Stack = new Stack<Projectile>();
-            /*
-            CacheProjectiles(number);
-            PopFirstProjectile();
-            m_Current.OnProjectileUsed += CurrentProjectileUsed_Perform;
-            OnEmpty += OnEmpty_Notify;
-            */
+            _spawner = spawner;
+            _stack = new Stack<Projectile>();
         }
-        ~ProjectileHandler()
+
+        private void DebugMessage()
         {
-            m_Current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
-            OnEmpty -= OnEmpty_Notify;
+            Debug.Log("Initialized successfully !");
+        }
+        ~ProjectileHandler() => Unsubscribe();
+
+        public void Subscribe()
+        {
+            _current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
+        }
+        public void Unsubscribe()
+        {
+            _current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
         }
 
         private void OnEmpty_Notify(object sender, EventArgs e)
@@ -41,7 +47,7 @@ namespace Arcade.Project.Runtime.Games.AngryBird
 
         private void CurrentProjectileUsed_Perform(object sender, EventArgs e)
         {
-            if (m_StackEmpty && Current.IsUsed)
+            if (_stackEmpty && Current.IsUsed)
             {
                 OnEmpty?.Invoke(this, EventArgs.Empty);
             }
@@ -52,41 +58,45 @@ namespace Arcade.Project.Runtime.Games.AngryBird
             
         }
 
-        public void CacheProjectiles(int number)
+        public void CacheProjectiles(int number, Transform platform)
         {
             for (int i = 0; i < number; i++)
             {
-                m_Spawner.SpawnProjectile();
-        
-                var projectile = m_Spawner.SpawnedProjectile.GetComponent<Projectile>();
+                _spawner.SpawnAt(Prefab, platform);
+
+                var projectile = _spawner.SpawnedRef.GetComponent<Projectile>();
                 projectile.gameObject.SetActive(false);
         
-                m_Stack.Push(projectile);
+                _stack.Push(projectile);
             }
         }
         public void PopFirstProjectile()
         {
-            m_Current = m_Stack.Pop();
-            m_Current.gameObject.SetActive(true);
+            _current = _stack.Pop();
+            _current.gameObject.SetActive(true);
         }
 
         public void GetProjectile()
         {
-            if (!m_StackEmpty)
+            if (!_stackEmpty)
             {
-                m_Next = m_Stack.Pop();
-                m_Next.gameObject.SetActive(true);
-                m_Current = m_Next;
+                _next = _stack.Pop();
+                _next.gameObject.SetActive(true);
+                _current = _next;
+            }
+            else
+            {
+                OnEmpty?.Invoke(this, EventArgs.Empty);
             }
         }
 
         private void GetNext()
         {
-            if (!m_StackEmpty && Current.IsUsed)
+            if (!_stackEmpty && Current.IsUsed)
             {
-                m_Next = m_Stack.Pop();
-                m_Next.gameObject.SetActive(true);
-                m_Current = m_Next;
+                _next = _stack.Pop();
+                _next.gameObject.SetActive(true);
+                _current = _next;
             }
         }
     }
