@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Arcade.Project.Core.StateMachine.Alt.Interfaces;
+using Project.Scripts.Runtime.Core.StateMachine.Alt.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.Runtime.Core.StateMachine.Alt

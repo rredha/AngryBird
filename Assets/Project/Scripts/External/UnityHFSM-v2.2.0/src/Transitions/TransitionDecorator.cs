@@ -1,6 +1,7 @@
 ﻿using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions
 {
 	/// <summary>
 	/// A helper class that helps you decorate multiple transitions with the same user code.

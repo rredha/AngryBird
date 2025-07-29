@@ -1,6 +1,7 @@
 using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Util;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.States
 {
 	/// <summary>
 	/// The "normal" state class that can run code on enter, on logic and on exit,

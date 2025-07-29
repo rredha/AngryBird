@@ -1,8 +1,9 @@
-using System.Collections;
-using UnityEngine;
 using System;
+using System.Collections;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Util;
+using UnityEngine;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.States
 {
 	/// <summary>
 	/// A state that can run a Unity coroutine as its <c>OnLogic</c> method.
@@ -40,7 +41,7 @@ namespace UnityHFSM
 		/// 	Function that determines if the state is ready to exit (true) or not (false).
 		/// 	It is called OnExitRequest and on each logic step when a transition is pending.</param>
 		/// <param name="loop">If true, it will loop the coroutine, running it again once it has completed.</param>
-		/// <inheritdoc cref="StateBase{T}(bool, bool)"/>
+		/// <inheritdoc cref="StateBase{TStateId}(bool,bool)"/>
 		public CoState(
 				MonoBehaviour mono,
 				Func<CoState<TStateId, TEvent>, IEnumerator> coroutine,

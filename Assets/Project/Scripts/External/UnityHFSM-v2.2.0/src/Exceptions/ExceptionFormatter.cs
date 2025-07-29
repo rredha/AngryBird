@@ -1,5 +1,5 @@
 
-namespace UnityHFSM.Exceptions
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Exceptions
 {
 	public static class ExceptionFormatter
 	{

@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Arcade.Project.Core.StateMachine.Alt.Interfaces
+namespace Project.Scripts.Runtime.Core.StateMachine.Alt.Interfaces
 {
     public interface IState
     {

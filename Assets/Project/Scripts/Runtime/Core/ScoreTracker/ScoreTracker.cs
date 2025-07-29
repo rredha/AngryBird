@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Arcade._Project.Core.ScoreTracker
+namespace Project.Scripts.Runtime.Core.ScoreTracker
 {
     public class ScoreTracker
     {

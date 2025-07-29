@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.Scripts.Runtime.Core.StateMachine.Alt.Interfaces;
 using UnityEngine;
-using Arcade.Project.Core.StateMachine.Alt.Interfaces;
 
-namespace Arcade.Project.Core.StateMachine.Alt.States
+namespace Project.Scripts.Runtime.Core.StateMachine.Alt.States
 {
     public abstract class BaseState : IState
     {

@@ -1,6 +1,7 @@
 using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions
 {
 	/// <summary>
 	/// A class that allows you to run additional functions (companion code)

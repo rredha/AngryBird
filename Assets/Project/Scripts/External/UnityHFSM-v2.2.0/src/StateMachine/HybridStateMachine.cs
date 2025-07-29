@@ -1,6 +1,8 @@
 ﻿using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Util;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine
 {
 	/// <summary>
 	/// A StateMachine that is also like a normal <see cref="State"/> in the sense that it allows you to run
@@ -33,7 +35,7 @@ namespace UnityHFSM
 		/// <param name="needsExitTime">(Only for hierarchical states):
 		/// 	Determines whether the state machine as a state of a parent state machine is allowed to instantly
 		/// 	exit on a transition (false), or if it should wait until an explicit exit transition occurs.</param>
-		/// <inheritdoc cref="StateBase{T}(bool, bool)"/>
+		/// <inheritdoc cref="StateBase{TStateId}(bool,bool)"/>
 		public HybridStateMachine(
 				Action<HybridStateMachine<TOwnId, TStateId, TEvent>> beforeOnEnter = null,
 				Action<HybridStateMachine<TOwnId, TStateId, TEvent>> afterOnEnter = null,

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
-using UnityEngine;
 
-namespace Arcade.Project.Core.StateMachine
+namespace Project.Scripts.Runtime.Core.StateMachine
 {
     public abstract class State<TEnumState> where TEnumState : Enum
     {

@@ -1,6 +1,4 @@
-using UnityHFSM.Inspection;
-
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Inspection
 {
 	public interface IVisitableState
 	{

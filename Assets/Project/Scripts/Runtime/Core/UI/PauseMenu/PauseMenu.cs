@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace Arcade._Project.Core.UI.PauseMenu
+namespace Project.Scripts.Runtime.Core.UI.PauseMenu
 {
     public class PauseMenu : MonoBehaviour
     {

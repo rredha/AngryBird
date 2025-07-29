@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Arcade.Project.Core.StateMachine.Alt.States
+namespace Project.Scripts.Runtime.Core.StateMachine.Alt.States
 {
     public class State : BaseState
     {

@@ -1,5 +1,5 @@
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Base
 {
 	/// <summary>
 	/// The base class of all transitions.

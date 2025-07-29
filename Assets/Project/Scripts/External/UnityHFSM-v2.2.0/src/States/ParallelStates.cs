@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.States
 {
 	/// <summary>
 	/// A state that can run multiple states in parallel.

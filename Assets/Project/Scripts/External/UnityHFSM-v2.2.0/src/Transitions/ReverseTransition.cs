@@ -1,4 +1,6 @@
-namespace UnityHFSM
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions
 {
 	/// <summary>
 	/// A ReverseTransition wraps another transition, but reverses it. The "from"

@@ -1,6 +1,9 @@
 using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine
 {
 	public static class StateMachineShortcuts
 	{

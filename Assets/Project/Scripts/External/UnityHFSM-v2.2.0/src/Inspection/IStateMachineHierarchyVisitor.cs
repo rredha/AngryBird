@@ -1,4 +1,7 @@
-namespace UnityHFSM.Inspection
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine;
+
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Inspection
 {
 	/// <summary>
 	/// Interface for objects that recursively traverse the states of a state machine

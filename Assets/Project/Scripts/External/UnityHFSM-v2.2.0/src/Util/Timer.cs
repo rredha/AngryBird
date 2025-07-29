@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Util
 {
 	/// <summary>
 	/// Default timer that calculates the elapsed time based on <c>Time.time</c>.

@@ -1,7 +1,7 @@
 using System;
-using Arcade.Project.Core.StateMachine.Alt.Interfaces;
+using Project.Scripts.Runtime.Core.StateMachine.Alt.Interfaces;
 
-namespace Arcade.Project.Core.StateMachine.Alt.Transitions
+namespace Project.Scripts.Runtime.Core.StateMachine.Alt.Transitions
 {
     public class EventTransition : ITransition
     {

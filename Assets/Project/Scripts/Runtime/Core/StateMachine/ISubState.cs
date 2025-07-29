@@ -1,4 +1,4 @@
-namespace Arcade.Project.Core.StateMachine
+namespace Project.Scripts.Runtime.Core.StateMachine
 {
     public interface ISubState
     {

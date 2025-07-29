@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Arcade._Project.Core.UI
+namespace Project.Scripts.Runtime.Core.UI
 {
     public static class Countdown
     {

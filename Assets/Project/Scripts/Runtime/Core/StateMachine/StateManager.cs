@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arcade.Project.Core.StateMachine
+namespace Project.Scripts.Runtime.Core.StateMachine
 {
     public abstract class StateManager<TEnumState> : MonoBehaviour where TEnumState : Enum
     {

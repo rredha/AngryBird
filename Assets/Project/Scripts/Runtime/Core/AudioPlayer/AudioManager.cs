@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Arcade.Project.Runtime.Core.AudioPlayer
+namespace Project.Scripts.Runtime.Core.AudioPlayer
 {
    public class AudioPlayer : MonoBehaviour
    {

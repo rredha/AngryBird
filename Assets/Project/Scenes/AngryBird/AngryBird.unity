@@ -571,6 +571,8 @@ GameObject:
   - component: {fileID: 533977497}
   - component: {fileID: 533977496}
   - component: {fileID: 533977498}
+  - component: {fileID: 533977499}
+  - component: {fileID: 533977500}
   m_Layer: 6
   m_Name: Slingshot
   m_TagString: Untagged
@@ -612,8 +614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf090dc554a4d9ae9b38b4f8b43cce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Holder: {fileID: 1610692386}
-  m_DropZone: {fileID: 2073245539}
+  _holder: {fileID: 1610692386}
+  _dropZone: {fileID: 2073245539}
+  _rubber: {fileID: 533977497}
 --- !u!114 &533977497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +648,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f56a619f5e445d9937390a75c10578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Slingshot: {fileID: 533977496}
+--- !u!114 &533977499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533977493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5308652ec549a8a2d614614ab360e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &533977500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533977493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e16b062a9bf431c8c247fc9be9d4157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &539527641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,6 +1733,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 3785075333529237977, guid: 0217ade8fe602c62a951be1c4b327ae8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1720,6 +1750,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4061699970898943054, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4440574606531188197, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
       propertyPath: m_Name
       value: Pointer

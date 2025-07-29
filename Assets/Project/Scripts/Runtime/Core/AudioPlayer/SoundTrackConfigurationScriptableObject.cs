@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Arcade.Project.Runtime.Core.AudioPlayer
+namespace Project.Scripts.Runtime.Core.AudioPlayer
 {
     [CreateAssetMenu(fileName = "SoundTrackConfig", menuName = "Audio/SoundTrackConfig", order = 100)]
     public class SoundTrackConfigurationScriptableObject : ScriptableObject

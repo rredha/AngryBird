@@ -1,7 +1,8 @@
 
-using UnityHFSM.Inspection;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Inspection;
 
-namespace UnityHFSM.Exceptions
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Exceptions
 {
 	public static class Common
 	{

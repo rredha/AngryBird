@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor.Animations;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Exceptions;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Inspection;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
-using UnityHFSM.Inspection;
 
-namespace UnityHFSM.Visualization
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Visualization
 {
 /// <summary>
 /// A visualisation / debugging tool that allows you to generate a Unity <see cref="AnimatorController"/>
@@ -433,7 +436,7 @@ public static class HfsmAnimatorGraph
 	{
 		if (fsm.GetAllStates().Count == 0)
 		{
-			throw new InvalidOperationException(UnityHFSM.Exceptions.ExceptionFormatter.Format(
+			throw new InvalidOperationException(ExceptionFormatter.Format(
 				context: "Generating an animator graph from a state machine.",
 				problem: "The state machine is empty.",
 				solution: "Only call this method after adding the states and transitions to the state machine."));

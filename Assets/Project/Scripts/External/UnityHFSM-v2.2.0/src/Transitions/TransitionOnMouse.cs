@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using UnityEngine;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions
 {
 	/// <summary>
 	/// Built-in mouse-related transition types to increase readability and reduce boilerplate.

@@ -1,6 +1,7 @@
 using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.States
 {
 	/// <summary>
 	/// A helper class that helps you decorate multiple states with the same user code.

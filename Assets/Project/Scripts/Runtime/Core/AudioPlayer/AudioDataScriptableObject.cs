@@ -1,8 +1,6 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-namespace Arcade.Project.Runtime.Core.AudioPlayer
+namespace Project.Scripts.Runtime.Core.AudioPlayer
 {
     [CreateAssetMenu(fileName = "SoundTrack", menuName = "Audio/SoundTrack", order = 100)]
     public class AudioDataScriptableObject : ScriptableObject

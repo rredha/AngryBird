@@ -1,4 +1,4 @@
-namespace UnityHFSM.Visualization
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Visualization
 {
 	// Weirdly, when Unity builds a project and a namespace contains no classes (e.g. because of preprocessor
 	// directives that remove code from the build), the namespace no longer exists. This can cause build problems

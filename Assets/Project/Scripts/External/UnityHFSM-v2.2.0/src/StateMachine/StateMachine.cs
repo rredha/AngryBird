@@ -2,7 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using UnityHFSM.Inspection;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Exceptions;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Inspection;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
 
 /**
  * Hierarchical Finite State Machine for Unity
@@ -11,7 +15,7 @@ using UnityHFSM.Inspection;
  * Version: 2.2.0
  */
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine
 {
 	/// <summary>
 	/// Main finite state machine class. It can be used as a child state of another state machine
@@ -183,7 +187,7 @@ namespace UnityHFSM
 		private void EnsureIsInitializedFor(string context)
 		{
 			if (activeState == null)
-				throw UnityHFSM.Exceptions.Common.NotInitialized(this, context);
+				throw Common.NotInitialized(this, context);
 		}
 
 		/// <summary>
@@ -239,7 +243,7 @@ namespace UnityHFSM
 
 			if (!stateBundlesByName.TryGetValue(name, out bundle) || bundle.state == null)
 			{
-				throw UnityHFSM.Exceptions.Common.StateNotFound(this, name.ToString(), context: "Switching states");
+				throw Common.StateNotFound(this, name.ToString(), context: "Switching states");
 			}
 
 			activeTransitions = bundle.transitions ?? noTransitions;
@@ -413,7 +417,7 @@ namespace UnityHFSM
 		{
 			if (!startState.hasState)
 			{
-				throw UnityHFSM.Exceptions.Common.MissingStartState(this, context: "Running OnEnter of the state machine.");
+				throw Common.MissingStartState(this, context: "Running OnEnter of the state machine.");
 			}
 
 			// Clear any previous pending transition from the last run.
@@ -787,7 +791,7 @@ namespace UnityHFSM
 
 			if (!stateBundlesByName.TryGetValue(name, out bundle) || bundle.state == null)
 			{
-				throw UnityHFSM.Exceptions.Common.StateNotFound(this, name.ToString(), context: "Getting a state");
+				throw Common.StateNotFound(this, name.ToString(), context: "Getting a state");
 			}
 
 			return bundle.state;
@@ -806,7 +810,7 @@ namespace UnityHFSM
 
 				if (subFsm == null)
 				{
-					throw UnityHFSM.Exceptions.Common.QuickIndexerMisusedForGettingState(this, name.ToString());
+					throw Common.QuickIndexerMisusedForGettingState(this, name.ToString());
 				}
 
 				return subFsm;
@@ -849,7 +853,7 @@ namespace UnityHFSM
 		{
 			if (!startState.hasState)
 			{
-				throw UnityHFSM.Exceptions.Common.MissingStartState(
+				throw Common.MissingStartState(
 					this,
 					context: "Getting the start state",
 					solution: "Make sure that there is at least one state in the state machine before running "

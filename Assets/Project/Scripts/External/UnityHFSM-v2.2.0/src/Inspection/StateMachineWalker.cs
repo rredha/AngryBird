@@ -1,7 +1,7 @@
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine;
 
-using System.Collections.Generic;
-
-namespace UnityHFSM.Inspection
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Inspection
 {
 	/// <summary>
 	/// Utility class for methods that traverse a hierarchical state machine.

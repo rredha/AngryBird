@@ -1,6 +1,8 @@
 using System;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Base;
+using Project.Scripts.External.UnityHFSM_v2._2._0.src.Util;
 
-namespace UnityHFSM
+namespace Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions
 {
 	/// <summary>
 	/// A class used to determine whether the state machine should transition to another state
