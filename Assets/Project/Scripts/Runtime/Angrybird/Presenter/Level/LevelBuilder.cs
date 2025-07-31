@@ -4,6 +4,7 @@ using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 {
@@ -73,7 +74,23 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 
         public void Clean()
         {
-            
+            // to improve
+            var projectiles = FindObjectsByType<Projectile>(FindObjectsSortMode.None);
+            var birds = FindObjectsByType<Model.Pigs.Birds>(FindObjectsSortMode.None);
+            var obstacles = FindObjectsByType<Obstacles>(FindObjectsSortMode.None);
+            foreach (var projectile in projectiles)
+            {
+                Destroy(projectile.gameObject);
+            }
+            foreach (var bird in birds)
+            {
+                Destroy(bird.gameObject);
+            }
+            foreach (var obstacle in obstacles)
+            {
+                Destroy(obstacle.gameObject);
+            }
+
         }
         private void SetupProjectiles()
         {

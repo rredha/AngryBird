@@ -718,8 +718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a50d1f74de416ed59cd3d13f1ca4e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3304457424203430322, guid: d1c2625f194f752818182b45cbddef35, type: 3}
-  birdPrefab: {fileID: 9011059954354761472, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
   wonUI: {fileID: 0}
   lostUI: {fileID: 6952951313657913154, guid: b6d2f6c0f2737fbb59053b771b6aa896, type: 3}
 --- !u!114 &539527647
@@ -746,8 +744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d5e028866684c73a1b3052590c0b7fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 1ca5b750af680a4aaa657c1364c67611, type: 2}
   gameConfig: {fileID: 11400000, guid: 96e48430fbb40c4de9e66fc31db9953c, type: 2}
+  config: {fileID: 11400000, guid: 1ca5b750af680a4aaa657c1364c67611, type: 2}
+  projectilePrefab: {fileID: 3304457424203430322, guid: d1c2625f194f752818182b45cbddef35, type: 3}
+  birdPrefab: {fileID: 9011059954354761472, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

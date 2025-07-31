@@ -100,7 +100,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     {
       if (_replayTriggered || _firstGame)
       {
-        Debug.Log("I’m ready to initialize everything");
         _level.Initialize();
       }
       else
@@ -147,13 +146,11 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     {
       lostUIBehaviour = Instantiate(lostUI);
       lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered += OnReplayTriggered_Set;
-      Debug.Log("I’m in lost state enter");
       //_lostUIBehaviour.ReplayTriggered += OnReplayTriggered_Set;
     }
 
     private void LostStateExit()
     {
-      Debug.Log("I’m in lost state exit : Triggered" + _replayTriggered);
       lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered -= OnReplayTriggered_Set;
       _level.Clean(); 
     }
