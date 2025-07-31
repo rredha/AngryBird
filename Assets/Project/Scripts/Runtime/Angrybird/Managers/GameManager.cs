@@ -1,4 +1,5 @@
 using System;
+using Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.View.UI;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
@@ -13,24 +14,21 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   public partial class GameManager : MonoBehaviour
   {
     public static GameManager Instance;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject birdPrefab;
 
     private GameConfigurationSO _configuration;
     
     [SerializeField] private GameObject wonUI;
     [SerializeField] private Transform lostUI;
     
-    private Spawner _spawner;
     
     private Projectile _projectile;
     
     private StateMachine _gameStateMachine;
 
-    private ProjectileHandler _projectileHandler;
     private BirdsHandler _birdsHandler;
     private LevelBuilder _level;
-    
+
+    private bool _replayTriggered;
     private bool _noAttemptsLeft;
     private bool _birdsDestroyed;
     private bool _projectileUsed;
@@ -39,19 +37,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     {
       Instance = this;
 
-      _spawner = GetComponent<Spawner>();
       _level = GetComponent<LevelBuilder>();
-      _projectileHandler = new ProjectileHandler(_spawner)
-      {
-        Prefab = projectilePrefab
-      };
-      _birdsHandler = new BirdsHandler(_spawner)
-      {
-        Prefab = birdPrefab
-      };
-      
-      _projectileHandler.CacheProjectiles(_level.Data.Projectiles, _level.Config.Platform);
-      _birdsHandler.CreateBirds(_level.Data.Birds, _level.Data.BirdsLocations);
       
       SetupStateMachine();
     }
@@ -76,20 +62,26 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
        ));
      _gameStateMachine.AddState("Lost",
        new State(
-         onEnter: state => LostStateEnter()
+         onEnter: state => LostStateEnter(),
+         onExit: state => LostStateExit()
        ));
       
      _gameStateMachine.AddTransition(new Transition(
        "Init", "Playing", transition => true));
      
      _gameStateMachine.AddTransition(new Transition(
-       "Playing", "Init", transition => _projectile.IsUsed));
+       "Playing", "Init", transition => _level.Projectile.IsUsed));
      
      //m_GameStateMachine.AddTransition(new Transition(
      //  "Playing", "Won", transition => m_BirdsDestroyed ));
      
      _gameStateMachine.AddTransition(new Transition(
-       "Playing", "Lost", transition => _projectileHandler.IsStackEmpty && _projectileHandler.Current.IsThrown && _projectileHandler.Current.IsTouchingGround));
+       "Playing", "Lost", transition => _level.ProjectileHandler.IsStackEmpty 
+                                            &&  _level.ProjectileHandler.Current.IsThrown 
+                                            &&  _level.ProjectileHandler.Current.IsTouchingGround));
+     
+     _gameStateMachine.AddTransition(new Transition(
+       "Lost", "Init", transition => _replayTriggered));
      
      _gameStateMachine.SetStartState("Init");
      _gameStateMachine.Init();
@@ -106,38 +98,38 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   {
     private void InitStateEnter()
     {
-      _projectileHandler.GetProjectile(); // needs to rethink
-      _projectileHandler.OnEmpty += OnProjectileStackEmpty_Perform;
-      _projectile = _projectileHandler.Current;
+      if (_replayTriggered || _firstGame)
+      {
+        Debug.Log("I’m ready to initialize everything");
+        _level.Initialize();
+      }
+      else
+      {
+        _level.Proceed();
+      }
       
       _projectileUsed = false;
       _birdsDestroyed = false;
     }
+
+    private bool _firstGame = true;
+
     private void InitStateExit()
     {
-      _projectileHandler.OnEmpty -= OnProjectileStackEmpty_Perform;
+      _firstGame = false;
+      _replayTriggered = false;
     }
-    private void OnProjectileStackEmpty_Perform(object sender, EventArgs e)
-    {
-      _noAttemptsLeft = true;
-    }
+
   }
   // Playing state
   public partial class GameManager
   {
     private void PlayingStateEnter()
     {
-      _birdsHandler.OnListEmpty += OnBirdListEmpty_Perform;
     }
 
-    private void OnBirdListEmpty_Perform(object sender, EventArgs e)
-    {
-      _birdsDestroyed = true;
-    }
     private void PlayingStateExit()
     {
-      _projectileHandler.OnEmpty -= OnProjectileStackEmpty_Perform;
-      _birdsHandler.OnListEmpty -= OnBirdListEmpty_Perform;
     }
   }
   
@@ -150,9 +142,25 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   // Lost State
   public partial class GameManager
   {
+    private Transform lostUIBehaviour;
     private void LostStateEnter()
     {
-      Instantiate(lostUI);
+      lostUIBehaviour = Instantiate(lostUI);
+      lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered += OnReplayTriggered_Set;
+      Debug.Log("I’m in lost state enter");
+      //_lostUIBehaviour.ReplayTriggered += OnReplayTriggered_Set;
+    }
+
+    private void LostStateExit()
+    {
+      Debug.Log("I’m in lost state exit : Triggered" + _replayTriggered);
+      lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered -= OnReplayTriggered_Set;
+      _level.Clean(); 
+    }
+    private void OnReplayTriggered_Set(object sender, EventArgs e)
+    {
+      _replayTriggered = true;
+      
     }
   }
 }

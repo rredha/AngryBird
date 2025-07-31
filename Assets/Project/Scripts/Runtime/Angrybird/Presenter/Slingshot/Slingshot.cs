@@ -39,7 +39,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
     {
       _behaviour.Pointer.Initialize();
       _behaviour.Pointer.Subscribe();
-      Debug.Log("Hello from empty state enter");
     }
     public void EmptyStateUpdate()
     {
@@ -48,7 +47,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
     public void EmptyStateExit()
     {
       _behaviour.Pointer.Unsubscribe();
-      Debug.Log("Hello from empty state exit");
     }
   }
   
@@ -61,7 +59,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       
       _behaviour.Subscribe();
       _visual.Subscribe();
-      Debug.Log("Hello from loaded state enter");
     }
     public void LoadedStateUpdate()
     {
@@ -74,7 +71,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       
       _behaviour.Unsubscribe();
       _visual.Unsubscribe();
-      Debug.Log("Hello from loaded state exit");
       
     }
   }
