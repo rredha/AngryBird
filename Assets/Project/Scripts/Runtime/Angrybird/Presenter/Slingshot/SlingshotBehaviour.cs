@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using Arcade.Project.Runtime.Games.AngryBird.Utils.InputSystem;
 using Project.Scripts.Runtime.Angrybird.Model.Slingshot;
 using Project.Scripts.Runtime.Angrybird.MovementProvider;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
+using Project.Scripts.Runtime.Angrybird.Presenter.Pointer;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +12,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 {
     public class SlingshotBehaviour : MonoBehaviour
     {
+        [SerializeField] private ReleaseStrategyBase releaseStrategy;
         public SlingshotContext context { get; set; }
         public MousePointer Pointer { get; private set; }
         private Vector2 _pointerScreenPosition;
@@ -20,6 +23,13 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
         {
             Pointer = new MousePointer(Camera.main);
             PlayerInputActions = new PlayerInputActions();
+
+            releaseStrategy.TaskComplete += releaseStrategy.Execute;
+        }
+
+        private void OnDisable()
+        {
+            releaseStrategy.TaskComplete -= releaseStrategy.Execute;
         }
 
         public void EnablePlayerActions() => PlayerInputActions.Player.Enable();
