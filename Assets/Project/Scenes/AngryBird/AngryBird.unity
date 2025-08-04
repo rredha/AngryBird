@@ -1752,7 +1752,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4061699970898943054, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4440574606531188197, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
       propertyPath: m_Name
@@ -1802,6 +1802,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6177668783465154206, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
+      propertyPath: selectStrategy
+      value: 
+      objectReference: {fileID: 11400000, guid: 58a25a38b77371d47b19d7cf5ab45e4a, type: 2}
     m_RemovedComponents:
     - {fileID: 1414770837135956600, guid: 2ca091b5c1a43ef4a886528ef770e015, type: 3}
     m_RemovedGameObjects: []
