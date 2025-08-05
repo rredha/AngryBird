@@ -41,6 +41,19 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pigs
                 bird.OnDeath += OnDeath_Perform;
             }
         }
+        public void CreateBirds(List<Transform> locations)
+        {
+            _birdsDictionary = new Dictionary<int, Model.Pigs.Birds>();
+            
+            for (var i = 0; i < locations.Count; i++)
+            {
+                _spawner.SpawnAt(Prefab, locations[i]);
+                var bird = _spawner.SpawnedRef.GetComponent<Model.Pigs.Birds>();
+                bird.Id = i;
+                _birdsDictionary.TryAdd(bird.Id, bird);
+                bird.OnDeath += OnDeath_Perform;
+            }
+        }
 
         ~BirdsHandler()
         {

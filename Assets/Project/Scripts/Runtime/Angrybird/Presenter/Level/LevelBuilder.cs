@@ -99,12 +99,12 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 
         private void SetupTargets()
         {
-          BirdsHandler.CreateBirds(Data.Birds, Data.BirdsLocations);
+          Debug.Log(config.BirdsLocations.Count);
+          BirdsHandler.CreateBirds(config.BirdsLocations);
         }
-
         private void SetupEnvironment()
         {
-            foreach (var t in Data.Stages)
+            foreach (var t in config.Stages)
             {
                 Instantiate(t);
             }
