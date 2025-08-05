@@ -29,30 +29,25 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
   }
   public class Pointer : MonoBehaviour
   {
+    [SerializeField] private SelectStrategyBase selectStrategy;
     private PointerBehaviour _behaviour;
     private PointerVisual _visual;
     private Action<Projectile> _selectStrategy;
 
 
 
+
     private void Awake()
     {
       _behaviour = GetComponent<PointerBehaviour>();
+      selectStrategy.MovementProvider = _behaviour.MouseMovement;
+      _behaviour.OnProjectileOverlap += selectStrategy.Select;
       _visual = GetComponent<PointerVisual>();
-      
-      _behaviour.OnProjectileOverlap += OnOnProjectileOverlap_SetToPointer;
     }
 
     private void OnDisable()
     {
-      _behaviour.OnProjectileOverlap -= OnOnProjectileOverlap_SetToPointer;
-    }
-
-    private void OnOnProjectileOverlap_SetToPointer(object sender, Projectile e)
-    {
-      e.IsSelected = true;
-      e.SetStatic();
-      e.transform.SetParent(transform);
+      _behaviour.OnProjectileOverlap -= selectStrategy.Select;
     }
   }
 }
