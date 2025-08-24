@@ -1,18 +1,13 @@
 using System;
-using System.Runtime.CompilerServices;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 {
     public class LevelBuilder : MonoBehaviour
     {
-        public Model.Level.Level Data => _data;
-        private Model.Level.Level _data;
-        public GameConfiguration Config { get; private set; }
         [SerializeField] private GameConfigurationSO gameConfig;
         [SerializeField] private LevelSO config;
 
@@ -30,13 +25,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 
         private void Awake()
         {
-            _data = new Model.Level.Level(
-                config.Birds,
-                config.Projectiles,
-                config.BirdsLocations,
-                config.Stages);
-            
-            Config = new GameConfiguration(gameConfig.Platform);
             
             _spawner = GetComponent<Spawner>();
             ProjectileHandler = new ProjectileHandler(_spawner)
@@ -94,12 +82,11 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         }
         private void SetupProjectiles()
         {
-          ProjectileHandler.CacheProjectiles(Data.Projectiles, Config.Platform);
+          ProjectileHandler.CacheProjectiles(config.Projectiles, gameConfig.Platform);
         }
 
         private void SetupTargets()
         {
-          Debug.Log(config.BirdsLocations.Count);
           BirdsHandler.CreateBirds(config.BirdsLocations);
         }
         private void SetupEnvironment()

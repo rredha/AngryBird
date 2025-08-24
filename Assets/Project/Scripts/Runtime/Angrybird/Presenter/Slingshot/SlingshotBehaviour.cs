@@ -12,7 +12,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 {
     public class SlingshotBehaviour : MonoBehaviour
     {
-        [SerializeField] private ReleaseStrategyBase releaseStrategy;
+        //[SerializeField] private ReleaseStrategyBase releaseStrategy;
         public SlingshotContext context { get; set; }
         public MousePointer Pointer { get; private set; }
         private Vector2 _pointerScreenPosition;
@@ -24,12 +24,12 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
             Pointer = new MousePointer(Camera.main);
             PlayerInputActions = new PlayerInputActions();
 
-            releaseStrategy.TaskComplete += releaseStrategy.Execute;
+            //releaseStrategy.TaskComplete += releaseStrategy.Execute;
         }
 
         private void OnDisable()
         {
-            releaseStrategy.TaskComplete -= releaseStrategy.Execute;
+            //releaseStrategy.TaskComplete -= releaseStrategy.Execute;
         }
 
         public void EnablePlayerActions() => PlayerInputActions.Player.Enable();

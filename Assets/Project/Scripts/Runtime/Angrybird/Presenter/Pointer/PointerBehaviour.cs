@@ -11,9 +11,11 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
         private Vector3 _pointerWorldPosition;
         private Vector2 _pointerScreenPosition;
         private Collider2D _collider;
-        [SerializeField] private SelectStrategyBase _selectStrategy;
+        private int _overlapTriggerCount;
+        public bool OverlapTriggered { get; set; }
         
-        public event EventHandler<Projectile> OnProjectileOverlap;
+        
+        public event EventHandler<Projectile> ProjectileOverlap;
         private void Awake()
         {
             MouseMovement = new MousePointer(Camera.main);
@@ -32,12 +34,25 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
             MouseMovement.Unsubscribe();
         }
 
+
+        public void ResetOverlapTriggerCount()
+        {
+            _overlapTriggerCount = 0;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            ResetOverlapTriggerCount();
+        }
+
+
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (other.GetComponent<Projectile>())
+            var projectile = other.GetComponent<Projectile>();
+            if (projectile != null && projectile.IsIdle && !projectile.IsSelected && !OverlapTriggered)
             {
-                var projectile = other.GetComponent<Projectile>();
-                OnProjectileOverlap?.Invoke(this, projectile);
+                ProjectileOverlap?.Invoke(this, projectile);
+                OverlapTriggered = true;
             }
         }
 

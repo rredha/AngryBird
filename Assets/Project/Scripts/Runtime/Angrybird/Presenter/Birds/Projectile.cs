@@ -9,9 +9,11 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
   public partial class Projectile
   // Idle state
   {
+    public bool IsIdle;
     public void IdleStateEnter()
     {
-      
+      IsIdle = true;
+      IsSelected = false;
     }
     public void IdleStateUpdate()
     {
@@ -19,7 +21,10 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
     }
     public void IdleStateExit()
     {
-      
+      /*
+      IsIdle = true;
+      IsSelected = false;
+      */
     }
     
   }
@@ -84,9 +89,11 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
       public bool IsUsed { get; set; }
       public bool IsSelected { get; set; }
       public bool IsThrown { get; set; }
+      
+      public bool IsSelectable { get; set; }
 
       public bool IsTouchingGround => !Col.IsTouchingLayers(m_EnvironmentLayer) &&
-                              (Col.IsTouchingLayers(m_ObstacleLayer) || Col.IsTouchingLayers(m_GroundLayer)); 
+                                      (Col.IsTouchingLayers(m_ObstacleLayer) || Col.IsTouchingLayers(m_GroundLayer)); 
       
       public event EventHandler OnProjectileUsed;
       public bool IsFlying { get; set; }
