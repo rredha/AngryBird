@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fdb8b009d64b68b28c42882e4c3ffb, type: 3}
+  m_Name: Two
+  m_EditorClassIdentifier: 
+  BirdPrefab: {fileID: 9011059954354761472, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
+  ProjectilePrefab: {fileID: 3304457424203430322, guid: d1c2625f194f752818182b45cbddef35, type: 3}
+  Birds: 5
+  BirdsLocations:
+  - {fileID: 2144799185526033216, guid: 95ecdae43cc273ff1bbd2ff2638e8aed, type: 3}
+  - {fileID: 4234472994885907884, guid: 8c003d472f1e8d5ecb50a08206d0247e, type: 3}
+  - {fileID: 304927305847691711, guid: 500fb698844429f7cad4473f0f6c1338, type: 3}
+  - {fileID: 6632111486210938840, guid: 6d30181794fd84922a9f367ed4cf2ef2, type: 3}
+  - {fileID: 6481682116101187375, guid: d9755efd8b0db9565848625eaeb2d797, type: 3}
+  Projectiles: 3
+  Stages:
+  - {fileID: 5847164863378566115, guid: 898ec6898b198b6b59f312503eaf7162, type: 3}
+  - {fileID: 8859048344945197693, guid: c27da033caac8128a9878db5a9790e4f, type: 3}
+  - {fileID: 2505364106026941331, guid: f3ba3e0e2ebb9f777aa6f46515f37472, type: 3}
+  - {fileID: 7969907108080858040, guid: 51c93f8581c93f900a0cd5eb221176cb, type: 3}
+  - {fileID: 3193615954610865213, guid: 7a5e24f873aea7d02b195c8184ac5cb0, type: 3}
+  - {fileID: 4535074897704544643, guid: 097e4e14263060360bf39d560f6f76bb, type: 3}

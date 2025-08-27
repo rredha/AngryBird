@@ -1,65 +1,48 @@
-using System;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 {
     public class LevelBuilder : MonoBehaviour
     {
         [SerializeField] private GameConfigurationSO gameConfig;
-        [SerializeField] private LevelSO config;
-
+        [SerializeField] private LevelSO levelData;
+        
+        private LevelManager _levelManager;
         public ProjectileHandler ProjectileHandler { get; private set; }
         public BirdsHandler BirdsHandler { get; private set; }
-        public Projectile Projectile { get; private set; }
-
-        public bool OutOfAttempts { get; private set; }
-        public bool AllBirdsDestroyed { get; private set; }
 
         private Spawner _spawner;
-        
-        [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private GameObject birdPrefab;
-
         private void Awake()
         {
-            
             _spawner = GetComponent<Spawner>();
+            _levelManager = GetComponent<LevelManager>();
             ProjectileHandler = new ProjectileHandler(_spawner)
             {
-                Prefab = projectilePrefab
+                Prefab = levelData.ProjectilePrefab
             };
             BirdsHandler = new BirdsHandler(_spawner)
             {
-                Prefab = birdPrefab
+                Prefab = levelData.BirdPrefab
             };
-            
-            ProjectileHandler.OnEmpty += OnProjectileStackEmpty_Perform;
-            BirdsHandler.OnListEmpty += OnBirdListEmpty_Perform;
-        }
-        private void OnBirdListEmpty_Perform(object sender, EventArgs e)
-        {
-            AllBirdsDestroyed = true;
         }
 
-        private void OnDisable()
-        {
-            ProjectileHandler.OnEmpty -= OnProjectileStackEmpty_Perform;
-            BirdsHandler.OnListEmpty -= OnBirdListEmpty_Perform;
-        }
-
-        public void Initialize()
+        public void Init()
         {
             SetupEnvironment();
             SetupTargets();
             SetupProjectiles();
-            
-            ProjectileHandler.PopFirstProjectile(); // needs to rethink
-            Projectile = ProjectileHandler.Current;
         }
 
+        public void PopFirstProjectile()
+        {
+            ProjectileHandler.PopFirstProjectile(); // needs to rethink
+            _levelManager.Projectile = ProjectileHandler.Current;
+ 
+        }
         public void Clean()
         {
             // to improve
@@ -82,30 +65,19 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         }
         private void SetupProjectiles()
         {
-          ProjectileHandler.CacheProjectiles(config.Projectiles, gameConfig.Platform);
+          ProjectileHandler.CacheProjectiles(levelData.Projectiles, gameConfig.Platform);
         }
-
         private void SetupTargets()
         {
-          BirdsHandler.CreateBirds(config.BirdsLocations);
+          BirdsHandler.CreateBirds(levelData.BirdsLocations);
         }
         private void SetupEnvironment()
         {
-            foreach (var t in config.Stages)
+            foreach (var t in levelData.Stages)
             {
                 Instantiate(t);
             }
         }
-        public void Proceed()
-        {
-            ProjectileHandler.GetProjectile();
-            Projectile = ProjectileHandler.Current;
-        }
-        private void OnProjectileStackEmpty_Perform(object sender, EventArgs e)
-        {
-            OutOfAttempts = true;
-        }
-
         public void DebugMessage(Model.Level.Level data)
         {
             Debug.Log("Level One : ");

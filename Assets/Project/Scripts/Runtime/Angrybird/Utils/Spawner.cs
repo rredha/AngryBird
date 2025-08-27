@@ -6,11 +6,6 @@ namespace Project.Scripts.Runtime.Angrybird.Utils
   public class Spawner : MonoBehaviour
   {
     public GameObject SpawnedRef { get; private set; }
-    private void Awake()
-    {
-
-    }
-    
     public void Spawn(GameObject prefab) => StartCoroutine(SpawnCoroutine(prefab));
     public void SpawnAt(GameObject prefab, Transform location)
     {

@@ -12,8 +12,9 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         public OverlapTaskBehaviour taskBehaviour;
         public override void Enable(object sender, Projectile proj)
         {
-            if (proj.IsSelected) return;
+            if (!proj.IsIdle) return;
             _projectile = proj;
+            _projectile.IsSelected = true;
             
             taskBehaviour.TaskComplete += OnTaskComplete_Execute;
             taskBehaviour.Execute();

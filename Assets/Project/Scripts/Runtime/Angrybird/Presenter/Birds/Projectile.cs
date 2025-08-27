@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using Debug = UnityEngine.Debug;
 
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
 {
+  // check if a event based or simple script will get better result that fsm.
   // projectile is better suited to be event based.
 
   public partial class Projectile
@@ -21,44 +25,46 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
     }
     public void IdleStateExit()
     {
-      /*
-      IsIdle = true;
-      IsSelected = false;
-      */
+      IsIdle = false;
     }
     
   }
   public partial class Projectile
   // Selected State
   {
+    public event EventHandler DroppingStageBegin;
+    private readonly List<float> _droppingTimerData = new();
+    private float _droppingTimer;
+
+    public void ReportDroppingTimer()
+    {
+      Debug.Log("Dropping State Timers :");
+      for (var i = 0; i < _droppingTimerData.Count; i++)
+      {
+        Debug.Log($"Attempt {i+1} : {_droppingTimerData[i]} s.");
+      }
+    }
     public void SelectedStateEnter()
     {
-      
+      DroppingStageBegin?.Invoke(this, EventArgs.Empty);
     }
     public void SelectedStateUpdate()
     {
-      
+      _droppingTimer += Time.deltaTime;
     }
     public void SelectedStateExit()
     {
-      
+      _droppingTimerData.Add(_droppingTimer);
+      _droppingTimer = 0f;
     }
     
   }
   public partial class Projectile
     // Used State
   {
-    private void OnProjectileUsed_Perform(object sender, EventArgs e)
-    {
-      IsUsed = true;
-    }
     private void OnProjectileUsed_Notify(object sender, EventArgs e)
     {
       Debug.Log(gameObject.name + " Used");
-    }
-    private void OnProjectileUsed_Set(object sender, EventArgs e)
-    {
-      IsUsed = true;
     }
     public void UsedStateEnter()
     {
@@ -86,28 +92,21 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
       private LayerMask m_GroundLayer;
       public Rigidbody2D Rb {get; private set;}
       public Collider2D Col {get; private set;}
-      public bool IsUsed { get; set; }
       public bool IsSelected { get; set; }
       public bool IsThrown { get; set; }
       
-      public bool IsSelectable { get; set; }
 
       public bool IsTouchingGround => !Col.IsTouchingLayers(m_EnvironmentLayer) &&
                                       (Col.IsTouchingLayers(m_ObstacleLayer) || Col.IsTouchingLayers(m_GroundLayer)); 
       
       public event EventHandler OnProjectileUsed;
-      public bool IsFlying { get; set; }
 
       private void OnEnable()
       {
-        OnProjectileUsed += OnProjectileUsed_Perform;
-        OnProjectileUsed += OnProjectileUsed_Set;
       }
 
       private void OnDisable()
       {
-        OnProjectileUsed -= OnProjectileUsed_Perform;
-        OnProjectileUsed -= OnProjectileUsed_Set;
       }
       private void Awake()
       {
@@ -117,23 +116,17 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
 
         Rb = GetComponent<Rigidbody2D>();
         Col = GetComponent<Collider2D>();
-        
 
-        IsFlying = false;
       }
       public void SetStatic()
       {
         Col.enabled = true;
         Rb.bodyType = RigidbodyType2D.Kinematic;
       }
-
       public void SetDynamic()
       {
         Col.enabled = true;
         Rb.bodyType = RigidbodyType2D.Dynamic;
-      }
-      private void Update()
-      {
       }
     }
 }
