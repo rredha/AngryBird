@@ -7,7 +7,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 {
     public class SlingshotController : MonoBehaviour
     {
-        private StateMachine m_SlingshotStateMachine;
+        private StateMachine _slingshotStateMachine;
         private Slingshot _slingshot;
 
         private void Awake()
@@ -17,16 +17,16 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 
         private void Start()
         {
-            m_SlingshotStateMachine = new StateMachine();
+            _slingshotStateMachine = new StateMachine();
 
-            m_SlingshotStateMachine.AddState("Empty",
+            _slingshotStateMachine.AddState("Empty",
                 new State(
                     onEnter: state => _slingshot.EmptyStateEnter(),
                     onLogic: state => _slingshot.EmptyStateUpdate(),
                     onExit: state => _slingshot.EmptyStateExit()
                     )
                 );
-            m_SlingshotStateMachine.AddState("Loaded",
+            _slingshotStateMachine.AddState("Loaded",
                 new State(
                     onEnter: state => _slingshot.LoadedStateEnter(),
                     onLogic: state => _slingshot.LoadedStateUpdate(),
@@ -34,23 +34,23 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
                     )
                 );
             
-            m_SlingshotStateMachine.SetStartState("Empty");
+            _slingshotStateMachine.SetStartState("Empty");
             
-            m_SlingshotStateMachine.AddTransition(new Transition(
+            _slingshotStateMachine.AddTransition(new Transition(
                 "Empty",
                 "Loaded",
                 transition => _slingshot.IsOverlapping));
             
-            m_SlingshotStateMachine.AddTransition(new Transition(
+            _slingshotStateMachine.AddTransition(new Transition(
                 "Loaded",
                 "Empty",
                 transition => _slingshot.ReleasedTriggered));
-            m_SlingshotStateMachine.Init();
+            _slingshotStateMachine.Init();
         }
 
         private void Update()
         {
-            m_SlingshotStateMachine.OnLogic();
+            _slingshotStateMachine.OnLogic();
         }
     }
 }

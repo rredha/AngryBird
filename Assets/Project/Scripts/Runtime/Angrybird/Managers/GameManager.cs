@@ -8,6 +8,7 @@ using Project.Scripts.Runtime.Angrybird.Presenter.Level;
 using Project.Scripts.Runtime.Angrybird.Presenter.Slingshot;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Managers
 {
@@ -17,11 +18,16 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     private GameConfigurationSO _configuration;
     [SerializeField] private Slingshot slingshot;
     
-    [SerializeField] private GameObject wonUI;
-    [SerializeField] private Transform lostUI;
+    [SerializeField] private UIManager _uiManager;
 
+    public event EventHandler StartPlayingTaskTimer;
+    public event EventHandler StopPlayingTaskTimer;
     public TaskTimer droppingTaskTimer { get; private set; }
     public TaskTimer aimingTaskTimer { get; private set; }
+    public TaskTimer playingTaskTimer { get; private set; }
+
+    private List<TaskTimer> record;
+    
     private StateMachine _gameStateMachine;
     private LevelBuilder _levelBuilder;
     public LevelManager levelManager{ get; private set; }
@@ -32,6 +38,8 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
 
       droppingTaskTimer = new TaskTimer();
       aimingTaskTimer = new TaskTimer();
+      playingTaskTimer = new TaskTimer();
+
       _levelBuilder = GetComponent<LevelBuilder>();
       levelManager = GetComponent<LevelManager>();
       
@@ -74,18 +82,12 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
      //  "Playing", "Won", transition => m_BirdsDestroyed ));
      
      _gameStateMachine.AddTransition(new Transition(
-       "Playing", "Lost", transition => levelManager.OutOfAttempts));
-     /*
-     _gameStateMachine.AddTransition(new Transition(
-       "Init", "Lost", transition => _levelManager.ProjectileHandler.IsStackEmpty
-                                            &&  _levelManager.ProjectileHandler.Current.IsThrown
-                                            &&  _levelManager.ProjectileHandler.Current.IsTouchingGround));
-      */
+       "Playing", "Lost", transition => levelManager.OutOfAttempts && levelManager.Projectile.IsTouchingGround));
      
      /*
      _gameStateMachine.AddTransition(new Transition(
        "Lost", "Init", transition => _replayTriggered));
-       */
+     */
      
      _gameStateMachine.SetStartState("Init");
      _gameStateMachine.Init();
@@ -124,33 +126,26 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   // Playing state
   public partial class GameManager
   {
-    private readonly List<float> _playingTimerData = new();
-    private float _playingTimer;
-
-    private void ReportPlayingTimer()
-    {
-      Debug.Log("Playing State Timers :");
-      for (var i = 0; i < _playingTimerData.Count - 1; i++)
-      {
-        Debug.Log($"Attempt {i+1} : {_playingTimerData[i]} s.");
-      }
-    }
     private void PlayingStateEnter()
     {
+      StartPlayingTaskTimer += playingTaskTimer.Enable;
+      StopPlayingTaskTimer -= playingTaskTimer.Disable;
+      
+      StartPlayingTaskTimer?.Invoke(this, EventArgs.Empty);
       levelManager.ProjectileHandler.Subscribe();
       levelManager.ProjectileHandler.SubscribeBeginDroppingTimer();
     }
 
     private void PlayingStateUpdate()
     {
-      _playingTimer += Time.deltaTime;
     }
 
     private void PlayingStateExit()
     {
-      _playingTimerData.Add(_playingTimer);
-      _playingTimer = 0f;
+      StopPlayingTaskTimer += playingTaskTimer.Disable;
+      StartPlayingTaskTimer -= playingTaskTimer.Enable;
       
+      StopPlayingTaskTimer?.Invoke(this,EventArgs.Empty);
       levelManager.ProjectileHandler.Unsubscribe();
       levelManager.ProjectileHandler.UnsubscribeBeginDroppingTimer();
     }
@@ -160,17 +155,19 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   // Lost State
   public partial class GameManager
   {
-    private Transform lostUIBehaviour;
     private void LostStateEnter()
     {
-      //levelManager.Projectile.ReportDroppingTimer();
-      droppingTaskTimer.Log("Dropping");
-      aimingTaskTimer.Log("Aiming");
-      ReportPlayingTimer();
-      lostUIBehaviour = Instantiate(lostUI);
+      TaskTimerCSV.Export("aiming.csv", aimingTaskTimer);
+      TaskTimerCSV.Export("playing.csv", playingTaskTimer);
+      TaskTimerCSV.Export("dropping.csv", droppingTaskTimer);
+      
+      _uiManager.Show("Lost");
+
       //lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered += OnReplayTriggered_Set;
       //_lostUIBehaviour.ReplayTriggered += OnReplayTriggered_Set;
     }
+
+    
     private void LostStateExit()
     {
       //lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered -= OnReplayTriggered_Set;
@@ -180,6 +177,9 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   // Won State
   public partial class GameManager
   {
-    private void WonStateEnter() => Debug.Log("Congratulations");
+    private void WonStateEnter()
+    {
+      _uiManager.Show("Won");
+    }
   }
 }

@@ -1,13 +1,10 @@
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Project.Scripts.Runtime.Angrybird.Managers;
 using Project.Scripts.Runtime.Angrybird.Model.Slingshot;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.View.Slingshot;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 {
@@ -54,78 +51,48 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
     {
       _behaviour.Pointer.Unsubscribe();
       StopDroppingStateTimer += GameManager.Instance.droppingTaskTimer.Disable; 
+      StopDroppingStateTimer?.Invoke(this, EventArgs.Empty);
     }
   }
   
   public partial class Slingshot
   {
     private readonly List<float> _aimingTimerData = new();
-    private float _aimingTimer;
 
     public event EventHandler StopDroppingStateTimer;
     public event EventHandler StartAimingStateTimer;
     public event EventHandler StopAimingStateTimer;
-    /*
-    public void ReportAimingTimer()
-    {
-      Debug.Log("Aiming :");
-      for (var i = 0; i < _aimingTimerData.Count; i++)
-      {
-        Debug.Log($"Attempt {i+1} : {_aimingTimerData[i]} s.");
-      }
-    }
-    */
     public void LoadedStateEnter()
     {
-      StopDroppingStateTimer?.Invoke(this, EventArgs.Empty);
-      StartAimingStateTimer?.Invoke(this, EventArgs.Empty);
-      
-      StartAimingStateTimer += GameManager.Instance.aimingTaskTimer.Enable;
-      StartAimingStateTimer += OnStartAimingStateTimer_Notify;
       _behaviour.EnablePlayerActions();
       _visual.EnablePlayerActions();
       
       _behaviour.Subscribe();
       _visual.Subscribe();
-    }
-
-    private void OnStartAimingStateTimer_Notify(object sender, EventArgs e)
-    {
-      Debug.Log("Aiming Timer Start");
+      StartAimingStateTimer += GameManager.Instance.aimingTaskTimer.Enable;
+      StopAimingStateTimer -= GameManager.Instance.aimingTaskTimer.Disable;
+      
+      StartAimingStateTimer?.Invoke(this, EventArgs.Empty);
     }
 
     public void LoadedStateUpdate()
     {
       _behaviour.SetProjectileToHolder();
-      
-      /*
-      _aimingTimer += Time.deltaTime;
-      */
     }
     public void LoadedStateExit()
     {
-      StopAimingStateTimer?.Invoke(this, EventArgs.Empty);
-      StopAimingStateTimer += GameManager.Instance.aimingTaskTimer.Disable;
-      StopAimingStateTimer += OnStopAimingStateTimer_Notify;  
-      /*
-      _aimingTimerData.Add(_aimingTimer);
-      _aimingTimer = 0f;
-      */
-      
       _context.ReleasedTriggered = false;
       _dropZone.IsOverlapping = false;
       
       _behaviour.Unsubscribe();
       _visual.Unsubscribe();
+      
       // unsubscribing from events
-      StopDroppingStateTimer -= GameManager.Instance.droppingTaskTimer.Disable;
+      StopAimingStateTimer += GameManager.Instance.aimingTaskTimer.Disable;
       StartAimingStateTimer -= GameManager.Instance.aimingTaskTimer.Enable;
-      StopAimingStateTimer -= GameManager.Instance.aimingTaskTimer.Disable;
-    }
-
-    private void OnStopAimingStateTimer_Notify(object sender, EventArgs e)
-    {
-      Debug.Log("Aiming timer stopped");
+      
+      StopAimingStateTimer?.Invoke(this, EventArgs.Empty);
+      StopDroppingStateTimer -= GameManager.Instance.droppingTaskTimer.Disable;
     }
   }
 }
