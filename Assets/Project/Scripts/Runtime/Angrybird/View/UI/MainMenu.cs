@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Project.Scripts.Runtime.Core.SessionManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -12,22 +10,19 @@ namespace Arcade
         private UIDocument _uiDocument;
         private VisualElement _root;
         private Button _playButton;
+        private int _level;
         void Awake()
         {
             _uiDocument = GetComponent<UIDocument>();
             _root = _uiDocument.rootVisualElement;
             _playButton = _root.Q<Button>("Play");
             _playButton.clicked += OnPlayButtonClicked_LoadLevelScene;
+            _level = SessionManager.Instance.Session.UserGameData.LastLevel + 1;
         }
 
         private void OnPlayButtonClicked_LoadLevelScene()
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
-        }
-        
-        void Update()
-        {
-        
+            SceneManager.LoadSceneAsync(sceneBuildIndex: _level, LoadSceneMode.Single);
         }
 
         private void OnDisable()

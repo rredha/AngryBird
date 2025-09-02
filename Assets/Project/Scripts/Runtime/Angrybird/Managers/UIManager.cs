@@ -19,6 +19,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
             _userInterfaces.Add("Won", wonUI);
             _userInterfaces.Add("Pause", pauseUI);
             _userInterfaces.Add("Survey", surveyUI);
+            DontDestroyOnLoad(gameObject);
             Initialize();
       
         }

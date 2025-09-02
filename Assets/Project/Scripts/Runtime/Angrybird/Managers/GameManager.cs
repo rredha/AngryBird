@@ -5,10 +5,10 @@ using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Level;
+using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Presenter.Slingshot;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Managers
 {
@@ -35,6 +35,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     private void Awake()
     {
       Instance = this;
+      DontDestroyOnLoad(gameObject);
 
       droppingTaskTimer = new TaskTimer();
       aimingTaskTimer = new TaskTimer();
@@ -78,16 +79,11 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
      _gameStateMachine.AddTransition(new Transition(
        "Playing", "Init", transition => levelManager.Projectile.IsThrown && !levelManager.OutOfAttempts));
      
-     //m_GameStateMachine.AddTransition(new Transition(
-     //  "Playing", "Won", transition => m_BirdsDestroyed ));
+     _gameStateMachine.AddTransition(new Transition(
+       "Playing", "Won", transition => levelManager.Projectile.IsTouchingGround && (levelManager.LevelStatus is LevelStatusEnum.Completed) ));
      
      _gameStateMachine.AddTransition(new Transition(
        "Playing", "Lost", transition => levelManager.OutOfAttempts && levelManager.Projectile.IsTouchingGround));
-     
-     /*
-     _gameStateMachine.AddTransition(new Transition(
-       "Lost", "Init", transition => _replayTriggered));
-     */
      
      _gameStateMachine.SetStartState("Init");
      _gameStateMachine.Init();
@@ -162,16 +158,10 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
       TaskTimerCSV.Export("dropping.csv", droppingTaskTimer);
       
       _uiManager.Show("Lost");
-
-      //lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered += OnReplayTriggered_Set;
-      //_lostUIBehaviour.ReplayTriggered += OnReplayTriggered_Set;
     }
 
-    
     private void LostStateExit()
     {
-      //lostUIBehaviour.gameObject.GetComponent<LostUI>().ReplayTriggered -= OnReplayTriggered_Set;
-      //_levelBuilder.Clean(); 
     }
   }
   // Won State

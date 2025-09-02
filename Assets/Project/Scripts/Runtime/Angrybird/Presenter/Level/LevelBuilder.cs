@@ -10,7 +10,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
     {
         [SerializeField] private GameConfigurationSO gameConfig;
         [SerializeField] private LevelSO levelData;
-        
+
         private LevelManager _levelManager;
         public ProjectileHandler ProjectileHandler { get; private set; }
         public BirdsHandler BirdsHandler { get; private set; }
@@ -28,6 +28,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
             {
                 Prefab = levelData.BirdPrefab
             };
+            BirdsHandler.NumberOfBirds = levelData.Birds;
         }
 
         public void Init()

@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Project/UI/Login/LoginMenuView.uss?fileID=7433441132597879392&amp;guid=3bd178fb085e2d1f59667577f99f9c79&amp;type=3#LoginMenuView" />
+    <ui:VisualElement name="background">
+        <ui:VisualElement name="main-container">
+            <ui:ListView focusable="true" name="user-list" />
+            <ui:VisualElement name="right-container">
+                <ui:VisualElement name="details-container">
+                    <ui:VisualElement name="details">
+                        <ui:VisualElement name="user-portrait" />
+                    </ui:VisualElement>
+                    <ui:Label text="Label" name="user-name" />
+                    <ui:Button text="Login" name="user-login" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -6,10 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Project/Scenes/AngryBird/Main.unity
+    path: Assets/Project/Scenes/Login.unity
+    guid: e693828751dd4e19d875850e0161e17e
+  - enabled: 1
+    path: Assets/Project/Scenes/Main.unity
     guid: b7fe5b27ef4bc3be99d075b36306a9a1
   - enabled: 1
     path: Assets/Project/Scenes/AngryBird/Level1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Project/Scenes/AngryBird/Level2.unity
+    guid: b90440b099a01a8b580f903942e57fda
+  - enabled: 1
+    path: Assets/Project/Scenes/AngryBird/Level3.unity
+    guid: 6047e0a3db17a35ba9a0bfbce8d7c31c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 67df20868e41af2d3ab5f1f5e56f0828, type: 3}
