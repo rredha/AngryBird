@@ -6,20 +6,19 @@ namespace Project.Scripts.Runtime.Angrybird.MovementProvider
 {
     public class MousePointer : IMovementProvider
     {
-        private Camera m_Camera;
         private PlayerInputActions m_playerInputActions;
         public Vector3 PointerWorldPosition { get; private set; }
         public bool SelectEventRaised { get; set; }
         public bool MoveEventRaised { get; private set; }
 
-        public MousePointer(Camera camera)
-        {
-            m_Camera = camera;
-        }
-    public void Initialize()
+        public void Initialize()
         {
             m_playerInputActions = new PlayerInputActions();
             m_playerInputActions.Player.Enable();
+        }
+        ~MousePointer()
+        {
+            m_playerInputActions.Player.Disable();
         }
         public void Subscribe()
         {
@@ -30,6 +29,7 @@ namespace Project.Scripts.Runtime.Angrybird.MovementProvider
         {
             m_playerInputActions.Player.Move.performed -= Move_performed;
             m_playerInputActions.Player.Select.performed -= Select_performed;
+            m_playerInputActions.Player.Disable();
         }
         private void Select_performed(InputAction.CallbackContext ctx)
         {
@@ -43,7 +43,7 @@ namespace Project.Scripts.Runtime.Angrybird.MovementProvider
         }
         private Vector3 ScreenToWorldPosition(Vector2 screenPosition)
         {
-            var worldPosition = m_Camera.ScreenToWorldPoint(screenPosition);
+            var worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             return new Vector3(worldPosition.x, worldPosition.y, 5);
         }
     }

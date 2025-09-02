@@ -36,7 +36,12 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         {
             _playerInputActions.Player.Select.performed -= SelectAction_Performed;
             _playerInputActions.Player.Select.canceled -= SelectAction_Canceled;
-            _playerInputActions.Disable();
+            _playerInputActions.Disable(); // added execution on OnDisable
+        }
+
+        private void OnDisable()
+        {
+            _playerInputActions.Player.Disable();
         }
     }
 }

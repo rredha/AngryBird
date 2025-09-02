@@ -24,6 +24,11 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
             PlayerInputActions.Player.Enable();
         }
 
+        ~TimerReleaseStrategy()
+        {
+            PlayerInputActions.Player.Disable();
+        }
+
         public override void Execute(object sender, bool e)
         {
             throw new System.NotImplementedException();
@@ -34,9 +39,13 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
     {
         public override void Task(object sender, bool e)
         {
-            throw new System.NotImplementedException();
+            PlayerInputActions.Player.Enable();
         }
 
+        ~ClickReleaseStrategy()
+        {
+            PlayerInputActions.Player.Disable();
+        }
         public override void Execute(object sender, bool e)
         {
             throw new System.NotImplementedException();

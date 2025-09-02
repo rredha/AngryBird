@@ -12,7 +12,8 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
     };
     public class LevelManager : MonoBehaviour
     {
-        private static LevelManager Instance;
+        public static LevelManager Instance;
+        public int CurrentLevel;
         public Projectile Projectile { get; set; }
         public ProjectileHandler ProjectileHandler { get; private set; }
         public BirdsHandler BirdsHandler { get; private set; }
@@ -32,7 +33,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
             _levelBuilder = GetComponent<LevelBuilder>();
             ProjectileHandler = _levelBuilder.ProjectileHandler;
             BirdsHandler = _levelBuilder.BirdsHandler;
-            
+            CurrentLevel = _levelBuilder.LevelIndex;
             ProjectileHandler.OnEmpty += OnProjectileStackEmpty_Perform;
         }
 

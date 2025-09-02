@@ -41,5 +41,10 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
                 TaskComplete?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        private void OnDisable()
+        {
+            _playerInputActions.Player.Disable();
+        }
     }
 }

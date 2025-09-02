@@ -6,6 +6,7 @@ namespace Project.Scripts.Runtime.Angrybird.Utils
     [CreateAssetMenu(fileName = "Level", menuName = "Configuration/Level", order = 100)]
     public class LevelSO : ScriptableObject
     {
+        public int LevelIndex;
         public GameObject BirdPrefab;
         public GameObject ProjectilePrefab;
         

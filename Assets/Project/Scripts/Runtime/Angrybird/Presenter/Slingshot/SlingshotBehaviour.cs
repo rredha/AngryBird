@@ -21,7 +21,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 
         private void Awake()
         {
-            Pointer = new MousePointer(Camera.main);
+            Pointer = new MousePointer();
             PlayerInputActions = new PlayerInputActions();
 
             //releaseStrategy.TaskComplete += releaseStrategy.Execute;
@@ -29,6 +29,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
 
         private void OnDisable()
         {
+            PlayerInputActions.Player.Disable();
             //releaseStrategy.TaskComplete -= releaseStrategy.Execute;
         }
 
@@ -56,6 +57,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
         {
             PlayerInputActions.Player.Move.performed -= Move_performed;
             PlayerInputActions.Player.Release.performed -= Release_performed;
+            PlayerInputActions.Player.Disable();
         }
         private void Move_performed(InputAction.CallbackContext ctx)
         {

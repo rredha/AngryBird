@@ -1,3 +1,4 @@
+using System;
 using Arcade.Project.Runtime.Games.AngryBird.Utils.InputSystem;
 using Project.Scripts.Runtime.Angrybird.Model.Slingshot;
 using UnityEngine;
@@ -15,6 +16,12 @@ namespace Project.Scripts.Runtime.Angrybird.View.Slingshot
         {
             PlayerInputActions = new PlayerInputActions();
         }
+
+        private void OnDisable()
+        {
+            PlayerInputActions.Player.Disable();
+        }
+
         public void EnablePlayerActions() => PlayerInputActions.Player.Enable();
         public void InitializeRubber()
         {
@@ -31,6 +38,7 @@ namespace Project.Scripts.Runtime.Angrybird.View.Slingshot
         {
             PlayerInputActions.Player.Move.performed -= Move_performed;
             PlayerInputActions.Player.Release.performed -= Release_performed;
+            PlayerInputActions.Player.Disable();
         }
         private void Move_performed(InputAction.CallbackContext ctx)
         {

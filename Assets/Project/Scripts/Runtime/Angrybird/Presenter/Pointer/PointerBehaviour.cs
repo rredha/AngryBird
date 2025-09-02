@@ -14,7 +14,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
         public event EventHandler<Projectile> ProjectileOverlap;
         private void Awake()
         {
-            mouseMovement = new MousePointer(Camera.main);
+            mouseMovement = new MousePointer();
             _collider = GetComponent<Collider2D>();
             _collider.isTrigger = true;
         }

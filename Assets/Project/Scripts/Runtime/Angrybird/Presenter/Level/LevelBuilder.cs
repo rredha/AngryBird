@@ -10,6 +10,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
     {
         [SerializeField] private GameConfigurationSO gameConfig;
         [SerializeField] private LevelSO levelData;
+        public int LevelIndex => levelData.LevelIndex;
 
         private LevelManager _levelManager;
         public ProjectileHandler ProjectileHandler { get; private set; }
