@@ -1,19 +1,29 @@
 using System.Collections.Generic;
+using Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.View.UI;
 using UnityEngine;
 
 namespace Project.Scripts.Runtime.Angrybird.Managers
 {
     public class UIManager : MonoBehaviour
     {
+        public static UIManager Instance;
         [SerializeField] private GameObject lostUI;
         [SerializeField] private GameObject wonUI;
         [SerializeField] private GameObject pauseUI;
         [SerializeField] private GameObject surveyUI;
 
-        private Dictionary<string, GameObject> _userInterfaces;
+        public WonUI WonUI;
+        public LostUI LostUI;
+
+        private static Dictionary<string, GameObject> _userInterfaces;
 
         private void Awake()
         {
+            Instance = this;
+            
+            WonUI = wonUI.GetComponent<WonUI>();
+            LostUI = lostUI.GetComponent<LostUI>();
+            
             _userInterfaces = new Dictionary<string, GameObject>();
             _userInterfaces.Add("Lost", lostUI);
             _userInterfaces.Add("Won", wonUI);

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39fdb8b009d64b68b28c42882e4c3ffb, type: 3}
   m_Name: One
   m_EditorClassIdentifier: 
+  LevelIndex: 1
   BirdPrefab: {fileID: 9011059954354761472, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
   ProjectilePrefab: {fileID: 3304457424203430322, guid: d1c2625f194f752818182b45cbddef35, type: 3}
   Birds: 3

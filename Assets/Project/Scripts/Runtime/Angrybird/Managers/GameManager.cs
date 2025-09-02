@@ -85,6 +85,12 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
      _gameStateMachine.AddTransition(new Transition(
        "Playing", "Lost", transition => levelManager.OutOfAttempts && levelManager.Projectile.IsTouchingGround));
      
+     _gameStateMachine.AddTransition(new Transition(
+       "Won", "Init", transition => _replayTriggered));
+     
+     _gameStateMachine.AddTransition(new Transition(
+       "Lost", "Init", transition => _replayTriggered));
+     
      _gameStateMachine.SetStartState("Init");
      _gameStateMachine.Init();
     }
@@ -170,6 +176,15 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     private void WonStateEnter()
     {
       _uiManager.Show("Won");
+      UIManager.Instance.WonUI.ReplayTriggered += OnReplayTriggered_Reset;
+    }
+
+    private bool _replayTriggered;
+    private void OnReplayTriggered_Reset(object sender, EventArgs e)
+    {
+      _levelBuilder.Clean();
+      _firstGame = true;
+      _replayTriggered = true;
     }
   }
 }

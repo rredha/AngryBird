@@ -1,4 +1,5 @@
 using System;
+using Project.Scripts.Runtime.Angrybird.Managers;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using UnityEngine;
@@ -23,6 +24,9 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         public LevelStatusEnum LevelStatus => BirdsHandler.AllBirdsDestroyed ? LevelStatusEnum.Completed : LevelStatusEnum.UnCompleted;
 
         public bool OutOfAttempts { get; private set; }
+
+
+
         private void Start()
         // need something that is more robust... dependency injection.
         {

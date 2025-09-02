@@ -37,12 +37,16 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.View.UI
         private void OnQuitClicked_AppQuit(ClickEvent evt) => QuitGame();
         private void OnNextLevelClicked_LoadLevel(ClickEvent evt)
         {
-            Debug.Log(LevelManager.Instance.CurrentLevel);
+            UIManager.Instance.Hide("Won");
             var nextLevel = LevelManager.Instance.CurrentLevel + 2;
             SceneManager.LoadScene(sceneBuildIndex:nextLevel, LoadSceneMode.Single);
         }
 
-        private void OnReplayClicked_TriggerReplay(ClickEvent evt) => ReplayTriggered?.Invoke(this, EventArgs.Empty);
+        private void OnReplayClicked_TriggerReplay(ClickEvent evt)
+        {
+            UIManager.Instance.Hide("Won");
+            ReplayTriggered?.Invoke(this, EventArgs.Empty);
+        }
 
         #endregion
 
