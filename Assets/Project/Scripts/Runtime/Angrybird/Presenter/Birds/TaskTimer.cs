@@ -6,10 +6,77 @@ using Debug = UnityEngine.Debug;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
 {
+    public class TaskTimerContainer
+    {
+        public double Total => CalculateTotal(Seconds, Milliseconds);
+
+        public int Seconds { get; set; }
+        public double Milliseconds { get; set; }
+
+        public double CalculateTotal(int seconds, double milliseconds)
+        {
+            return seconds * 1000 + milliseconds;
+        }
+    }
+    public class DroppingTaskTimerData : TaskTimerContainer
+    {
+        public string TaskName { get; set; } = "Dropping";
+        public int Seconds { get; set; }
+        public double Milliseconds { get; set; }
+    }
+    public class PlayingTaskTimerData : TaskTimerContainer
+    {
+        public string TaskName { get; set; } = "Playing";
+        public int Seconds { get; set; }
+        public double Milliseconds { get; set; }
+    }
+    public class AimingTaskTimerData : TaskTimerContainer
+    {
+        public string TaskName { get; set; } = "Aiming";
+        public int Seconds { get; set; }
+        public double Milliseconds { get; set; }
+    }
+    public class TaskTimerCSVData
+    {
+        public int Level { get; set; }
+        public int Attempt { get; set; }
+        public List<TaskTimerContainer> TaskTimerContainers { get; set; }
+        public List<double> TimersTotal { get; set; }
+        
+        public double AimingTimer { get; set; }
+        public double PlayingTimer { get; set; }
+        public double DroppingTimer { get; set; }
+
+        public void Initialize()
+        {
+            TaskTimerContainers = new List<TaskTimerContainer>
+            {
+                new DroppingTaskTimerData(),
+                new AimingTaskTimerData(),
+                new PlayingTaskTimerData()
+            };
+            TimersTotal = new List<double>
+            {
+                DroppingTimer,
+                AimingTimer,
+                PlayingTimer
+            };
+        }
+
+        public void Serialize()
+        {
+            for (int i = 0; i < TimersTotal.Count; i++)
+            {
+                TimersTotal[i] = TaskTimerContainers[i].Total;
+            }
+        }
+    }
+
+
+    /*
     public class TaskTimerCSVData
     {
         public string TaskName;
-
         public int Attempt { get; set; }
         public int Seconds { get; set; }
         public double Milliseconds { get; set; }
@@ -21,6 +88,25 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
             Milliseconds = milliseconds;
         }
     }
+    */
+    public class TaskTimer
+    {
+        private readonly Stopwatch _timer = new();
+        public long Total => _total;
+        private long _total;
+
+        public void Enable(object sender, EventArgs e)
+        {
+            _timer.Start();
+        }
+        public void Disable(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            _total = _timer.ElapsedMilliseconds;
+            _timer.Reset();
+        }
+    }
+    /*
     public class TaskTimer
     {
         private readonly Stopwatch _timer = new();
@@ -86,9 +172,13 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
 
             for (int i = 0; i < TimeSpanData.Count; i++)
             {
-                var data = new TaskTimerCSVData(i+1, Seconds[i], Milliseconds[i]);
+                //var data = new TaskTimerCSVData(i+1, Seconds[i], Milliseconds[i]);
+                var data = new TaskTimerCSVData();
+                data.Initialize();
+                data.Serialize();
                 _csvDatas.Add(data);
             }
         }
     }
+    */
 }

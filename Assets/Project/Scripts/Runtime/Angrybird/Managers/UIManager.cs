@@ -13,6 +13,9 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
         [SerializeField] private GameObject surveyUI;
 
         public WonUI WonUI;
+        // TODO:
+        // fix issues with lostui, in prefab.
+        // create parent prefab and generate prefab variants.
         public LostUI LostUI;
 
         private static Dictionary<string, GameObject> _userInterfaces;

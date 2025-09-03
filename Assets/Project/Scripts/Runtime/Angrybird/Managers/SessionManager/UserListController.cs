@@ -40,6 +40,9 @@ namespace Project.Scripts.Runtime.Core.SessionManager
 
         private void OnUserSelected(IEnumerable<object> selectedItems)
         {
+            // TODO : Add portrait image based on user gender.
+            // get an image from session manager, ou ui controller.
+            // _userPortrait.style.backgroundImage = new StyleBackground(_selectedUser.PortraitImage); 
             _selectedUser = _userListView.selectedItem as User;
 
             if (_selectedUser == null)
@@ -51,8 +54,6 @@ namespace Project.Scripts.Runtime.Core.SessionManager
             }
 
             _userNameLabel.text = _selectedUser.Username;
-            // get an image from session manager, ou ui controller.
-            // _userPortrait.style.backgroundImage = new StyleBackground(_selectedUser.PortraitImage); 
 
         }
 

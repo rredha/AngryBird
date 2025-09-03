@@ -18,6 +18,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
         
         private Spawner _spawner;
         private Stack<Projectile> _stack;
+        public int ProjectileLeft => _stack.Count;
 
         public event EventHandler OnEmpty;
 

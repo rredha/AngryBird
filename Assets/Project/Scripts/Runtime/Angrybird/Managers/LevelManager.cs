@@ -19,6 +19,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         public ProjectileHandler ProjectileHandler { get; private set; }
         public BirdsHandler BirdsHandler { get; private set; }
         private LevelBuilder _levelBuilder;
+        public int Attempt => ProjectileHandler.ProjectileLeft;
         private int _numberOfBirds;
         private LevelStatusEnum _levelStatus;
         public LevelStatusEnum LevelStatus => BirdsHandler.AllBirdsDestroyed ? LevelStatusEnum.Completed : LevelStatusEnum.UnCompleted;

@@ -5,9 +5,9 @@ using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Level;
-using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Presenter.Slingshot;
 using Project.Scripts.Runtime.Angrybird.Utils;
+using Project.Scripts.Runtime.Core.SessionManager;
 using UnityEngine;
 
 namespace Project.Scripts.Runtime.Angrybird.Managers
@@ -17,7 +17,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     public static GameManager Instance;
     private GameConfigurationSO _configuration;
     [SerializeField] private Slingshot slingshot;
-    
     [SerializeField] private UIManager _uiManager;
 
     public event EventHandler StartPlayingTaskTimer;
@@ -25,9 +24,8 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     public TaskTimer droppingTaskTimer { get; private set; }
     public TaskTimer aimingTaskTimer { get; private set; }
     public TaskTimer playingTaskTimer { get; private set; }
-
-    private List<TaskTimer> record;
     
+    private bool _replayTriggered; // should be reload level.
     private StateMachine _gameStateMachine;
     private LevelBuilder _levelBuilder;
     public LevelManager levelManager{ get; private set; }
@@ -63,16 +61,16 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
           onExit: state => PlayingStateExit()
             ));
       
-     _gameStateMachine.AddState("Won",
+     _gameStateMachine.AddState("Finish",
        new State(
-         onEnter: state => WonStateEnter()
+         onEnter: state => FinishStateEnter(),
+         onExit: state => FinishStateExit()
        ));
-     _gameStateMachine.AddState("Lost",
-       new State(
-         onEnter: state => LostStateEnter(),
-         onExit: state => LostStateExit()
-       ));
-      
+     
+     // TODO:
+     // add condition for passing from init to playing.
+     // for instance the projectile needs to be in the correct init position.
+     
      _gameStateMachine.AddTransition(new Transition(
        "Init", "Playing", transition => true));
      
@@ -80,20 +78,17 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
        "Playing", "Init", transition => levelManager.Projectile.IsThrown && !levelManager.OutOfAttempts));
      
      _gameStateMachine.AddTransition(new Transition(
-       "Playing", "Won", transition => levelManager.Projectile.IsTouchingGround && (levelManager.LevelStatus is LevelStatusEnum.Completed) ));
+       "Playing", "Finish", transition => levelManager.Projectile.IsTouchingGround && 
+                                          (levelManager.LevelStatus is LevelStatusEnum.Completed) || (levelManager.OutOfAttempts)));
      
      _gameStateMachine.AddTransition(new Transition(
-       "Playing", "Lost", transition => levelManager.OutOfAttempts && levelManager.Projectile.IsTouchingGround));
-     
-     _gameStateMachine.AddTransition(new Transition(
-       "Won", "Init", transition => _replayTriggered));
-     
-     _gameStateMachine.AddTransition(new Transition(
-       "Lost", "Init", transition => _replayTriggered));
+       "Finish", "Init", transition => _replayTriggered));
      
      _gameStateMachine.SetStartState("Init");
      _gameStateMachine.Init();
     }
+
+
 
     private void Update()
     {
@@ -144,46 +139,81 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
 
     private void PlayingStateExit()
     {
+      // TODO :
+      // Fix issue with Aiming Timer,
+      // Also wrong switching from init -> playing on last attempt
+      
       StopPlayingTaskTimer += playingTaskTimer.Disable;
       StartPlayingTaskTimer -= playingTaskTimer.Enable;
       
       StopPlayingTaskTimer?.Invoke(this,EventArgs.Empty);
       levelManager.ProjectileHandler.Unsubscribe();
       levelManager.ProjectileHandler.UnsubscribeBeginDroppingTimer();
+
+      var sessionMetrics = new SessionMetrics(
+        levelManager.CurrentLevel, levelManager.Attempt,
+        playingTaskTimer.Total,
+        droppingTaskTimer.Total,
+        aimingTaskTimer.Total);
+      
+      SessionManager.Instance.AddMetric(sessionMetrics);
     }
+
   }
   
   
   // Lost State
   public partial class GameManager
   {
+    /*
     private void LostStateEnter()
     {
-      TaskTimerCSV.Export("aiming.csv", aimingTaskTimer);
-      TaskTimerCSV.Export("playing.csv", playingTaskTimer);
-      TaskTimerCSV.Export("dropping.csv", droppingTaskTimer);
-      
+      SessionManager.Instance.Export();
       _uiManager.Show("Lost");
     }
 
     private void LostStateExit()
     {
     }
+    */
   }
-  // Won State
+  // Finish State
   public partial class GameManager
   {
-    private void WonStateEnter()
+    // TODO:
+    // fix LostUI issue.
+    private void FinishStateEnter()
     {
-      _uiManager.Show("Won");
-      UIManager.Instance.WonUI.ReplayTriggered += OnReplayTriggered_Reset;
+      SessionManager.Instance.Export();
+      
+      if (LevelManager.Instance.LevelStatus == LevelStatusEnum.Completed)
+      {
+        _uiManager.Show("Won");
+        UIManager.Instance.WonUI.ReplayTriggered += OnReplayTriggered_Reset;
+      }
+      else if (LevelManager.Instance.LevelStatus == LevelStatusEnum.UnCompleted)
+      {
+        _uiManager.Show("Lost");
+        //UIManager.Instance.LostUI.ReplayTriggered += OnReplayTriggered_Reset;
+      }
     }
 
-    private bool _replayTriggered;
+    private void FinishStateExit()
+    {
+      if (_replayTriggered)
+      {
+        _levelBuilder.Clean();
+        _firstGame = true;
+      }
+
+      UIManager.Instance.WonUI.ReplayTriggered -= OnReplayTriggered_Reset;
+      //UIManager.Instance.LostUI.ReplayTriggered -= OnReplayTriggered_Reset;
+      
+      _replayTriggered = false;
+    }
+    
     private void OnReplayTriggered_Reset(object sender, EventArgs e)
     {
-      _levelBuilder.Clean();
-      _firstGame = true;
       _replayTriggered = true;
     }
   }
