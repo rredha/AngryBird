@@ -13,6 +13,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
 
         public void OnEnable()
         {
+            /*
             switch (TaskEnum)
             {
                 case TaskEnum.Overlap:
@@ -22,6 +23,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
                     Task = CreateInstance<SingleClickTask>();
                     break;
             }
+            */
         }
     }
     public enum TaskEnum

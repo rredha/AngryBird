@@ -6,10 +6,25 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
 {
     public class OverlapTaskBehaviour : MonoBehaviour, ITaskBehaviour
     {
+        public void Disable()
+        {
+            throw new NotImplementedException();
+        }
+
         public event EventHandler TaskComplete;
         public void Execute()
         {
             TaskComplete?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Initialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Cleanup()
+        {
+            throw new NotImplementedException();
         }
     }
 }

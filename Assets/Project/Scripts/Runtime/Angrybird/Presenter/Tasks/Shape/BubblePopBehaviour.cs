@@ -10,6 +10,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
     public class BubblePopBehaviour : MonoBehaviour, ITaskBehaviour
     {
         [SerializeField] private ShapeVisual shapeVisual;
+        public ShapeVisual Visual => shapeVisual;
         [SerializeField]private GameObject _bubblePrefab;
         [SerializeField]private ShapeSO _shapeData;
         private IShapeGenerator _shapeGenerator;
@@ -17,20 +18,22 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         private readonly List<BubbleHandler> _bubbles = new();
         private int _shapeCount;
 
+        public void Disable()
+        {
+            throw new NotImplementedException();
+        }
+
         public event EventHandler TaskComplete;
         public event EventHandler TaskStart;
 
+        /*
         private void OnEnable()
         {
             TaskStart += OnTaskStart_Draw;
-            TaskStart += OnTaskStart_SayHello;
             TaskStart += OnTaskStart_Instantiate;
         }
+        */
 
-        private void OnTaskStart_SayHello(object sender, EventArgs e)
-        {
-            Debug.Log("Hello");
-        }
 
         private void Awake()
         {
@@ -42,17 +45,20 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
             _shapeCount = vertices.Length;
         }
 
-        private void OnTaskStart_Draw(object sender, EventArgs e)
-        {
-            shapeVisual.Draw(vertices);
-        }
-        private void OnTaskStart_Instantiate(object sender, EventArgs e)
-        {
-            SpawnBubbles();
-        }
         public void Execute()
         {
-            TaskStart?.Invoke(this, EventArgs.Empty);
+            shapeVisual.Draw(vertices);
+            SpawnBubbles();
+        }
+
+        public void Initialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Cleanup()
+        {
+            throw new NotImplementedException();
         }
 
         private void SpawnBubbles()
@@ -81,8 +87,6 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         }
             private void OnDisable()
             {
-                TaskStart -= OnTaskStart_Draw;
-                TaskStart -= OnTaskStart_Instantiate;
                 foreach (var bubbleHandler in _bubbles)
                 {
                     bubbleHandler.OnBubbleClicked -= BubbleClicked_Countdown;

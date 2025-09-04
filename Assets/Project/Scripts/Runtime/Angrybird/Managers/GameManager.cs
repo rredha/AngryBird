@@ -156,7 +156,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
         droppingTaskTimer.Total,
         aimingTaskTimer.Total);
       
-      SessionManager.Instance.AddMetric(sessionMetrics);
+      //SessionManager.Instance.AddMetric(sessionMetrics);
     }
 
   }
@@ -184,7 +184,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     // fix LostUI issue.
     private void FinishStateEnter()
     {
-      SessionManager.Instance.Export();
+      //SessionManager.Instance.Export();
       
       if (LevelManager.Instance.LevelStatus == LevelStatusEnum.Completed)
       {

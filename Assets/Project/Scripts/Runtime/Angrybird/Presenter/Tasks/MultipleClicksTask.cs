@@ -34,7 +34,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         }
         private void OnTaskComplete_Execute(object sender, EventArgs eventArgs)
         {
-            Outcome(_projectile, Pointer);   
+            //Outcome(_projectile, Pointer);   
         }
 
         protected override void Create()

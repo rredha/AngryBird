@@ -34,6 +34,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
             var projectile = other.GetComponent<Projectile>();
             if (projectile != null && projectile.IsIdle && !projectile.IsSelected)
             {
+                projectile.IsOverlapped = true;
                 ProjectileOverlap?.Invoke(this, projectile);
             }
         }

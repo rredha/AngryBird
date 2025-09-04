@@ -30,7 +30,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
     
   }
   public partial class Projectile
-  // Selected State
+    // Selected State
   {
     public event EventHandler DroppingStageBegin;
     private readonly List<float> _droppingTimerData = new();
@@ -46,6 +46,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
     }
     public void SelectedStateEnter()
     {
+      IsOverlapped = false;
       DroppingStageBegin?.Invoke(this, EventArgs.Empty);
     }
     public void SelectedStateUpdate()
@@ -94,7 +95,8 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
       public Collider2D Col {get; private set;}
       public bool IsSelected { get; set; }
       public bool IsThrown { get; set; }
-      
+      public bool IsOverlapped { get; set; }
+
 
       public bool IsTouchingGround => !Col.IsTouchingLayers(m_EnvironmentLayer) &&
                                       (Col.IsTouchingLayers(m_ObstacleLayer) || Col.IsTouchingLayers(m_GroundLayer)); 

@@ -4,8 +4,8 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
 {
     public interface ITaskBehaviour
     {
-        public void Execute();
-
         public event EventHandler TaskComplete;
+        public void Initialize();
+        public void Cleanup();
     }
 }

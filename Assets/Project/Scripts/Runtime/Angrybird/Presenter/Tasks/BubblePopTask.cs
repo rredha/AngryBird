@@ -19,12 +19,14 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
             _projectile = proj;
             
             taskBehaviour.TaskComplete += OnTaskComplete_Execute;
+            taskBehaviour.Visual.Draw(taskBehaviour.vertices);
             taskBehaviour.Execute();
         }
 
+
         private void OnTaskComplete_Execute(object sender, EventArgs e)
         {
-            Outcome(_projectile, Pointer);
+            //Outcome(_projectile, Pointer);
         }
 
         protected override void Create()

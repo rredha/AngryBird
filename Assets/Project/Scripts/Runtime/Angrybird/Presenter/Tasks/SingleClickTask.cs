@@ -1,11 +1,10 @@
 using System;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
-using Project.Scripts.Runtime.Angrybird.Presenter.Pointer;
 using UnityEngine;
 
 namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.Tasks
 {
-    [CreateAssetMenu(menuName = "Select Strategy/Single Click", fileName = "Single Click", order = 0)]
+    [CreateAssetMenu(menuName = "Select Strategy/SingleClick Task", fileName = "Single Click", order = 0)]
     public class SingleClickTask : BaseTask
     {
         private Projectile _projectile;
@@ -31,7 +30,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
 
         private void OnTaskComplete_Execute(object sender, EventArgs eventArgs)
         {
-            Outcome(_projectile,Pointer);   
+            //Outcome(_projectile,Pointer);   
         }
         public override void Notify(object sender, Projectile e)
         {

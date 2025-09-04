@@ -1,52 +1,53 @@
 using System;
 using Arcade.Project.Runtime.Games.AngryBird.Utils.InputSystem;
 using Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.Tasks.Shape;
+using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Object = System.Object;
 
 namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.Tasks
 {
-    public class SingleClickBehaviour : MonoBehaviour, ITaskBehaviour
+    public class ClickTaskBehaviour : ITaskBehaviour
     {
-        private bool _clicked;
-
-        private PlayerInputActions _playerInputActions;
-        public void Disable()
-        {
-            throw new NotImplementedException();
-        }
-
+        private int _clickCount;
+        public int Threshold { get; set; }
+        
+        private PlayerInputActions _playerInputActions; 
         public event EventHandler TaskComplete;
+
+        public ClickTaskBehaviour(int threshold)
+        {
+            Threshold = threshold;
+            
+            _playerInputActions = new PlayerInputActions();
+        }
         public void Initialize()
         {
-            _playerInputActions = new PlayerInputActions();
             _playerInputActions.Enable();
             _playerInputActions.Player.Select.performed += SelectAction_Performed;
-            _playerInputActions.Player.Select.canceled += SelectAction_Canceled;
+            // TODO 
+            //  expected : execute once only 
+            //  bug : keeps executing at every frame.
+            //Debug.Log($"Task initialized.");
         }
 
-        public void Execute()
-        {
-        }
         void SelectAction_Performed(InputAction.CallbackContext obj)
         {
-            _clicked = true;
-            TaskComplete?.Invoke(this, EventArgs.Empty);
+            _clickCount++;
+            Debug.Log(_clickCount);
+            if (_clickCount >= Threshold)
+                TaskComplete?.Invoke(this,EventArgs.Empty);
         }
         void SelectAction_Canceled(InputAction.CallbackContext obj)
         {
-            _clicked = false;
         }
         public void Cleanup()
         {
             _playerInputActions.Player.Select.performed -= SelectAction_Performed;
-            _playerInputActions.Player.Select.canceled -= SelectAction_Canceled;
             _playerInputActions.Disable(); // added execution on OnDisable
-        }
-
-        private void OnDisable()
-        {
-            _playerInputActions.Player.Disable();
+            
+            _clickCount = 0;
         }
     }
 }
