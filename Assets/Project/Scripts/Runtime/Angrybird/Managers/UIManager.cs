@@ -53,5 +53,20 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
         {
             _userInterfaces[key].SetActive(false);
         }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Show("Pause");
+                PauseGame();
+                Show("Survey");
+            }
+        }
+
+        private void PauseGame()
+        {
+            Time.timeScale= 0f;
+        }
     }
 }

@@ -7,53 +7,52 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
 {
     public class ProjectileController : MonoBehaviour
     {
-        private StateMachine m_ProjectileStateMachine;
-        private Projectile m_Projectile;
+        private StateMachine _projectileStateMachine;
+        private Projectile _projectile;
 
         private void Start()
         {
-            m_Projectile = GetComponent<Projectile>();
-            m_ProjectileStateMachine = new StateMachine();
+            _projectile = GetComponent<Projectile>();
+            _projectileStateMachine = new StateMachine();
 
-            m_ProjectileStateMachine.AddState("Idle",
+            _projectileStateMachine.AddState("Idle",
                 new State(
-                    onEnter: state => m_Projectile.IdleStateEnter(),
-                    onLogic: state => m_Projectile.IdleStateUpdate(),
-                    onExit: state => m_Projectile.IdleStateExit()
+                    onEnter: state => _projectile.IdleStateEnter(),
+                    onLogic: state => _projectile.IdleStateUpdate(),
+                    onExit: state => _projectile.IdleStateExit()
                 )
             );
-            m_ProjectileStateMachine.AddState("Selected",
+            _projectileStateMachine.AddState("Selected",
                 new State(
-                    onEnter: state => m_Projectile.SelectedStateEnter(),
-                    onLogic: state => m_Projectile.SelectedStateUpdate(),
-                    onExit: state => m_Projectile.SelectedStateExit()
+                    onEnter: state => _projectile.SelectedStateEnter(),
+                    onExit: state => _projectile.SelectedStateExit()
                 )
             );
-            m_ProjectileStateMachine.AddState("Used",
+            _projectileStateMachine.AddState("Used",
                 new State(
-                    onEnter: state => m_Projectile.UsedStateEnter(),
-                    onLogic: state => m_Projectile.UsedStateUpdate(),
-                    onExit: state => m_Projectile.UsedStateExit()
+                    onEnter: state => _projectile.UsedStateEnter(),
+                    onLogic: state => _projectile.UsedStateUpdate(),
+                    onExit: state => _projectile.UsedStateExit()
                 )
             );
             
-            m_ProjectileStateMachine.SetStartState("Idle");
+            _projectileStateMachine.SetStartState("Idle");
             
-            m_ProjectileStateMachine.AddTransition(new Transition(
+            _projectileStateMachine.AddTransition(new Transition(
                 "Idle",
                 "Selected",
-                transition => m_Projectile.IsSelected));
+                transition => _projectile.IsSelected));
             
-            m_ProjectileStateMachine.AddTransition(new Transition(
+            _projectileStateMachine.AddTransition(new Transition(
                 "Selected",
                 "Used",
-                transition => m_Projectile.IsThrown));
-            m_ProjectileStateMachine.Init();
+                transition => _projectile.IsThrown));
+            _projectileStateMachine.Init();
         }
 
         private void Update()
         {
-            m_ProjectileStateMachine.OnLogic();
+            _projectileStateMachine.OnLogic();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Properties;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Model.Survey
 {
@@ -11,16 +12,16 @@ namespace Model.Survey
         [CreateProperty] public string Title => _title;
         
         [SerializeField, DontCreateProperty]
-        private string m_Question;
+        private string _question;
         
         [SerializeField, DontCreateProperty]
-        private List<string> m_Answers;
+        private List<string> _answers;
 
         [CreateProperty]
-        public string Question => m_Question;
+        public string Question => _question;
 
         [CreateProperty]
-        public List<string> Answers => m_Answers;
+        public List<string> Answers => _answers;
 
     }
 }

@@ -51,12 +51,20 @@ namespace Project.Scripts.Runtime.Core.SessionManager
         {
             Directory.CreateDirectory(path);
         }
+
+        public void Log(List<SessionMetrics> metricsList)
+        {
+            foreach (var metric in metricsList)
+            {
+               metric.Log(); 
+            } 
+        }
         
         public void Export()
         {
             var sessionID = Session.LoginTime.ToString("yyyyMMddHHmm");
             var dataPath = Session.User.DataPath;
-            var dirPath = dataPath + sessionID;
+            var dirPath = dataPath + "/by-sessions/" + sessionID;
             
             CreateDirectory(dirPath);
             

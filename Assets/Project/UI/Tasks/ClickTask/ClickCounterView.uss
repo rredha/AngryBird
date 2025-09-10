@@ -1,0 +1,11 @@
+#counter {
+    position: absolute;
+    bottom: 140px;
+    left: 40px;
+    font-size: 30px;
+    color: coral;
+    -unity-text-outline-color: crimson;
+    -unity-font-style: bold-and-italic;
+    -unity-text-outline-width: 2px;
+    -unity-font-definition: url("/Assets/TextMesh Pro/Fonts/angrybirds-regular SDF.asset");
+}

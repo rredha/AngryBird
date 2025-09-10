@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Project.Scripts.Runtime.Angrybird.Managers;
 using Project.Scripts.Runtime.Angrybird.Model.Slingshot;
@@ -50,18 +49,12 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
     public void EmptyStateExit()
     {
       _behaviour.Pointer.Unsubscribe();
-      StopDroppingStateTimer += GameManager.Instance.droppingTaskTimer.Disable; 
-      StopDroppingStateTimer?.Invoke(this, EventArgs.Empty);
     }
   }
   
   public partial class Slingshot
   {
     private readonly List<float> _aimingTimerData = new();
-
-    public event EventHandler StopDroppingStateTimer;
-    public event EventHandler StartAimingStateTimer;
-    public event EventHandler StopAimingStateTimer;
     public void LoadedStateEnter()
     {
       _behaviour.EnablePlayerActions();
@@ -69,10 +62,12 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       
       _behaviour.Subscribe();
       _visual.Subscribe();
-      StartAimingStateTimer += GameManager.Instance.aimingTaskTimer.Enable;
-      StopAimingStateTimer -= GameManager.Instance.aimingTaskTimer.Disable;
       
-      StartAimingStateTimer?.Invoke(this, EventArgs.Empty);
+      GameManager.Instance.DroppingTaskTracker.StopRecording();
+      GameManager.Instance.DroppingTaskMonitor.Unsubscribe();
+      
+      GameManager.Instance.AimingTaskMonitor.Subscribe();
+      GameManager.Instance.AimingTaskTracker.StartRecording();
     }
 
     public void LoadedStateUpdate()
@@ -87,12 +82,8 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       _behaviour.Unsubscribe();
       _visual.Unsubscribe();
       
-      // unsubscribing from events
-      StopAimingStateTimer += GameManager.Instance.aimingTaskTimer.Disable;
-      StartAimingStateTimer -= GameManager.Instance.aimingTaskTimer.Enable;
-      
-      StopAimingStateTimer?.Invoke(this, EventArgs.Empty);
-      StopDroppingStateTimer -= GameManager.Instance.droppingTaskTimer.Disable;
+      GameManager.Instance.AimingTaskTracker.StopRecording();
+      GameManager.Instance.AimingTaskMonitor.Unsubscribe();
     }
   }
 }

@@ -1,6 +1,5 @@
 using Project.Scripts.Runtime.Angrybird.Presenter.Pointer;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.Tasks
 {

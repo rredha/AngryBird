@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
@@ -18,13 +17,8 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     private GameConfigurationSO _configuration;
     [SerializeField] private Slingshot slingshot;
     [SerializeField] private UIManager _uiManager;
+    private bool _firstGame = true;
 
-    public event EventHandler StartPlayingTaskTimer;
-    public event EventHandler StopPlayingTaskTimer;
-    public TaskTimer droppingTaskTimer { get; private set; }
-    public TaskTimer aimingTaskTimer { get; private set; }
-    public TaskTimer playingTaskTimer { get; private set; }
-    
     private bool _replayTriggered; // should be reload level.
     private StateMachine _gameStateMachine;
     private LevelBuilder _levelBuilder;
@@ -34,10 +28,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     {
       Instance = this;
       DontDestroyOnLoad(gameObject);
-
-      droppingTaskTimer = new TaskTimer();
-      aimingTaskTimer = new TaskTimer();
-      playingTaskTimer = new TaskTimer();
 
       _levelBuilder = GetComponent<LevelBuilder>();
       levelManager = GetComponent<LevelManager>();
@@ -57,7 +47,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
       _gameStateMachine.AddState("Playing",
         new State(
           onEnter: state => PlayingStateEnter(),
-          onLogic: state => PlayingStateUpdate(),
+          onLogic: state => PlayingStateUpdate(), 
           onExit: state => PlayingStateExit()
             ));
       
@@ -87,9 +77,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
      _gameStateMachine.SetStartState("Init");
      _gameStateMachine.Init();
     }
-
-
-
     private void Update()
     {
       _gameStateMachine.OnLogic();
@@ -111,9 +98,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
         levelManager.Proceed();
       }
     }
-
-    private bool _firstGame = true;
-
     private void InitStateExit()
     {
       _firstGame = false;
@@ -123,68 +107,71 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   // Playing state
   public partial class GameManager
   {
+    public DurationTracker PlayingDurationTracker;
+    public DurationMonitor PlayingDurationMonitor;
+    
+    public DurationTracker SelectingTaskTracker;
+    public DurationMonitor SelectingTaskMonitor;
+    
+    public DurationTracker DroppingTaskTracker;
+    public DurationMonitor DroppingTaskMonitor;
+
+    public DurationTracker AimingTaskTracker;
+    public DurationMonitor AimingTaskMonitor;
+    
     private void PlayingStateEnter()
     {
-      StartPlayingTaskTimer += playingTaskTimer.Enable;
-      StopPlayingTaskTimer -= playingTaskTimer.Disable;
+      PlayingDurationTracker = new DurationTracker();
+      PlayingDurationMonitor = new DurationMonitor(PlayingDurationTracker, "Total Playing");
       
-      StartPlayingTaskTimer?.Invoke(this, EventArgs.Empty);
+      /*
+      SelectingTaskTracker = new DurationTracker();
+      SelectingTaskMonitor = new DurationMonitor(SelectingTaskTracker, "Selecting");
+      */
+      SelectingTaskTracker = levelManager.ProjectileHandler.Current.SelectingTaskTracker;
+      SelectingTaskMonitor = levelManager.ProjectileHandler.Current.SelectingTaskMonitor;
+      
+      DroppingTaskTracker = new DurationTracker();
+      DroppingTaskMonitor = new DurationMonitor(DroppingTaskTracker, "Dropping");
+      
+      AimingTaskTracker = new DurationTracker();
+      AimingTaskMonitor = new DurationMonitor(AimingTaskTracker, "Aiming");
+      
+      PlayingDurationMonitor.Subscribe();
+      PlayingDurationTracker.StartRecording();
+      
       levelManager.ProjectileHandler.Subscribe();
-      levelManager.ProjectileHandler.SubscribeBeginDroppingTimer();
     }
-
     private void PlayingStateUpdate()
     {
     }
-
     private void PlayingStateExit()
     {
-      // TODO :
-      // Fix issue with Aiming Timer,
-      // Also wrong switching from init -> playing on last attempt
-      
-      StopPlayingTaskTimer += playingTaskTimer.Disable;
-      StartPlayingTaskTimer -= playingTaskTimer.Enable;
-      
-      StopPlayingTaskTimer?.Invoke(this,EventArgs.Empty);
+      PlayingDurationTracker.StopRecording();
+      PlayingDurationMonitor.Unsubscribe();
+
       levelManager.ProjectileHandler.Unsubscribe();
-      levelManager.ProjectileHandler.UnsubscribeBeginDroppingTimer();
 
       var sessionMetrics = new SessionMetrics(
         levelManager.CurrentLevel, levelManager.Attempt,
-        playingTaskTimer.Total,
-        droppingTaskTimer.Total,
-        aimingTaskTimer.Total);
+        PlayingDurationTracker.Data.Total,
+        SelectingTaskTracker.Data.Total,
+        DroppingTaskTracker.Data.Total,
+        AimingTaskTracker.Data.Total);
       
-      //SessionManager.Instance.AddMetric(sessionMetrics);
+      SessionManager.Instance.AddMetric(sessionMetrics);
     }
-
   }
   
-  
-  // Lost State
-  public partial class GameManager
-  {
-    /*
-    private void LostStateEnter()
-    {
-      SessionManager.Instance.Export();
-      _uiManager.Show("Lost");
-    }
-
-    private void LostStateExit()
-    {
-    }
-    */
-  }
   // Finish State
   public partial class GameManager
   {
     // TODO:
-    // fix LostUI issue.
+    // fix LostUI issue, remake prefab and prefab variants.
     private void FinishStateEnter()
     {
-      //SessionManager.Instance.Export();
+      SessionManager.Instance.Export();
+      //SessionManager.Instance.Log(SessionManager.Instance.SessionMetrics);
       
       if (LevelManager.Instance.LevelStatus == LevelStatusEnum.Completed)
       {
@@ -194,7 +181,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
       else if (LevelManager.Instance.LevelStatus == LevelStatusEnum.UnCompleted)
       {
         _uiManager.Show("Lost");
-        //UIManager.Instance.LostUI.ReplayTriggered += OnReplayTriggered_Reset;
+        UIManager.Instance.LostUI.ReplayTriggered += OnReplayTriggered_Reset;
       }
     }
 
@@ -207,7 +194,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
       }
 
       UIManager.Instance.WonUI.ReplayTriggered -= OnReplayTriggered_Reset;
-      //UIManager.Instance.LostUI.ReplayTriggered -= OnReplayTriggered_Reset;
+      UIManager.Instance.LostUI.ReplayTriggered -= OnReplayTriggered_Reset;
       
       _replayTriggered = false;
     }

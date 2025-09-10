@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using CsvHelper;
 using Model.Survey;
+using Presenter;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -24,30 +22,35 @@ namespace View.Survey
     public class SurveyUI : MonoBehaviour
     {
         private VisualElement _root;
-        private Label _questionText;
         private VisualElement _buttonContainer;
-        private static List<Button> _buttons = new();
+        private Label _questionText;
+        private Button _exitButton;
+        private Button _confirmButton;
         
+        private static List<Button> _buttons = new();
         public SurveySO Data { get; set; }
         public event EventHandler<SurveyAnsweredEventArgs> AnswerPicked;
+        public event EventHandler ChoiceConfirmed;
         private void Awake()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
             _buttonContainer = _root.Query<VisualElement>("ButtonContainer");
             _questionText = _root.Query<Label>("QuestionText");
+            _exitButton = _root.Query<Button>("ExitButton");
+            _confirmButton = _root.Query<Button>("ConfirmButton");
         }
         private void OnEnable()
         {
-            SetQuestion(Data.Question);
-            Populate(Data.Answers);
+            _exitButton.clickable.clicked += OnExitClicked_Hide;
+            _confirmButton.clickable.clicked += OnChoiceConfirmed;
         }
 
-        private void SetQuestion(string question)
+        public void SetQuestion(string question)
         {
             _questionText.text = question;
         }
         
-        private void Populate(List<string> answers)
+        public void SetAnswers(List<string> answers)
         {
             foreach (var button in answers.Select((value, index) => new Button()
                      {
@@ -70,10 +73,21 @@ namespace View.Survey
 
         private void OnDisable()
         {
+            _exitButton.clickable.clicked -= OnExitClicked_Hide;
+            _confirmButton.clickable.clicked -= OnChoiceConfirmed;
             foreach (var button in _buttons)
             {
                 button.clickable.clickedWithEventInfo -= OnClickedWithEventInfo;
             }
+        }
+        private void OnExitClicked_Hide()
+        {
+            gameObject.SetActive(false);
+        }
+        protected virtual void OnChoiceConfirmed()
+        {
+            ChoiceConfirmed?.Invoke(this, EventArgs.Empty);
+            gameObject.SetActive(false);
         }
     }
 }

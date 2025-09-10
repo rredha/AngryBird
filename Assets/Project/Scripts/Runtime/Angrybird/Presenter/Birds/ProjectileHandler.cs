@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Project.Scripts.Runtime.Angrybird.Managers;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
 
@@ -28,19 +27,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
             _stack = new Stack<Projectile>();
         }
 
-        public void SubscribeBeginDroppingTimer()
-        {
-            _current.DroppingStageBegin += GameManager.Instance.droppingTaskTimer.Enable;
-        }
-        public void UnsubscribeBeginDroppingTimer()
-        {
-            _current.DroppingStageBegin += GameManager.Instance.droppingTaskTimer.Enable;
-        }
-
-        private void DebugMessage()
-        {
-            Debug.Log("Initialized successfully !");
-        }
         ~ProjectileHandler() => Unsubscribe();
 
         public void Subscribe()
@@ -51,12 +37,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
         {
             _current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
         }
-
-        private void OnEmpty_Notify(object sender, EventArgs e)
-        {
-            Debug.Log("It is empty my dear");
-        }
-
         private void CurrentProjectileUsed_Perform(object sender, EventArgs e)
         {
             if (_stackEmpty && Current.IsThrown)
@@ -67,7 +47,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
             {
                 GetNext();
             }
-            
         }
 
         public void CacheProjectiles(int number, Transform platform)
@@ -109,7 +88,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
                 _next = _stack.Pop();
                 _next.gameObject.SetActive(true);
                 _current = _next;
-                //Current.IsIdle = true;
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
 
         private void OnEnable()
         {
-            TaskBehaviour = new ClickTaskBehaviour(Threshold);
+            CreateGameObjectInstance = true;
         }
     }
 }
