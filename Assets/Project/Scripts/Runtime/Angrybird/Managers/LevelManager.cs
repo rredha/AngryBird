@@ -23,8 +23,8 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         private int _numberOfBirds;
         private LevelStatusEnum _levelStatus;
         public LevelStatusEnum LevelStatus => BirdsHandler.AllBirdsDestroyed ? LevelStatusEnum.Completed : LevelStatusEnum.UnCompleted;
-
-        public bool OutOfAttempts { get; private set; }
+        //public bool OutOfAttempts { get; private set; }
+        public bool OutOfAttempts { get; set; }
 
 
 

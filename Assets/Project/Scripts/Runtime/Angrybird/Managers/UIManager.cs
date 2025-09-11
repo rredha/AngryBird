@@ -22,7 +22,15 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
 
         private void Awake()
         {
-            Instance = this;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+                DontDestroyOnLoad(this);
+            }
             
             WonUI = wonUI.GetComponent<WonUI>();
             LostUI = lostUI.GetComponent<LostUI>();
@@ -32,7 +40,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
             _userInterfaces.Add("Won", wonUI);
             _userInterfaces.Add("Pause", pauseUI);
             _userInterfaces.Add("Survey", surveyUI);
-            DontDestroyOnLoad(gameObject);
             Initialize();
       
         }

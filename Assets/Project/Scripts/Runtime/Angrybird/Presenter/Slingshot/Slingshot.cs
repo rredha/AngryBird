@@ -64,9 +64,9 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       _visual.Subscribe();
       
       GameManager.Instance.DroppingTaskTracker.StopRecording();
-      GameManager.Instance.DroppingTaskMonitor.Unsubscribe();
+      //GameManager.Instance.DroppingTaskMonitor.Unsubscribe();
       
-      GameManager.Instance.AimingTaskMonitor.Subscribe();
+      //GameManager.Instance.AimingTaskMonitor.Subscribe();
       GameManager.Instance.AimingTaskTracker.StartRecording();
     }
 
@@ -83,7 +83,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       _visual.Unsubscribe();
       
       GameManager.Instance.AimingTaskTracker.StopRecording();
-      GameManager.Instance.AimingTaskMonitor.Unsubscribe();
+      //GameManager.Instance.AimingTaskMonitor.Unsubscribe();
     }
   }
 }

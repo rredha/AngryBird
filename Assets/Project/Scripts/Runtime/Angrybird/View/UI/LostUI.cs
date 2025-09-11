@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Project.Scripts.Runtime.Angrybird.Managers;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -32,7 +33,7 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.View.UI
 
         #region Events
         private void OnQuitClicked_AppQuit(ClickEvent evt) => QuitGame();
-        private void OnReplayClicked_DisableUI(ClickEvent evt) => gameObject.SetActive(false);
+        private void OnReplayClicked_DisableUI(ClickEvent evt) => UIManager.Instance.Hide("Lost");
         private void OnReplayClicked_TriggerReplay(ClickEvent evt) => ReplayTriggered?.Invoke(this, EventArgs.Empty);
 
         #endregion

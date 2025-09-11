@@ -41,7 +41,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
   // Idle state
   {
     public DurationTracker SelectingTaskTracker;
-    public DurationMonitor SelectingTaskMonitor;
+    //public DurationMonitor SelectingTaskMonitor;
     public bool IsIdle;
     public void IdleStateEnter()
     {
@@ -57,13 +57,13 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
       }
       */
       SelectingTaskTracker = new DurationTracker();
-      SelectingTaskMonitor = new DurationMonitor(SelectingTaskTracker, "Selecting");
+      //SelectingTaskMonitor = new DurationMonitor(SelectingTaskTracker, "Selecting");
       
       IsIdle = true;
       IsSelected = false;
       
       SelectingTaskTracker.StartRecording();
-      SelectingTaskMonitor.Subscribe();
+      //SelectingTaskMonitor.Subscribe();
     }
 
     public void IdleStateUpdate()
@@ -81,9 +81,9 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
     public void SelectedStateEnter()
     {
       SelectingTaskTracker.StopRecording();
-      SelectingTaskMonitor.Unsubscribe();
+      //SelectingTaskMonitor.Unsubscribe();
       
-      GameManager.Instance.DroppingTaskMonitor.Subscribe();
+      //GameManager.Instance.DroppingTaskMonitor.Subscribe();
       GameManager.Instance.DroppingTaskTracker.StartRecording();
       IsOverlapped = false;
     }
