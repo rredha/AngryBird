@@ -1,9 +1,8 @@
 using System;
+using Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.Tasks;
 using Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.Tasks.Shape;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
-using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
 {
@@ -15,8 +14,16 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
         
         private ITaskBehaviour _taskBehaviour;
         private Projectile _projectile;
+        private SelectAction _selectAction;
+
+        public void Awake()
+        {
+            _selectAction = gameObject.GetComponent<SelectAction>();
+        }
+
         public void Enable(object sender, Projectile projectile)
         {
+            _selectAction.Unsubscribe(); // unsubscribe before executing anything else.
             _projectile = projectile;
             if (taskData.CreateGameObjectInstance)
             {
@@ -31,8 +38,8 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
             if (_projectile.IsIdle && !_projectile.IsSelected && _projectile.IsOverlapped)
             {
                 _taskBehaviour.IsTaskStarted = true;
-                _taskBehaviour.Initialize();
                 Subscribe();
+                _taskBehaviour.Initialize();
             }
         }
         
@@ -40,6 +47,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
         {
             _taskBehaviour.Cleanup();
             Unsubscribe();
+            _selectAction.Subscribe(); // subscribe after every thing has been cleaned for next projectile ?
         }
         private void Outcome(object sender, EventArgs eventArgs)
         {
@@ -53,7 +61,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
         {
             _taskBehaviour.TaskComplete += Notify;
             _taskBehaviour.TaskComplete += Outcome;
-            //_taskBehaviour.TaskComplete += Disable;
         }
 
         private void Notify(object sender, EventArgs e)
@@ -65,7 +72,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
         {
             _taskBehaviour.TaskComplete -= Notify;
             _taskBehaviour.TaskComplete -= Outcome;
-            //_taskBehaviour.TaskComplete -= Disable;
         }
     }
 }

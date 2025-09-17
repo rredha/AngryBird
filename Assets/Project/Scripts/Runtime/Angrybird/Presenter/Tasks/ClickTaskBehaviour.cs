@@ -17,7 +17,6 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         
         private PlayerInputActions _playerInputActions;
         public bool IsTaskStarted { get; set; }
-        private bool _isActive;
         public event EventHandler TaskComplete;
 
         private void Awake()
@@ -29,12 +28,6 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         public void Initialize()
         {
             _playerInputActions.Enable();
-            // TODO 
-            //  expected : execute once only 
-            //  bug : keeps executing at every frame.
-            //Debug.Log($"Task initialized.");
-            
-            // kind of a fix
             if (IsTaskStarted)
             {
                 _visual.Initialize();
@@ -42,7 +35,6 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
                 _playerInputActions.Player.Select.performed += SelectAction_Performed;
                 IsTaskStarted = false;
             }
-                
         }
 
         void SelectAction_Performed(InputAction.CallbackContext obj)
@@ -55,16 +47,13 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
                 TaskComplete?.Invoke(this,EventArgs.Empty);
             }
         }
-        void SelectAction_Canceled(InputAction.CallbackContext obj)
-        {
-        }
         public void Cleanup()
         {
-            _isActive = false;
             _playerInputActions.Player.Select.performed -= SelectAction_Performed;
-            _playerInputActions.Disable(); // added execution on OnDisable
+            _playerInputActions.Disable();
 
             _clickCountLeft = Threshold;
+            Destroy(gameObject);
         }
     }
 }

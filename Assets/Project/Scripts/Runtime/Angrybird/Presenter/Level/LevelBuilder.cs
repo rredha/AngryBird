@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Utils;
@@ -6,30 +7,25 @@ using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 {
-    public class LevelBuilder : MonoBehaviour
+    public class LevelBuilder
     {
-        [SerializeField] private GameConfigurationSO gameConfig;
-        [SerializeField] private LevelSO levelData;
-        public int LevelIndex => levelData.LevelIndex;
-
-        private LevelManager _levelManager;
-        public ProjectileHandler ProjectileHandler { get; private set; }
-        public BirdsHandler BirdsHandler { get; private set; }
-
+        private readonly GameConfigurationSO _gameConfig;
+        private readonly LevelSO _levelData;
         private Spawner _spawner;
-        private void Awake()
+        public int LevelIndex => _levelData.LevelIndex;
+        private readonly ProjectileHandler _projectileHandler;
+        private readonly BirdsHandler _birdsHandler;
+
+        public LevelBuilder(
+            ProjectileHandler projectileHandler, BirdsHandler birdsHandler,
+            LevelSO levelData, GameConfigurationSO gameConfigurationSo,
+            Spawner spawner)
         {
-            _spawner = GetComponent<Spawner>();
-            _levelManager = GetComponent<LevelManager>();
-            ProjectileHandler = new ProjectileHandler(_spawner)
-            {
-                Prefab = levelData.ProjectilePrefab
-            };
-            BirdsHandler = new BirdsHandler(_spawner)
-            {
-                Prefab = levelData.BirdPrefab
-            };
-            BirdsHandler.NumberOfBirds = levelData.Birds;
+            _projectileHandler = projectileHandler;
+            _birdsHandler = birdsHandler;
+            _levelData = levelData;
+            _gameConfig = gameConfigurationSo;
+            _spawner = spawner;
         }
 
         public void Init()
@@ -38,53 +34,20 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
             SetupTargets();
             SetupProjectiles();
         }
-
-        public void PopFirstProjectile()
-        {
-            ProjectileHandler.PopFirstProjectile(); // needs to rethink
-            _levelManager.Projectile = ProjectileHandler.Current;
- 
-        }
-        public void Clean()
-        {
-            // to improve
-            var projectiles = FindObjectsByType<Projectile>(FindObjectsSortMode.None);
-            var birds = FindObjectsByType<Model.Pigs.Birds>(FindObjectsSortMode.None);
-            var obstacles = FindObjectsByType<Obstacles>(FindObjectsSortMode.None);
-            foreach (var projectile in projectiles)
-            {
-                Destroy(projectile.gameObject);
-            }
-            foreach (var bird in birds)
-            {
-                Destroy(bird.gameObject);
-            }
-            foreach (var obstacle in obstacles)
-            {
-                Destroy(obstacle.gameObject);
-            }
-
-        }
         private void SetupProjectiles()
-        {
-          ProjectileHandler.CacheProjectiles(levelData.Projectiles, gameConfig.Platform);
+        { 
+            _projectileHandler.CacheProjectiles(_levelData.Projectiles, _gameConfig.Platform);
         }
         private void SetupTargets()
         {
-          BirdsHandler.CreateBirds(levelData.BirdsLocations);
+          _birdsHandler.CreateBirds(_levelData.BirdsLocations);
         }
         private void SetupEnvironment()
         {
-            foreach (var t in levelData.Stages)
+            foreach (var t in _levelData.Stages)
             {
-                Instantiate(t);
+                _spawner.Spawn(t.gameObject);
             }
-        }
-        public void DebugMessage(Model.Level.Level data)
-        {
-            Debug.Log("Level One : ");
-            Debug.Log($"{data.Projectiles} Projectiles");
-            Debug.Log($"{data.Birds} Projectiles");
         }
     }
 }

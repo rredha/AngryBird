@@ -10,10 +10,9 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
     public class OverlapTaskBehaviour : ITaskBehaviour
     {
         public int OverlapAreaRadius { get; set; }
-        public BaseTaskData TaskData { get; set; }
+        private OverlapBasedTask _taskData; 
         public bool IsTaskStarted { get; set; }
         public event EventHandler TaskComplete;
-        private bool _isActive; // prevent behaviour from executing when the bird is dropping
 
         public OverlapTaskBehaviour(int radius)
         {
@@ -21,13 +20,15 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
         }
         public void Initialize()
         {
-            _isActive = true;
-            if (_isActive)
+            if (IsTaskStarted)
+            {
                 TaskComplete?.Invoke(this, EventArgs.Empty);
+                IsTaskStarted = false;
+            }
         }
         public void Cleanup()
         {
-            _isActive = false;
+            IsTaskStarted = false;
         }
     }
 }

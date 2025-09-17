@@ -7,15 +7,21 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.Presenter.
     {
         [SerializeField] private TaskHandler taskHandler;
         [SerializeField] private Pointer pointer;
-        private PointerBehaviour _pointerBehaviour;
         private void Awake()
         {
-            _pointerBehaviour = pointer.GetComponent<PointerBehaviour>();
-            _pointerBehaviour.ProjectileOverlap += taskHandler.Enable;
+            pointer.Setup();
+            Subscribe();
         }
-        private void OnDisable()
+
+        public void Unsubscribe()
         {
-            _pointerBehaviour.ProjectileOverlap -= taskHandler.Enable;
+            pointer.Behaviour.ProjectileOverlap -= taskHandler.Enable;
         }
+
+        public void Subscribe()
+        {
+            pointer.Behaviour.ProjectileOverlap += taskHandler.Enable;
+        }
+        
     }
 }

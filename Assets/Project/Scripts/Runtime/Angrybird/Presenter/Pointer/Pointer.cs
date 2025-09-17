@@ -8,13 +8,12 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Pointer
 {
   public class Pointer : MonoBehaviour
   {
-    private PointerBehaviour _behaviour;
+    public PointerBehaviour Behaviour { get; private set; }
     private PointerVisual _visual;
 
-
-    private void Awake()
+    public void Setup()
     {
-      _behaviour = GetComponent<PointerBehaviour>();
+      Behaviour = GetComponent<PointerBehaviour>();
       _visual = GetComponent<PointerVisual>();
     }
   }

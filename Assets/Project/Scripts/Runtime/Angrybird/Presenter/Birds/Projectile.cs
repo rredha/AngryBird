@@ -24,8 +24,14 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
       _groundLayer = LayerMask.GetMask("Ground");
 
       Rb = GetComponent<Rigidbody2D>();
+      if (Rb == null)
+        Rb = gameObject.AddComponent<Rigidbody2D>();
+      
       Col = GetComponent<Collider2D>();
+      if (Col == null)
+        Col = gameObject.AddComponent<CapsuleCollider2D>();
     }
+
     public void SetStatic()
     {
       Col.enabled = true;

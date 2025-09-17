@@ -1,8 +1,9 @@
 using System;
-using Project.Scripts.Runtime.Angrybird.Managers;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
+using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 {
@@ -13,32 +14,44 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
     };
     public class LevelManager : MonoBehaviour
     {
-        public static LevelManager Instance;
         public int CurrentLevel;
+        [SerializeField] private LevelSO levelSo;
+        [SerializeField] private GameConfigurationSO configurationSo;
+        [SerializeField] private Spawner spawner;
+        
         public Projectile Projectile { get; set; }
         public ProjectileHandler ProjectileHandler { get; private set; }
         public BirdsHandler BirdsHandler { get; private set; }
-        private LevelBuilder _levelBuilder;
+        public LevelBuilder Builder { get; private set; }
         public int Attempt => ProjectileHandler.ProjectileLeft;
         private int _numberOfBirds;
-        private LevelStatusEnum _levelStatus;
         public LevelStatusEnum LevelStatus => BirdsHandler.AllBirdsDestroyed ? LevelStatusEnum.Completed : LevelStatusEnum.UnCompleted;
-        //public bool OutOfAttempts { get; private set; }
-        public bool OutOfAttempts { get; set; }
+        public bool OutOfAttempts { get; private set; }
 
+        public void Setup()
+        {
+            if (spawner == null)
+                Debug.LogError("Spawner not yet initialized.");
+            
+            ProjectileHandler = new ProjectileHandler(spawner)
+            {
+                Prefab = levelSo.ProjectilePrefab
+            };
+            BirdsHandler = new BirdsHandler(spawner)
+            {
+                Prefab = levelSo.BirdPrefab,
+                NumberOfBirds = levelSo.Birds
+            };
+            Builder = new LevelBuilder(ProjectileHandler, BirdsHandler, levelSo, configurationSo, spawner);
+            Builder.Init();
+            IsInitialized = true;
+        }
 
-
+        public bool IsInitialized;
         private void Start()
         // need something that is more robust... dependency injection.
         {
-            if (Instance == null && Instance != this)
-            {
-                Instance = this;
-            }
-            _levelBuilder = GetComponent<LevelBuilder>();
-            ProjectileHandler = _levelBuilder.ProjectileHandler;
-            BirdsHandler = _levelBuilder.BirdsHandler;
-            CurrentLevel = _levelBuilder.LevelIndex;
+            //CurrentLevel = Builder.LevelIndex;
             ProjectileHandler.OnEmpty += OnProjectileStackEmpty_Perform;
         }
 
@@ -54,6 +67,32 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         {
             ProjectileHandler.GetProjectile();
             Projectile = ProjectileHandler.Current;
+        }
+
+        public void Clean()
+        {
+            var projectiles = FindObjectsByType<Projectile>(FindObjectsSortMode.None);
+            var birds = FindObjectsByType<Model.Pigs.Birds>(FindObjectsSortMode.None);
+            var obstacles = FindObjectsByType<Obstacles>(FindObjectsSortMode.None);
+            foreach (var projectile in projectiles)
+            {
+                Destroy(projectile.gameObject);
+            }
+            foreach (var bird in birds)
+            {
+                Destroy(bird.gameObject);
+            }
+            foreach (var obstacle in obstacles)
+            {
+                Destroy(obstacle.gameObject);
+            }
+
+        }
+
+        public void Reset()
+        {
+            OutOfAttempts = false;
+            IsInitialized = false;
         }
     }
 }

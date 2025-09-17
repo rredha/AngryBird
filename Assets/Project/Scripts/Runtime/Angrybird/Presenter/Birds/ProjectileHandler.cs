@@ -31,11 +31,13 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
 
         public void Subscribe()
         {
-            _current.OnProjectileUsed += CurrentProjectileUsed_Perform;
+            Current.OnProjectileUsed += CurrentProjectileUsed_Perform;
+            //_current.OnProjectileUsed += CurrentProjectileUsed_Perform;
         }
         public void Unsubscribe()
         {
-            _current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
+            Current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
+            //_current.OnProjectileUsed -= CurrentProjectileUsed_Perform;
         }
         private void CurrentProjectileUsed_Perform(object sender, EventArgs e)
         {
@@ -49,6 +51,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Birds
             }
         }
 
+        
         public void CacheProjectiles(int number, Transform platform)
         {
             for (int i = 0; i < number; i++)

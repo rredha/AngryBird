@@ -38,8 +38,10 @@ namespace Project.Runtime.AngryBird.Project.Scripts.Runtime.Angrybird.View.UI
         private void OnNextLevelClicked_LoadLevel(ClickEvent evt)
         {
             UIManager.Instance.Hide("Won");
+            /*
             var nextLevel = LevelManager.Instance.CurrentLevel + 2;
             SceneManager.LoadScene(sceneBuildIndex:nextLevel, LoadSceneMode.Single);
+            */
         }
 
         private void OnReplayClicked_TriggerReplay(ClickEvent evt)

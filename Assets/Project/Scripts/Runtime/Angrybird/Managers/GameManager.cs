@@ -2,6 +2,7 @@ using System;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.StateMachine;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.States;
 using Project.Scripts.External.UnityHFSM_v2._2._0.src.Transitions;
+using Project.Scripts.Runtime.Angrybird.Model.Level;
 using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Level;
 using Project.Scripts.Runtime.Angrybird.Presenter.Slingshot;
@@ -14,23 +15,22 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   public partial class GameManager : MonoBehaviour
   {
     public static GameManager Instance;
-    private GameConfigurationSO _configuration;
-    [SerializeField] private Slingshot slingshot;
-    //[SerializeField] private UIManager _uiManager;
-    private bool _firstGame = true;
+    [SerializeField] private LevelManager levelManager;
 
     private bool _replayTriggered; // should be reload level.
     private StateMachine _gameStateMachine;
-    private LevelBuilder _levelBuilder;
-    public LevelManager levelManager{ get; private set; }
 
     private void Awake()
     {
-      Instance = this;
-      DontDestroyOnLoad(gameObject);
-
-      _levelBuilder = GetComponent<LevelBuilder>();
-      levelManager = GetComponent<LevelManager>();
+      if (Instance != null && Instance != this)
+      {
+          Destroy(gameObject);
+      }
+      else
+      {
+          Instance = this;
+          DontDestroyOnLoad(gameObject);
+      }
       
       SetupStateMachine();
     }
@@ -65,7 +65,8 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
        "Init", "Playing", transition => true));
      
      _gameStateMachine.AddTransition(new Transition(
-       "Playing", "Init", transition => levelManager.Projectile.IsThrown && !levelManager.OutOfAttempts));
+       "Playing", "Init", transition => 
+         levelManager.ProjectileHandler.Current.IsThrown && !levelManager.OutOfAttempts));
      
      _gameStateMachine.AddTransition(new Transition(
        "Playing", "Finish", transition => levelManager.ProjectileHandler.Current.IsTouchingGround && 
@@ -88,10 +89,10 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   {
     private void InitStateEnter()
     {
-      if (_firstGame)
+      if (!levelManager.IsInitialized)
       {
-        _levelBuilder.Init();
-        _levelBuilder.PopFirstProjectile();
+        levelManager.Setup();
+        levelManager.ProjectileHandler.PopFirstProjectile();
       }
       else
       {
@@ -100,7 +101,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     }
     private void InitStateExit()
     {
-      _firstGame = false;
     }
 
   }
@@ -128,7 +128,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
       SelectingTaskTracker = new DurationTracker();
       SelectingTaskMonitor = new DurationMonitor(SelectingTaskTracker, "Selecting");
       */
-      SelectingTaskTracker = levelManager.ProjectileHandler.Current.SelectingTaskTracker;
+      //SelectingTaskTracker = levelManager.ProjectileHandler.Current.SelectingTaskTracker;
       //SelectingTaskMonitor = levelManager.ProjectileHandler.Current.SelectingTaskMonitor;
       
       DroppingTaskTracker = new DurationTracker();
@@ -152,6 +152,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
 
       levelManager.ProjectileHandler.Unsubscribe();
 
+      /*
       var sessionMetrics = new SessionMetrics(
         levelManager.CurrentLevel, levelManager.Attempt,
         PlayingDurationTracker.Data.Total,
@@ -160,6 +161,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
         AimingTaskTracker.Data.Total);
       
       SessionManager.Instance.AddMetric(sessionMetrics);
+      */
     }
   }
   
@@ -170,15 +172,15 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     // fix LostUI issue, remake prefab and prefab variants.
     private void FinishStateEnter()
     {
-      SessionManager.Instance.Export();
+      //SessionManager.Instance.Export();
       //SessionManager.Instance.Log(SessionManager.Instance.SessionMetrics);
       
-      if (LevelManager.Instance.LevelStatus == LevelStatusEnum.Completed)
+      if (levelManager.LevelStatus == LevelStatusEnum.Completed)
       {
         UIManager.Instance.Show("Won");
         UIManager.Instance.WonUI.ReplayTriggered += OnReplayTriggered_Reset;
       }
-      else if (LevelManager.Instance.LevelStatus == LevelStatusEnum.UnCompleted)
+      else if (levelManager.LevelStatus == LevelStatusEnum.UnCompleted)
       {
         UIManager.Instance.Show("Lost");
         UIManager.Instance.LostUI.ReplayTriggered += OnReplayTriggered_Reset;
@@ -187,7 +189,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
 
     private void FinishStateExit()
     {
-      _levelBuilder.Clean();
+      levelManager.Clean();
       UIManager.Instance.WonUI.ReplayTriggered -= OnReplayTriggered_Reset;
       UIManager.Instance.LostUI.ReplayTriggered -= OnReplayTriggered_Reset;
       
@@ -196,8 +198,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     
     private void OnReplayTriggered_Reset(object sender, EventArgs e)
     {
-      levelManager.OutOfAttempts = false; // rework the cleaning and creation of a level
-      _firstGame = true;
+      levelManager.Reset();
       _replayTriggered = true;
     }
   }

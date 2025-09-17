@@ -19,10 +19,11 @@ namespace View.Shapes
         }
         public void Draw(Vector3[] vertices)
         {
+            var originProjectilePosition = new Vector3(-6.74991322f, -3.43700671f, 0f); // hard coded fix later
             lineRenderer.positionCount = vertices.Length;
             for (int i = 0; i < lineRenderer.positionCount; i++)
             {
-                vertices[i] = transform.localPosition - vertices[i];
+                vertices[i] = originProjectilePosition - transform.localPosition - vertices[i];
             }
             lineRenderer.SetPositions(vertices);
         }
