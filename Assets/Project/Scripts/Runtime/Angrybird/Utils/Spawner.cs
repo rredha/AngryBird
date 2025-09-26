@@ -5,6 +5,10 @@ namespace Project.Scripts.Runtime.Angrybird.Utils
 {
   public class Spawner : MonoBehaviour
   {
+    /*
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject birdPrefab;
+    */
     public GameObject SpawnedRef { get; private set; }
     public void Spawn(GameObject prefab) => StartCoroutine(SpawnCoroutine(prefab));
     public void SpawnAt(GameObject prefab, Transform location)

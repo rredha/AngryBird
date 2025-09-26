@@ -15,6 +15,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   public partial class GameManager : MonoBehaviour
   {
     public static GameManager Instance;
+    [SerializeField] private LevelController levelController;
     [SerializeField] private LevelManager levelManager;
 
     private bool _replayTriggered; // should be reload level.
@@ -91,7 +92,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     {
       if (!levelManager.IsInitialized)
       {
-        levelManager.Setup();
+        levelController.LoadLevel();
         levelManager.ProjectileHandler.PopFirstProjectile();
       }
       else
@@ -108,37 +109,40 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
   public partial class GameManager
   {
     public DurationTracker PlayingDurationTracker;
-    //public DurationMonitor PlayingDurationMonitor;
+    public DurationMonitor PlayingDurationMonitor;
     
     public DurationTracker SelectingTaskTracker;
-    //public DurationMonitor SelectingTaskMonitor;
+    public DurationMonitor SelectingTaskMonitor;
     
     public DurationTracker DroppingTaskTracker;
-    //public DurationMonitor DroppingTaskMonitor;
+    public DurationMonitor DroppingTaskMonitor;
 
     public DurationTracker AimingTaskTracker;
-    //public DurationMonitor AimingTaskMonitor;
+    public DurationMonitor AimingTaskMonitor;
     
     private void PlayingStateEnter()
     {
-      PlayingDurationTracker = new DurationTracker();
-      //PlayingDurationMonitor = new DurationMonitor(PlayingDurationTracker, "Total Playing");
-      
       /*
+      PlayingDurationTracker = new DurationTracker();
+      PlayingDurationMonitor = new DurationMonitor(PlayingDurationTracker, "Total Playing");
+
       SelectingTaskTracker = new DurationTracker();
       SelectingTaskMonitor = new DurationMonitor(SelectingTaskTracker, "Selecting");
       */
-      //SelectingTaskTracker = levelManager.ProjectileHandler.Current.SelectingTaskTracker;
-      //SelectingTaskMonitor = levelManager.ProjectileHandler.Current.SelectingTaskMonitor;
+      
+      /*
+      SelectingTaskTracker = levelManager.ProjectileHandler.Current.SelectingTaskTracker;
+      SelectingTaskMonitor = levelManager.ProjectileHandler.Current.SelectingTaskMonitor;
       
       DroppingTaskTracker = new DurationTracker();
-      //DroppingTaskMonitor = new DurationMonitor(DroppingTaskTracker, "Dropping");
+      DroppingTaskMonitor = new DurationMonitor(DroppingTaskTracker, "Dropping");
       
       AimingTaskTracker = new DurationTracker();
-      //AimingTaskMonitor = new DurationMonitor(AimingTaskTracker, "Aiming");
+      AimingTaskMonitor = new DurationMonitor(AimingTaskTracker, "Aiming");
       
-      //PlayingDurationMonitor.Subscribe();
+      PlayingDurationMonitor.Subscribe();
       PlayingDurationTracker.StartRecording();
+      */
       
       levelManager.ProjectileHandler.Subscribe();
     }
@@ -147,11 +151,13 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     }
     private void PlayingStateExit()
     {
+      /*
       PlayingDurationTracker.StopRecording();
-      //PlayingDurationMonitor.Unsubscribe();
+      PlayingDurationMonitor.Unsubscribe();
+      */
 
       levelManager.ProjectileHandler.Unsubscribe();
-
+    
       /*
       var sessionMetrics = new SessionMetrics(
         levelManager.CurrentLevel, levelManager.Attempt,
@@ -172,8 +178,10 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     // fix LostUI issue, remake prefab and prefab variants.
     private void FinishStateEnter()
     {
-      //SessionManager.Instance.Export();
-      //SessionManager.Instance.Log(SessionManager.Instance.SessionMetrics);
+      /*
+      SessionManager.Instance.Export();
+      SessionManager.Instance.Log(SessionManager.Instance.SessionMetrics);
+      */
       
       if (levelManager.LevelStatus == LevelStatusEnum.Completed)
       {

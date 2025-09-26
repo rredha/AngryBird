@@ -10,9 +10,11 @@ namespace Project.Scripts.Runtime.Angrybird.Utils
         public GameObject BirdPrefab;
         public GameObject ProjectilePrefab;
         
-        public int Birds;
-        public List<Transform> BirdsLocations;
         public int Projectiles;
+        public int Birds;
+
+        public Transform ProjectileLocation;
+        public List<Transform> BirdsLocations;
 
         public Transform[] Stages;
     }

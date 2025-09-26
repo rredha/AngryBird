@@ -63,11 +63,13 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       _behaviour.Subscribe();
       _visual.Subscribe();
       
+      /*
       GameManager.Instance.DroppingTaskTracker.StopRecording();
-      //GameManager.Instance.DroppingTaskMonitor.Unsubscribe();
+      GameManager.Instance.DroppingTaskMonitor.Unsubscribe();
       
-      //GameManager.Instance.AimingTaskMonitor.Subscribe();
+      GameManager.Instance.AimingTaskMonitor.Subscribe();
       GameManager.Instance.AimingTaskTracker.StartRecording();
+      */
     }
 
     public void LoadedStateUpdate()
@@ -82,8 +84,10 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Slingshot
       _behaviour.Unsubscribe();
       _visual.Unsubscribe();
       
+      /*
       GameManager.Instance.AimingTaskTracker.StopRecording();
-      //GameManager.Instance.AimingTaskMonitor.Unsubscribe();
+      GameManager.Instance.AimingTaskMonitor.Unsubscribe();
+      */
     }
   }
 }

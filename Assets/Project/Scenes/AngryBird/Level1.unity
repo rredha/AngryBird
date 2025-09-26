@@ -553,10 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a8b6a511984f85a9a4f25ac90ccb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevel: 0
-  levelSo: {fileID: 11400000, guid: 1ca5b750af680a4aaa657c1364c67611, type: 2}
-  configurationSo: {fileID: 11400000, guid: 96e48430fbb40c4de9e66fc31db9953c, type: 2}
-  spawner: {fileID: 2021279451}
   IsInitialized: 0
 --- !u!4 &2021279450
 Transform:
@@ -858,7 +854,7 @@ PrefabInstance:
     - target: {fileID: 7793626594818999033, guid: fb67a8873442cab56825cbf1269ac3b6, type: 3}
       propertyPath: taskData
       value: 
-      objectReference: {fileID: 11400000, guid: d208fe8f69d508ec7b62c80f9ae7febc, type: 2}
+      objectReference: {fileID: 11400000, guid: 042f2fd358e4bcc50a2960842f3c651a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
