@@ -1,0 +1,8 @@
+:root {
+}
+
+.survey__answer--button--style {
+    flex-direction: column;
+    flex-grow: 1;
+    font-size: 30px;
+}

@@ -15,12 +15,13 @@ MonoBehaviour:
   LevelIndex: 1
   BirdPrefab: {fileID: 9011059954354761472, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
   ProjectilePrefab: {fileID: 3304457424203430322, guid: d1c2625f194f752818182b45cbddef35, type: 3}
+  Projectiles: 3
   Birds: 3
+  ProjectileLocation: {fileID: 4084058405276078945, guid: 5b21f76847a8b9fcf8769d7147c6c192, type: 3}
   BirdsLocations:
   - {fileID: 2563832542122680899, guid: 18aa73051dccd66a29b5196eaef0de98, type: 3}
   - {fileID: 6914608493098445533, guid: f9f3fa02a437b7e1cb857fd1f1178115, type: 3}
   - {fileID: 17618590712728932, guid: 0d21757616c1d7b14b6945c6242bb599, type: 3}
-  Projectiles: 3
   Stages:
   - {fileID: 2900855210877547946, guid: 9f4da75e297268cbd8c9ed7bb114510e, type: 3}
   - {fileID: 3037362800103153191, guid: f3189676fed2087cab29abefb051632a, type: 3}

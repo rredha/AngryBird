@@ -429,6 +429,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf090dc554a4d9ae9b38b4f8b43cce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &920603480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920603482}
+  - component: {fileID: 920603481}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &920603481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920603480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfa1eda5b00244fa8254cc354ef9649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultParent: {fileID: 920603482}
+  defaultTransform: {fileID: 920603482}
+--- !u!4 &920603482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920603480}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1113929005 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9057475214571409859, guid: 538c31803e817f77aac0d2cea418c14f, type: 3}
@@ -533,9 +579,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2021279450}
   - component: {fileID: 2021279449}
-  - component: {fileID: 2021279451}
+  - component: {fileID: 2021279452}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: LevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +615,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2021279451
+--- !u!114 &2021279452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -578,9 +624,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2021279448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dfa1eda5b00244fa8254cc354ef9649, type: 3}
+  m_Script: {fileID: 11500000, guid: 1095c987aebaff9178c32fe64574e536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  availableLevels: []
+  _levelSo: {fileID: 11400000, guid: 1ca5b750af680a4aaa657c1364c67611, type: 2}
+  configurationSo: {fileID: 0}
+  projectilePrefab: {fileID: 3304457424203430322, guid: d1c2625f194f752818182b45cbddef35, type: 3}
+  birdPrefab: {fileID: 9011059954354761472, guid: 6027c21f42f0d3f94a10d34379a361bd, type: 3}
+  spawner: {fileID: 920603481}
 --- !u!1001 &301967091342968374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -854,7 +906,7 @@ PrefabInstance:
     - target: {fileID: 7793626594818999033, guid: fb67a8873442cab56825cbf1269ac3b6, type: 3}
       propertyPath: taskData
       value: 
-      objectReference: {fileID: 11400000, guid: 042f2fd358e4bcc50a2960842f3c651a, type: 2}
+      objectReference: {fileID: 11400000, guid: 4f594a03340e67697a9dcb5db9bc7b24, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -989,6 +1041,10 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2021279449}
+    - target: {fileID: 8223221772693751432, guid: 8dbb9be468f6bc1fba5d65172f111c18, type: 3}
+      propertyPath: levelController
+      value: 
+      objectReference: {fileID: 2021279452}
     m_RemovedComponents:
     - {fileID: 2659808633189690905, guid: 8dbb9be468f6bc1fba5d65172f111c18, type: 3}
     m_RemovedGameObjects: []
@@ -1010,3 +1066,4 @@ SceneRoots:
   - {fileID: 5406693280632933148}
   - {fileID: 1129445371}
   - {fileID: 2021279450}
+  - {fileID: 920603482}

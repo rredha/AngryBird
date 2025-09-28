@@ -5,7 +5,6 @@ using Project.Scripts.Runtime.Angrybird.Presenter.Birds;
 using Project.Scripts.Runtime.Angrybird.Presenter.Pigs;
 using Project.Scripts.Runtime.Angrybird.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
 {
@@ -35,12 +34,6 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
             _spawner = spawner;
 
         }
-
-        public void CreateGameHandler()
-        {
-            _projectileHandler = new ProjectileHandler();
-            _birdsHandler = new BirdsHandler();
-        }
         public LevelData LoadLevelFromScriptableObject(int index, LevelSO levelSo)
         {
             var levelData = new LevelData(index,
@@ -52,19 +45,31 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         }
         public void Init()
         {
+            _spawner.OnObjectSpawned += OnObjectSpawned_CreateGameHandlers;
             SetupProjectiles(LevelData);
             SetupEnvironment(LevelData);
             SetupTargets(LevelData);
             
             OnLevelSetup(new GameHandlersEventArgs(_projectileHandler, _birdsHandler));
         }
+
+        private void OnObjectSpawned_CreateGameHandlers(GameObject obj)
+        {
+            if (_projectileHandler == null)
+                _projectileHandler = new ProjectileHandler();
+            if (_birdsHandler == null)
+                _birdsHandler = new BirdsHandler();
+        }
+
         private void SetupProjectiles(LevelData levelData)
         {
             for (int i = 0; i < levelData.Projectiles; i++)
             {
+                if (_spawner == null)
+                    Debug.LogError("No spwaner found.");
                 _spawner.SpawnAt(_projectilePrefab, levelData.ProjectileLocation);
 
-                var projectile = _spawner.SpawnedRef.GetComponent<Projectile>();
+                var projectile = _spawner.GetLastSpawned().GetComponent<Projectile>();
                 projectile.gameObject.SetActive(false);
         
                 if (_projectileHandler == null)
@@ -82,7 +87,7 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
           for (var i = 0; i < levelData.BirdsLocations.Count; i++)
           {
               _spawner.SpawnAt(_birdPrefab, levelData.BirdsLocations[i]);
-              var bird = _spawner.SpawnedRef.GetComponent<Model.Pigs.Birds>();
+              var bird = _spawner.GetLastSpawned().GetComponent<Model.Pigs.Birds>();
               bird.Id = i;
               _birdsHandler.BirdsDictionary.Add(bird.Id, bird);
               _birdsHandler.BirdStatusDict.Add(bird.Id, false);
@@ -93,14 +98,15 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         {
             foreach (var t in levelData.Stages)
             {
-                _spawner.Spawn(t.gameObject);
+                _spawner.SpawnAt(t.gameObject, t);
             }
         }
-
         protected virtual void OnLevelSetup(GameHandlersEventArgs gameHandlers)
         {
+            _spawner.OnObjectSpawned -= OnObjectSpawned_CreateGameHandlers;
             LevelSetup?.Invoke(this, gameHandlers);
         }
+        public void Clean() => _spawner.DestroyAllSpawned();
     }
 
     public class GameHandlersEventArgs : EventArgs

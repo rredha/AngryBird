@@ -43,30 +43,8 @@ namespace Project.Scripts.Runtime.Angrybird.Presenter.Level
         }
         public void UnloadLevel()
         {
-            Clean();
-            Reset();
-        }
-        public void Clean()
-        {
             ProjectileHandler.OnEmpty -= OnProjectileStackEmpty_Perform;
-            var projectiles = FindObjectsByType<Projectile>(FindObjectsSortMode.None);
-            var birds = FindObjectsByType<Model.Pigs.Birds>(FindObjectsSortMode.None);
-            var obstacles = FindObjectsByType<Obstacles>(FindObjectsSortMode.None);
-            foreach (var projectile in projectiles)
-            {
-                Destroy(projectile.gameObject);
-            }
-            foreach (var bird in birds)
-            {
-                Destroy(bird.gameObject);
-            }
-            foreach (var obstacle in obstacles)
-            {
-                Destroy(obstacle.gameObject);
-            }
-        }
-        public void Reset()
-        {
+            
             OutOfAttempts = false;
             IsInitialized = false;
         }

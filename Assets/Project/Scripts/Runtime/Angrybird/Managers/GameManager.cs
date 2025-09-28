@@ -197,7 +197,6 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
 
     private void FinishStateExit()
     {
-      levelManager.Clean();
       UIManager.Instance.WonUI.ReplayTriggered -= OnReplayTriggered_Reset;
       UIManager.Instance.LostUI.ReplayTriggered -= OnReplayTriggered_Reset;
       
@@ -206,7 +205,7 @@ namespace Project.Scripts.Runtime.Angrybird.Managers
     
     private void OnReplayTriggered_Reset(object sender, EventArgs e)
     {
-      levelManager.Reset();
+      levelController.UnLoadLevel();
       _replayTriggered = true;
     }
   }
